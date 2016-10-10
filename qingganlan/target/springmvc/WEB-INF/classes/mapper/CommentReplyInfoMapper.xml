@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CommentReplyInfoMapper">
+  <resultMap id="BaseResultMap" type="po.CommentReplyInfo">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="COMMENT_ID" jdbcType="VARCHAR" property="commentId" />
+    <result column="BLOG_ID" jdbcType="VARCHAR" property="blogId" />
+    <result column="COMMENT_US_ID" jdbcType="VARCHAR" property="commentUsId" />
+    <result column="REPLY_US_ID" jdbcType="VARCHAR" property="replyUsId" />
+    <result column="COMMENT_CONTENT" jdbcType="VARCHAR" property="commentContent" />
+    <result column="COMMENT_DATE" jdbcType="DATE" property="commentDate" />
+    <result column="REPLY_CONTENT" jdbcType="VARCHAR" property="replyContent" />
+    <result column="REPLY_DATE" jdbcType="DATE" property="replyDate" />
+    <result column="IS_DELETE" jdbcType="VARCHAR" property="isDelete" />
+  </resultMap>
+</mapper>

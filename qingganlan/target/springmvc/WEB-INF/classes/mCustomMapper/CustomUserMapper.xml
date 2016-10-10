@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mCustomMapper.CustomUserMapper">
+	<select id="getAllUser"  parameterType="Map" resultType="Map">
+		select
+		US_ID               ,
+		US_NAME             ,
+		AGE                 ,
+		SEX                 ,
+		TEL                 ,
+		EMAIL               ,
+		QQ                  ,
+		WEICHAT             ,
+		PS                  ,
+		HOBBY               ,
+		AREA                ,
+		GRADUATE_SCHOOL     ,
+		PROFESSION          ,
+		CHIRCH_TYPE         ,
+		STATE               ,
+		REG_DATE            ,
+		TK_ID               ,
+		AUTHENTICATION      ,
+		IS_BAPTISM          ,
+		IS_TRUTH            ,
+		BLOG_NO             ,
+		COLLECT_BLOG_NO     ,
+		CONCERN_NO          ,
+		FANS_NO             ,
+		MY_FRIEND_NO        ,
+		COMMENT_NO          ,
+		COMMENT_ME_COMMENT_NO
+
+		from
+			user_info 
+   		WHERE 1 = 1
+   		<if test="landId != null and landId != ''">
+		 	and US_ID = #{landId}
+	 	</if>
+	 	<if test="nickName != null and nickName != ''">
+		 	and US_NAME like '%${nickName}%'
+	 	</if>
+	 	<if test="isBaptism != null and isBaptism != ''">
+		 	and IS_BAPTISM = #{isBaptism}
+	 	</if>
+	 	<if test="state != null and state != ''">
+		 	and STATE = #{state}
+	 	</if>
+	 	<if test="authentication != null and authentication != ''">
+		 	and AUTHENTICATION = #{authentication}
+	 	</if>
+	 	<if test="isTruth != null and isTruth != ''">
+		 	and IS_TRUTH = #{isTruth}
+	 	</if>
+	 	<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>	
+
+	</select>
+	<select id="selectManager"  parameterType="Map" resultType="Map">
+		select
+			*
+		from
+			manager_info
+		where 
+			US_ID = #{usId}
+		and
+			US_PS = #{usPs}
+	</select>
+	<select id="userInfoDetail"  parameterType="Map" resultType="Map">
+		select
+			*
+		from
+			manager_info
+		where 
+			US_ID = #{usId}
+	</select>
+	<select id="getAllManagers"  parameterType="Map" resultType="Map">
+		select
+			*
+		from
+			manager_info
+		WHERE 1 = 1
+   		<if test="userId != null and userId != ''">
+		 	and US_ID = #{userId}
+	 	</if>
+	 	<if test="name != null and name != ''">
+		 	and US_NAME like '%${name}%'
+	 	</if>
+	 
+	 	<if test="auth != null and auth != ''">
+		 	and AUTHENTICATION = #{auth}
+	 	</if>
+	 	<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>
+	</select>
+	 <select id="getManagersCom" parameterType="Map" resultType="Map">
+		SELECT 
+			US_ID,
+			US_NAME
+		FROM
+			manager_info 
+		WHERE 1 = 1
+		<if test="name != null and name != ''">
+			AND US_NAME LIKE '%${name}%'
+		</if>
+    </select>
+    <select id="getAllUsersCom" parameterType="Map" resultType="Map">
+		SELECT 
+			US_ID,
+			US_NAME
+		FROM
+			user_info 
+		WHERE 1 = 1
+		<if test="nickName != null and nickName != ''">
+			AND US_NAME LIKE '%${nickName}%'
+		</if>
+    </select>
+     <select id="getUsIds" parameterType="Map" resultType="Map">
+		SELECT 
+			 DISTINCT US_ID
+		FROM
+			user_info 
+		WHERE 1 = 1
+		<if test="landId != null and landId != ''">
+			AND US_ID LIKE '%${landId}%'
+		</if>
+    </select>
+    
+   	<update id="modifyPersonalPW" parameterType="Map">
+		UPDATE manager_info
+		SET US_PS = #{newPassWord}
+		WHERE
+			US_ID = #{usId} 
+	</update>
+	<update id="modifyPersonalInfo" parameterType="Map">
+		UPDATE manager_info
+		SET US_NAME = #{usName},
+			SEX = #{sex}
+			<if test="tel != null">
+				,TEL = #{tel} 		
+			</if>
+			<if test="email != null">
+				,EMAIL = #{email} 		
+			</if>
+		WHERE
+			US_ID = #{usId} 
+	</update>
+  	<select id="userDetail" parameterType="Map" resultType="Map">
+   		SELECT
+	   		US_ID          ,
+			US_NAME        ,
+			AGE            ,
+			SEX            ,
+			TEL            ,
+			EMAIL          ,
+			QQ             ,
+			WEICHAT        ,
+			PS             ,
+			HOBBY          ,
+			AREA           ,
+			PROFESSION     ,
+			CHIRCH_TYPE    ,
+			STATE          ,
+			START_TRUTH    ,
+			REG_DATE       ,
+			AUTHENTICATION ,
+			IS_BAPTISM     ,
+			IS_TRUTH
+   		FROM user_info
+   		WHERE US_ID = #{usId}
+   		LIMIT 0, 1
+    </select>
+        <update id="deleteUser" parameterType="Map">
+		UPDATE user_info
+		SET STATE = 'LIMIT'
+		WHERE
+			US_ID IN 
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+   			#{item}
+   		</foreach>
+    </update>
+    
+    <update id="recoverUser" parameterType="Map">
+		UPDATE user_info
+		SET STATE = 'NORMAL'
+		WHERE
+			US_ID IN 
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+   			#{item}
+   		</foreach>
+    </update>
+</mapper>

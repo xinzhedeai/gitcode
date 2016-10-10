@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mCustomMapper.CustomAFSMapper">
+	<select id="getAllFSs"  parameterType="Map" resultType="Map">
+		select
+			*
+		from
+			fellowship_info
+		WHERE 1 = 1
+   		<if test="fellowShipId != null and fellowShipId != ''">
+		 	and FS_ID = #{fellowShipId}
+	 	</if>
+	 	<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>
+	</select>
+	 <select id="getFSName" parameterType="Map" resultType="Map">
+		SELECT 
+			 DISTINCT FS_ID,
+			FS_NAME				 
+		FROM
+			fellowship_info 
+		WHERE 1 = 1
+		<if test="fellowShipId != null and fellowShipId != ''">
+			AND FS_ID LIKE '%${fellowShipId}%'
+		</if>
+    </select>
+</mapper>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="normalMapper.LogMapper" >
+  <resultMap id="BaseResultMap" type="normalPo.Log" >
+    <id column="LOG_ID" property="logId" jdbcType="VARCHAR" />
+    <result column="US_ID" property="usId" jdbcType="VARCHAR" />
+    <result column="LOG_CONTENT" property="logContent" jdbcType="VARCHAR" />
+    <result column="SEND_DATE" property="sendDate" jdbcType="TIMESTAMP" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+    <result column="IS_FORWARD" property="isForward" jdbcType="VARCHAR" />
+    <result column="FORWARDING_VALIABLE" property="forwardingValiable" jdbcType="VARCHAR" />
+    <result column="FORWARDED_NO" property="forwardedNo" jdbcType="INTEGER" />
+    <result column="LOG_STATE" property="logState" jdbcType="VARCHAR" />
+    <result column="LOG_UPDATE_DATE" property="logUpdateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LOG_ID, US_ID, LOG_CONTENT, SEND_DATE, IS_DELETE, IS_FORWARD, FORWARDING_VALIABLE, 
+    FORWARDED_NO, LOG_STATE, LOG_UPDATE_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="normalPo.LogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from log
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from log
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="normalPo.LogExample" >
+    delete from log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="normalPo.Log" >
+    insert into log (LOG_ID, US_ID, LOG_CONTENT, 
+      SEND_DATE, IS_DELETE, IS_FORWARD, 
+      FORWARDING_VALIABLE, FORWARDED_NO, LOG_STATE, 
+      LOG_UPDATE_DATE)
+    values (#{logId,jdbcType=VARCHAR}, #{usId,jdbcType=VARCHAR}, #{logContent,jdbcType=VARCHAR}, 
+      #{sendDate,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=VARCHAR}, #{isForward,jdbcType=VARCHAR}, 
+      #{forwardingValiable,jdbcType=VARCHAR}, #{forwardedNo,jdbcType=INTEGER}, #{logState,jdbcType=VARCHAR}, 
+      #{logUpdateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="normalPo.Log" >
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        LOG_ID,
+      </if>
+      <if test="usId != null" >
+        US_ID,
+      </if>
+      <if test="logContent != null" >
+        LOG_CONTENT,
+      </if>
+      <if test="sendDate != null" >
+        SEND_DATE,
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="isForward != null" >
+        IS_FORWARD,
+      </if>
+      <if test="forwardingValiable != null" >
+        FORWARDING_VALIABLE,
+      </if>
+      <if test="forwardedNo != null" >
+        FORWARDED_NO,
+      </if>
+      <if test="logState != null" >
+        LOG_STATE,
+      </if>
+      <if test="logUpdateDate != null" >
+        LOG_UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null" >
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="logContent != null" >
+        #{logContent,jdbcType=VARCHAR},
+      </if>
+      <if test="sendDate != null" >
+        #{sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="isForward != null" >
+        #{isForward,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardingValiable != null" >
+        #{forwardingValiable,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardedNo != null" >
+        #{forwardedNo,jdbcType=INTEGER},
+      </if>
+      <if test="logState != null" >
+        #{logState,jdbcType=VARCHAR},
+      </if>
+      <if test="logUpdateDate != null" >
+        #{logUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="normalPo.LogExample" resultType="java.lang.Integer" >
+    select count(*) from log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update log
+    <set >
+      <if test="record.logId != null" >
+        LOG_ID = #{record.logId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usId != null" >
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logContent != null" >
+        LOG_CONTENT = #{record.logContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendDate != null" >
+        SEND_DATE = #{record.sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isForward != null" >
+        IS_FORWARD = #{record.isForward,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forwardingValiable != null" >
+        FORWARDING_VALIABLE = #{record.forwardingValiable,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forwardedNo != null" >
+        FORWARDED_NO = #{record.forwardedNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.logState != null" >
+        LOG_STATE = #{record.logState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logUpdateDate != null" >
+        LOG_UPDATE_DATE = #{record.logUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update log
+    set LOG_ID = #{record.logId,jdbcType=VARCHAR},
+      US_ID = #{record.usId,jdbcType=VARCHAR},
+      LOG_CONTENT = #{record.logContent,jdbcType=VARCHAR},
+      SEND_DATE = #{record.sendDate,jdbcType=TIMESTAMP},
+      IS_DELETE = #{record.isDelete,jdbcType=VARCHAR},
+      IS_FORWARD = #{record.isForward,jdbcType=VARCHAR},
+      FORWARDING_VALIABLE = #{record.forwardingValiable,jdbcType=VARCHAR},
+      FORWARDED_NO = #{record.forwardedNo,jdbcType=INTEGER},
+      LOG_STATE = #{record.logState,jdbcType=VARCHAR},
+      LOG_UPDATE_DATE = #{record.logUpdateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="normalPo.Log" >
+    update log
+    <set >
+      <if test="usId != null" >
+        US_ID = #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="logContent != null" >
+        LOG_CONTENT = #{logContent,jdbcType=VARCHAR},
+      </if>
+      <if test="sendDate != null" >
+        SEND_DATE = #{sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="isForward != null" >
+        IS_FORWARD = #{isForward,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardingValiable != null" >
+        FORWARDING_VALIABLE = #{forwardingValiable,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardedNo != null" >
+        FORWARDED_NO = #{forwardedNo,jdbcType=INTEGER},
+      </if>
+      <if test="logState != null" >
+        LOG_STATE = #{logState,jdbcType=VARCHAR},
+      </if>
+      <if test="logUpdateDate != null" >
+        LOG_UPDATE_DATE = #{logUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="normalPo.Log" >
+    update log
+    set US_ID = #{usId,jdbcType=VARCHAR},
+      LOG_CONTENT = #{logContent,jdbcType=VARCHAR},
+      SEND_DATE = #{sendDate,jdbcType=TIMESTAMP},
+      IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+      IS_FORWARD = #{isForward,jdbcType=VARCHAR},
+      FORWARDING_VALIABLE = #{forwardingValiable,jdbcType=VARCHAR},
+      FORWARDED_NO = #{forwardedNo,jdbcType=INTEGER},
+      LOG_STATE = #{logState,jdbcType=VARCHAR},
+      LOG_UPDATE_DATE = #{logUpdateDate,jdbcType=TIMESTAMP}
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+</mapper>

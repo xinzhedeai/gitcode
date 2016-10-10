@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.SysFileInfoMapper">
+  <resultMap id="BaseResultMap" type="po.SysFileInfo">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="FILE_ID" jdbcType="VARCHAR" property="fileId" />
+    <result column="MODU_CD" jdbcType="VARCHAR" property="moduCd" />
+    <result column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="MODU_NO" jdbcType="VARCHAR" property="moduNo" />
+    <result column="FILE_NM" jdbcType="VARCHAR" property="fileNm" />
+    <result column="FILE_REL_PATH" jdbcType="VARCHAR" property="fileRelPath" />
+    <result column="FILE_ABS_PATH" jdbcType="VARCHAR" property="fileAbsPath" />
+    <result column="FILE_EXTENSION" jdbcType="VARCHAR" property="fileExtension" />
+    <result column="FILE_SIZE" jdbcType="BIGINT" property="fileSize" />
+    <result column="FILE_CONTENT_TYPE" jdbcType="VARCHAR" property="fileContentType" />
+    <result column="USED_STAT" jdbcType="INTEGER" property="usedStat" />
+    <result column="DL_CNT" jdbcType="INTEGER" property="dlCnt" />
+    <result column="EXPIRE_TS" jdbcType="TIMESTAMP" property="expireTs" />
+    <result column="UPLOAD_TS" jdbcType="TIMESTAMP" property="uploadTs" />
+  </resultMap>
+</mapper>

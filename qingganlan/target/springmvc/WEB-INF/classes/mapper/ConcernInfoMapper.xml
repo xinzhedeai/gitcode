@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ConcernInfoMapper">
+  <resultMap id="BaseResultMap" type="po.ConcernInfo">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="CONCERNED_US_ID" jdbcType="VARCHAR" property="concernedUsId" />
+    <result column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="CONCERN_TIME" jdbcType="TIMESTAMP" property="concernTime" />
+  </resultMap>
+</mapper>

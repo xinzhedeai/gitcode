@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mCustomMapper.CustomAFriendMapper">
+
+	<select id="getAllFriends"  parameterType="Map" resultType="Map">
+		select
+			a.*,
+			b.US_NAME,
+			c.US_NAME AS FRIEND_US_NAME
+		from
+			my_friends_info	a
+			LEFT OUTER JOIN user_info b ON a.US_ID = b.US_ID	
+ 	 		LEFT OUTER JOIN user_info c ON a.FRIEND_ID = c.US_ID	
+		WHERE 1 = 1
+		<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>
+	 	<if test="userId != null and userId != ''">
+		 	and a.US_ID = #{userId}
+	 	</if>
+	</select>
+</mapper>

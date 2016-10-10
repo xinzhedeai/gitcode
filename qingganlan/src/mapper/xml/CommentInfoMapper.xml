@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CommentInfoMapper">
+  <resultMap id="BaseResultMap" type="po.CommentInfo">
+    <id column="CommentID" jdbcType="VARCHAR" property="commentid" />
+    <id column="BLOG_ID" jdbcType="VARCHAR" property="blogId" />
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="COMMENT_TIME" jdbcType="TIMESTAMP" property="commentTime" />
+    <result column="IS_DELETE" jdbcType="VARCHAR" property="isDelete" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CommentID, BLOG_ID, US_ID, CONTENT, COMMENT_TIME, IS_DELETE
+  </sql>
+  <select id="selectByExample" parameterType="po.CommentInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from comment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comment_info
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from comment_info
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="po.CommentInfoExample">
+    delete from comment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.CommentInfo">
+    insert into comment_info (CommentID, BLOG_ID, US_ID, 
+      CONTENT, COMMENT_TIME, IS_DELETE
+      )
+    values (#{commentid,jdbcType=VARCHAR}, #{blogId,jdbcType=VARCHAR}, #{usId,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{commentTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="po.CommentInfo">
+    insert into comment_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentid != null">
+        CommentID,
+      </if>
+      <if test="blogId != null">
+        BLOG_ID,
+      </if>
+      <if test="usId != null">
+        US_ID,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="commentTime != null">
+        COMMENT_TIME,
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentid != null">
+        #{commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="blogId != null">
+        #{blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null">
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null">
+        #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.CommentInfoExample" resultType="java.lang.Integer">
+    select count(*) from comment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update comment_info
+    <set>
+      <if test="record.commentid != null">
+        CommentID = #{record.commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogId != null">
+        BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usId != null">
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentTime != null">
+        COMMENT_TIME = #{record.commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null">
+        IS_DELETE = #{record.isDelete,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update comment_info
+    set CommentID = #{record.commentid,jdbcType=VARCHAR},
+      BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      US_ID = #{record.usId,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      COMMENT_TIME = #{record.commentTime,jdbcType=TIMESTAMP},
+      IS_DELETE = #{record.isDelete,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="po.CommentInfo">
+    update comment_info
+    <set>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null">
+        COMMENT_TIME = #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="po.CommentInfo">
+    update comment_info
+    set CONTENT = #{content,jdbcType=VARCHAR},
+      COMMENT_TIME = #{commentTime,jdbcType=TIMESTAMP},
+      IS_DELETE = #{isDelete,jdbcType=VARCHAR}
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="po.CommentInfo">
+    <id column="CommentID" jdbcType="VARCHAR" property="commentid" />
+    <id column="BLOG_ID" jdbcType="VARCHAR" property="blogId" />
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="COMMENT_TIME" jdbcType="TIMESTAMP" property="commentTime" />
+    <result column="IS_DELETE" jdbcType="VARCHAR" property="isDelete" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CommentID, BLOG_ID, US_ID, CONTENT, COMMENT_TIME, IS_DELETE
+  </sql>
+  <select id="selectByExample" parameterType="po.CommentInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from comment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comment_info
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from comment_info
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="po.CommentInfoExample">
+    delete from comment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.CommentInfo">
+    insert into comment_info (CommentID, BLOG_ID, US_ID, 
+      CONTENT, COMMENT_TIME, IS_DELETE
+      )
+    values (#{commentid,jdbcType=VARCHAR}, #{blogId,jdbcType=VARCHAR}, #{usId,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{commentTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="po.CommentInfo">
+    insert into comment_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentid != null">
+        CommentID,
+      </if>
+      <if test="blogId != null">
+        BLOG_ID,
+      </if>
+      <if test="usId != null">
+        US_ID,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="commentTime != null">
+        COMMENT_TIME,
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentid != null">
+        #{commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="blogId != null">
+        #{blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null">
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null">
+        #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.CommentInfoExample" resultType="java.lang.Integer">
+    select count(*) from comment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update comment_info
+    <set>
+      <if test="record.commentid != null">
+        CommentID = #{record.commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogId != null">
+        BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usId != null">
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentTime != null">
+        COMMENT_TIME = #{record.commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null">
+        IS_DELETE = #{record.isDelete,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update comment_info
+    set CommentID = #{record.commentid,jdbcType=VARCHAR},
+      BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      US_ID = #{record.usId,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      COMMENT_TIME = #{record.commentTime,jdbcType=TIMESTAMP},
+      IS_DELETE = #{record.isDelete,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="po.CommentInfo">
+    update comment_info
+    <set>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null">
+        COMMENT_TIME = #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="po.CommentInfo">
+    update comment_info
+    set CONTENT = #{content,jdbcType=VARCHAR},
+      COMMENT_TIME = #{commentTime,jdbcType=TIMESTAMP},
+      IS_DELETE = #{isDelete,jdbcType=VARCHAR}
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="model.CommentInfo">
+    <id column="CommentID" jdbcType="VARCHAR" property="commentid" />
+    <id column="BLOG_ID" jdbcType="VARCHAR" property="blogId" />
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="COMMENT_TIME" jdbcType="TIMESTAMP" property="commentTime" />
+    <result column="IS_DELETE" jdbcType="VARCHAR" property="isDelete" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CommentID, BLOG_ID, US_ID, CONTENT, COMMENT_TIME, IS_DELETE
+  </sql>
+  <select id="selectByExample" parameterType="model.CommentInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from comment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comment_info
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from comment_info
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="model.CommentInfoExample">
+    delete from comment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="model.CommentInfo">
+    insert into comment_info (CommentID, BLOG_ID, US_ID, 
+      CONTENT, COMMENT_TIME, IS_DELETE
+      )
+    values (#{commentid,jdbcType=VARCHAR}, #{blogId,jdbcType=VARCHAR}, #{usId,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{commentTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.CommentInfo">
+    insert into comment_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentid != null">
+        CommentID,
+      </if>
+      <if test="blogId != null">
+        BLOG_ID,
+      </if>
+      <if test="usId != null">
+        US_ID,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="commentTime != null">
+        COMMENT_TIME,
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentid != null">
+        #{commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="blogId != null">
+        #{blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null">
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null">
+        #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="model.CommentInfoExample" resultType="java.lang.Integer">
+    select count(*) from comment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update comment_info
+    <set>
+      <if test="record.commentid != null">
+        CommentID = #{record.commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogId != null">
+        BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usId != null">
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentTime != null">
+        COMMENT_TIME = #{record.commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null">
+        IS_DELETE = #{record.isDelete,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update comment_info
+    set CommentID = #{record.commentid,jdbcType=VARCHAR},
+      BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      US_ID = #{record.usId,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      COMMENT_TIME = #{record.commentTime,jdbcType=TIMESTAMP},
+      IS_DELETE = #{record.isDelete,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="model.CommentInfo">
+    update comment_info
+    <set>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null">
+        COMMENT_TIME = #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.CommentInfo">
+    update comment_info
+    set CONTENT = #{content,jdbcType=VARCHAR},
+      COMMENT_TIME = #{commentTime,jdbcType=TIMESTAMP},
+      IS_DELETE = #{isDelete,jdbcType=VARCHAR}
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="model.CommentInfo">
+    <id column="CommentID" jdbcType="VARCHAR" property="commentid" />
+    <id column="BLOG_ID" jdbcType="VARCHAR" property="blogId" />
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="COMMENT_TIME" jdbcType="TIMESTAMP" property="commentTime" />
+    <result column="IS_DELETE" jdbcType="VARCHAR" property="isDelete" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CommentID, BLOG_ID, US_ID, CONTENT, COMMENT_TIME, IS_DELETE
+  </sql>
+  <select id="selectByExample" parameterType="model.CommentInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from comment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comment_info
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from comment_info
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="model.CommentInfoExample">
+    delete from comment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="model.CommentInfo">
+    insert into comment_info (CommentID, BLOG_ID, US_ID, 
+      CONTENT, COMMENT_TIME, IS_DELETE
+      )
+    values (#{commentid,jdbcType=VARCHAR}, #{blogId,jdbcType=VARCHAR}, #{usId,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{commentTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.CommentInfo">
+    insert into comment_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentid != null">
+        CommentID,
+      </if>
+      <if test="blogId != null">
+        BLOG_ID,
+      </if>
+      <if test="usId != null">
+        US_ID,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="commentTime != null">
+        COMMENT_TIME,
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentid != null">
+        #{commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="blogId != null">
+        #{blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null">
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null">
+        #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="model.CommentInfoExample" resultType="java.lang.Integer">
+    select count(*) from comment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update comment_info
+    <set>
+      <if test="record.commentid != null">
+        CommentID = #{record.commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogId != null">
+        BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usId != null">
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentTime != null">
+        COMMENT_TIME = #{record.commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null">
+        IS_DELETE = #{record.isDelete,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update comment_info
+    set CommentID = #{record.commentid,jdbcType=VARCHAR},
+      BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      US_ID = #{record.usId,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      COMMENT_TIME = #{record.commentTime,jdbcType=TIMESTAMP},
+      IS_DELETE = #{record.isDelete,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="model.CommentInfo">
+    update comment_info
+    <set>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null">
+        COMMENT_TIME = #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.CommentInfo">
+    update comment_info
+    set CONTENT = #{content,jdbcType=VARCHAR},
+      COMMENT_TIME = #{commentTime,jdbcType=TIMESTAMP},
+      IS_DELETE = #{isDelete,jdbcType=VARCHAR}
+    where CommentID = #{commentid,jdbcType=VARCHAR}
+      and BLOG_ID = #{blogId,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+</mapper>

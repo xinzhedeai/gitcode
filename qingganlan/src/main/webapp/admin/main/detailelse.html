@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="author" content="zhaojunbao" />
+<script type="text/javascript" src="../js/detailelse.js?v=20151127001"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<div class="row az-user-row">
+		<div class="col-md-12 az-user-all">
+			<div class="az-m9-title">
+				<h5>微法信息管理</h5>
+			</div>
+			<h4 class="az-m9-h3">微法解释详细内容列表</h4>
+			<div class="az-search">
+				 <div class="az-search-func">
+					<ul class="az-ul-common">
+						<button type="button" class="btn btn-default btn-md " id="microContentsBtn" style="display:none">修改标题</button>
+					</ul>
+				</div>
+				<table id="DetailElsegrid" class="table table-bordered table-hover "></table>
+				
+				<div id="detailModalDiv"></div>
+				
+				<div class="modal" id="microExplainModal">
+					 <div class="modal-dialog" style="width:800px; margin-top:230px;">
+						 <div class="modal-content">
+							<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								 <span aria-hidden="true">&times;</span>
+								 <span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title">修改解释详情内容</h4>
+						</div>
+						<div class="modal-body">
+							<div class="microExplainDiv" id="microExplainDiv">
+								 <form name="microExplain" id="microExplain">
+								 	<table class="table table-bordered al-table-search">
+								 		<tbody>
+											<span>解释详情内容: </span>
+										</tbody>
+									</table>
+								</form>
+							</div>
+						</div>
+						<script id="contentsEditor" type="text/plain" style="width:767px; height: 170px; margin:0px auto 40px 15px;"></script>
+						<div class="modal-footer">
+							 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							 <button type="button" class="btn btn-primary" id="microExplainSaveBtn">保存</button>
+						 </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

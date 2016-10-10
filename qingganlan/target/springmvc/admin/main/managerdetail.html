@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="author" content="zhaojunbao" />
+<script type="text/javascript" src="../js/managerdetail.js?v=20151201001"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+	<div class="row az-user-row">
+		<div class="col-md-12 az-user-all">
+			<div class="az-m9-title">
+				<h5>用户信息管理</h5>
+			</div>
+			<h4 class="az-m9-h3">管理员信息详情</h4>
+			<div class="az-search">
+				<form name="searchForm" id="az-microExpForm">
+					<table class="table  table-bordered al-searchcondition" id="managerDetail-reset">
+						<tbody>
+							<tr>
+								<td>
+									 <div class="al-value manaDetailUserId">
+										<center><span >用户id:</span></center>
+									</div>
+									<div class="az-showstyle">
+									 	<strong id="manadetailUserId" name="userId"></strong>
+									</div>
+								</td>
+								<td>
+									 <div class="al-value">
+										<center><span>权限:</span></center>
+									</div>
+									<div class="az-showstyle">
+										<strong id="manadetailAuth" name="userId"></strong>
+									</div>
+								</td>
+							</tr>
+						    <tr>
+						       <td>
+						        	<div class="aj-value">
+										<center><span class="aj-span">用户名:</span></center>
+									</div>
+		  							<input type="text" id ="manadetailName" name="content" class="form-control aj-tableInput" placeholder="请输入用户名">
+								</td>
+						     	 <td>
+						        	 <div class="al-value">
+									 	<center><span>性别:</span></center>
+									</div>
+									<select class="az-tableInput" name="type" id="manadetailSex">
+											<option value="1" class="manadetailSex1">男</option>
+											<option value="0" class="manadetailSex0">女</option>
+									</select>
+								</td>
+					     	</tr>
+							<tr>
+								<td>
+						        	<div class="aj-value">
+										<center><span class="aj-span">手机号: </span></center>
+									</div>
+		  							<input type="text" id="manadetailTel" name="content" class="form-control aj-tableInput" placeholder="请输入手机号码">
+								</td>
+								 <td>
+						        	<div class="aj-value manadetailEmail">
+										<center><span class="aj-span">邮箱号: </span></center>
+									</div>
+		  							<input type="text" id="manadetailEmail" name="content" class="form-control aj-tableInput" placeholder="请输入邮箱号码">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+				<div class="az-search-func">
+					<ul class="az-ul-common">
+						<li><button type="button" class="btn btn-default btn-md " id="manaDetailModify">修改个人信息</button></li>
+					</ul>
+				</div>
+			</div>
+			<div class="az-search">
+				<form >
+					<table class="table  table-bordered al-searchcondition" id="az-modify-password">
+						<tbody>
+							<tr>
+						        <td>
+						        	<div class="aj-value">
+										<center><span class="aj-span">原密码:</span></center>
+									</div>
+		  							<input type="password" id ="manadetailPwd" name="content" class="form-control aj-tableInput" placeholder="请输入原密码">
+								</td>
+								 <td>
+						        	 <div class="aj-value">
+										<center><span class="aj-span">新密码: </span></center>
+									 </div>
+		  							 <input type="password" id="manadetailNewPwd" name="content" class="form-control aj-tableInput" placeholder="请输入新密码">
+							    </td>
+								 <td>
+						        	<div class="aj-value">
+										<center><span class="aj-span">确认新密码: </span></center>
+									</div>
+		  							<input type="password" id="manadetailReNewPwd" name="content" class="form-control aj-tableInput" placeholder="请输入新密码">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+				<div class="az-search-func">
+					<ul class="az-ul-common">
+						<li><button type="button" class="btn btn-default btn-md " id="manaDetailModifyPwd">修改密码</button></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

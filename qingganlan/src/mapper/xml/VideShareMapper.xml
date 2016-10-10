@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.VideShareMapper">
+  <resultMap id="BaseResultMap" type="po.VideShare">
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="VIDEO_ID" jdbcType="VARCHAR" property="videoId" />
+    <result column="VIDEO_NAME" jdbcType="VARCHAR" property="videoName" />
+    <result column="VIDEO_DESC" jdbcType="VARCHAR" property="videoDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    US_ID, VIDEO_ID, VIDEO_NAME, VIDEO_DESC
+  </sql>
+  <select id="selectByExample" parameterType="po.VideShareExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from vide_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from vide_share
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from vide_share
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="po.VideShareExample">
+    delete from vide_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.VideShare">
+    insert into vide_share (US_ID, VIDEO_ID, VIDEO_NAME, 
+      VIDEO_DESC)
+    values (#{usId,jdbcType=VARCHAR}, #{videoId,jdbcType=VARCHAR}, #{videoName,jdbcType=VARCHAR}, 
+      #{videoDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="po.VideShare">
+    insert into vide_share
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usId != null">
+        US_ID,
+      </if>
+      <if test="videoId != null">
+        VIDEO_ID,
+      </if>
+      <if test="videoName != null">
+        VIDEO_NAME,
+      </if>
+      <if test="videoDesc != null">
+        VIDEO_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usId != null">
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoId != null">
+        #{videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null">
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        #{videoDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.VideShareExample" resultType="java.lang.Integer">
+    select count(*) from vide_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update vide_share
+    <set>
+      <if test="record.usId != null">
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoId != null">
+        VIDEO_ID = #{record.videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoName != null">
+        VIDEO_NAME = #{record.videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoDesc != null">
+        VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update vide_share
+    set US_ID = #{record.usId,jdbcType=VARCHAR},
+      VIDEO_ID = #{record.videoId,jdbcType=VARCHAR},
+      VIDEO_NAME = #{record.videoName,jdbcType=VARCHAR},
+      VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="po.VideShare">
+    update vide_share
+    <set>
+      <if test="videoId != null">
+        VIDEO_ID = #{videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null">
+        VIDEO_NAME = #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        VIDEO_DESC = #{videoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="po.VideShare">
+    update vide_share
+    set VIDEO_ID = #{videoId,jdbcType=VARCHAR},
+      VIDEO_NAME = #{videoName,jdbcType=VARCHAR},
+      VIDEO_DESC = #{videoDesc,jdbcType=VARCHAR}
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="po.VideShare">
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="VIDEO_ID" jdbcType="VARCHAR" property="videoId" />
+    <result column="VIDEO_NAME" jdbcType="VARCHAR" property="videoName" />
+    <result column="VIDEO_DESC" jdbcType="VARCHAR" property="videoDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    US_ID, VIDEO_ID, VIDEO_NAME, VIDEO_DESC
+  </sql>
+  <select id="selectByExample" parameterType="po.VideShareExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from vide_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from vide_share
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from vide_share
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="po.VideShareExample">
+    delete from vide_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.VideShare">
+    insert into vide_share (US_ID, VIDEO_ID, VIDEO_NAME, 
+      VIDEO_DESC)
+    values (#{usId,jdbcType=VARCHAR}, #{videoId,jdbcType=VARCHAR}, #{videoName,jdbcType=VARCHAR}, 
+      #{videoDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="po.VideShare">
+    insert into vide_share
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usId != null">
+        US_ID,
+      </if>
+      <if test="videoId != null">
+        VIDEO_ID,
+      </if>
+      <if test="videoName != null">
+        VIDEO_NAME,
+      </if>
+      <if test="videoDesc != null">
+        VIDEO_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usId != null">
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoId != null">
+        #{videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null">
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        #{videoDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.VideShareExample" resultType="java.lang.Integer">
+    select count(*) from vide_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update vide_share
+    <set>
+      <if test="record.usId != null">
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoId != null">
+        VIDEO_ID = #{record.videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoName != null">
+        VIDEO_NAME = #{record.videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoDesc != null">
+        VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update vide_share
+    set US_ID = #{record.usId,jdbcType=VARCHAR},
+      VIDEO_ID = #{record.videoId,jdbcType=VARCHAR},
+      VIDEO_NAME = #{record.videoName,jdbcType=VARCHAR},
+      VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="po.VideShare">
+    update vide_share
+    <set>
+      <if test="videoId != null">
+        VIDEO_ID = #{videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null">
+        VIDEO_NAME = #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        VIDEO_DESC = #{videoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="po.VideShare">
+    update vide_share
+    set VIDEO_ID = #{videoId,jdbcType=VARCHAR},
+      VIDEO_NAME = #{videoName,jdbcType=VARCHAR},
+      VIDEO_DESC = #{videoDesc,jdbcType=VARCHAR}
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="model.VideShare">
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="VIDEO_ID" jdbcType="VARCHAR" property="videoId" />
+    <result column="VIDEO_NAME" jdbcType="VARCHAR" property="videoName" />
+    <result column="VIDEO_DESC" jdbcType="VARCHAR" property="videoDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    US_ID, VIDEO_ID, VIDEO_NAME, VIDEO_DESC
+  </sql>
+  <select id="selectByExample" parameterType="model.VideShareExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from vide_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from vide_share
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from vide_share
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="model.VideShareExample">
+    delete from vide_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="model.VideShare">
+    insert into vide_share (US_ID, VIDEO_ID, VIDEO_NAME, 
+      VIDEO_DESC)
+    values (#{usId,jdbcType=VARCHAR}, #{videoId,jdbcType=VARCHAR}, #{videoName,jdbcType=VARCHAR}, 
+      #{videoDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="model.VideShare">
+    insert into vide_share
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usId != null">
+        US_ID,
+      </if>
+      <if test="videoId != null">
+        VIDEO_ID,
+      </if>
+      <if test="videoName != null">
+        VIDEO_NAME,
+      </if>
+      <if test="videoDesc != null">
+        VIDEO_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usId != null">
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoId != null">
+        #{videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null">
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        #{videoDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="model.VideShareExample" resultType="java.lang.Integer">
+    select count(*) from vide_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update vide_share
+    <set>
+      <if test="record.usId != null">
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoId != null">
+        VIDEO_ID = #{record.videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoName != null">
+        VIDEO_NAME = #{record.videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoDesc != null">
+        VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update vide_share
+    set US_ID = #{record.usId,jdbcType=VARCHAR},
+      VIDEO_ID = #{record.videoId,jdbcType=VARCHAR},
+      VIDEO_NAME = #{record.videoName,jdbcType=VARCHAR},
+      VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="model.VideShare">
+    update vide_share
+    <set>
+      <if test="videoId != null">
+        VIDEO_ID = #{videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null">
+        VIDEO_NAME = #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        VIDEO_DESC = #{videoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.VideShare">
+    update vide_share
+    set VIDEO_ID = #{videoId,jdbcType=VARCHAR},
+      VIDEO_NAME = #{videoName,jdbcType=VARCHAR},
+      VIDEO_DESC = #{videoDesc,jdbcType=VARCHAR}
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="model.VideShare">
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="VIDEO_ID" jdbcType="VARCHAR" property="videoId" />
+    <result column="VIDEO_NAME" jdbcType="VARCHAR" property="videoName" />
+    <result column="VIDEO_DESC" jdbcType="VARCHAR" property="videoDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    US_ID, VIDEO_ID, VIDEO_NAME, VIDEO_DESC
+  </sql>
+  <select id="selectByExample" parameterType="model.VideShareExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from vide_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from vide_share
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from vide_share
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="model.VideShareExample">
+    delete from vide_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="model.VideShare">
+    insert into vide_share (US_ID, VIDEO_ID, VIDEO_NAME, 
+      VIDEO_DESC)
+    values (#{usId,jdbcType=VARCHAR}, #{videoId,jdbcType=VARCHAR}, #{videoName,jdbcType=VARCHAR}, 
+      #{videoDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="model.VideShare">
+    insert into vide_share
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usId != null">
+        US_ID,
+      </if>
+      <if test="videoId != null">
+        VIDEO_ID,
+      </if>
+      <if test="videoName != null">
+        VIDEO_NAME,
+      </if>
+      <if test="videoDesc != null">
+        VIDEO_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usId != null">
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoId != null">
+        #{videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null">
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        #{videoDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="model.VideShareExample" resultType="java.lang.Integer">
+    select count(*) from vide_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update vide_share
+    <set>
+      <if test="record.usId != null">
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoId != null">
+        VIDEO_ID = #{record.videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoName != null">
+        VIDEO_NAME = #{record.videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoDesc != null">
+        VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update vide_share
+    set US_ID = #{record.usId,jdbcType=VARCHAR},
+      VIDEO_ID = #{record.videoId,jdbcType=VARCHAR},
+      VIDEO_NAME = #{record.videoName,jdbcType=VARCHAR},
+      VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="model.VideShare">
+    update vide_share
+    <set>
+      <if test="videoId != null">
+        VIDEO_ID = #{videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null">
+        VIDEO_NAME = #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        VIDEO_DESC = #{videoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.VideShare">
+    update vide_share
+    set VIDEO_ID = #{videoId,jdbcType=VARCHAR},
+      VIDEO_NAME = #{videoName,jdbcType=VARCHAR},
+      VIDEO_DESC = #{videoDesc,jdbcType=VARCHAR}
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+</mapper>

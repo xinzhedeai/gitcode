@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="normalMapper.SysFileInfoMapper" >
+  <resultMap id="BaseResultMap" type="normalPo.SysFileInfo" >
+    <id column="FILE_ID" property="fileId" jdbcType="VARCHAR" />
+    <result column="MODU_CD" property="moduCd" jdbcType="VARCHAR" />
+    <result column="US_ID" property="usId" jdbcType="VARCHAR" />
+    <result column="MODU_NO" property="moduNo" jdbcType="VARCHAR" />
+    <result column="FILE_NM" property="fileNm" jdbcType="VARCHAR" />
+    <result column="FILE_REL_PATH" property="fileRelPath" jdbcType="VARCHAR" />
+    <result column="FILE_ABS_PATH" property="fileAbsPath" jdbcType="VARCHAR" />
+    <result column="FILE_EXTENSION" property="fileExtension" jdbcType="VARCHAR" />
+    <result column="FILE_SIZE" property="fileSize" jdbcType="BIGINT" />
+    <result column="FILE_CONTENT_TYPE" property="fileContentType" jdbcType="VARCHAR" />
+    <result column="USED_STAT" property="usedStat" jdbcType="INTEGER" />
+    <result column="DL_CNT" property="dlCnt" jdbcType="INTEGER" />
+    <result column="EXPIRE_TS" property="expireTs" jdbcType="TIMESTAMP" />
+    <result column="UPLOAD_TS" property="uploadTs" jdbcType="TIMESTAMP" />
+    <result column="FS_ID" property="fsId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FILE_ID, MODU_CD, US_ID, MODU_NO, FILE_NM, FILE_REL_PATH, FILE_ABS_PATH, FILE_EXTENSION, 
+    FILE_SIZE, FILE_CONTENT_TYPE, USED_STAT, DL_CNT, EXPIRE_TS, UPLOAD_TS, FS_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="normalPo.SysFileInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_file_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_file_info
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_file_info
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="normalPo.SysFileInfoExample" >
+    delete from sys_file_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="normalPo.SysFileInfo" >
+    insert into sys_file_info (FILE_ID, MODU_CD, US_ID, 
+      MODU_NO, FILE_NM, FILE_REL_PATH, 
+      FILE_ABS_PATH, FILE_EXTENSION, FILE_SIZE, 
+      FILE_CONTENT_TYPE, USED_STAT, DL_CNT, 
+      EXPIRE_TS, UPLOAD_TS, FS_ID
+      )
+    values (#{fileId,jdbcType=VARCHAR}, #{moduCd,jdbcType=VARCHAR}, #{usId,jdbcType=VARCHAR}, 
+      #{moduNo,jdbcType=VARCHAR}, #{fileNm,jdbcType=VARCHAR}, #{fileRelPath,jdbcType=VARCHAR}, 
+      #{fileAbsPath,jdbcType=VARCHAR}, #{fileExtension,jdbcType=VARCHAR}, #{fileSize,jdbcType=BIGINT}, 
+      #{fileContentType,jdbcType=VARCHAR}, #{usedStat,jdbcType=INTEGER}, #{dlCnt,jdbcType=INTEGER}, 
+      #{expireTs,jdbcType=TIMESTAMP}, #{uploadTs,jdbcType=TIMESTAMP}, #{fsId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="normalPo.SysFileInfo" >
+    insert into sys_file_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileId != null" >
+        FILE_ID,
+      </if>
+      <if test="moduCd != null" >
+        MODU_CD,
+      </if>
+      <if test="usId != null" >
+        US_ID,
+      </if>
+      <if test="moduNo != null" >
+        MODU_NO,
+      </if>
+      <if test="fileNm != null" >
+        FILE_NM,
+      </if>
+      <if test="fileRelPath != null" >
+        FILE_REL_PATH,
+      </if>
+      <if test="fileAbsPath != null" >
+        FILE_ABS_PATH,
+      </if>
+      <if test="fileExtension != null" >
+        FILE_EXTENSION,
+      </if>
+      <if test="fileSize != null" >
+        FILE_SIZE,
+      </if>
+      <if test="fileContentType != null" >
+        FILE_CONTENT_TYPE,
+      </if>
+      <if test="usedStat != null" >
+        USED_STAT,
+      </if>
+      <if test="dlCnt != null" >
+        DL_CNT,
+      </if>
+      <if test="expireTs != null" >
+        EXPIRE_TS,
+      </if>
+      <if test="uploadTs != null" >
+        UPLOAD_TS,
+      </if>
+      <if test="fsId != null" >
+        FS_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileId != null" >
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="moduCd != null" >
+        #{moduCd,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null" >
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="moduNo != null" >
+        #{moduNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNm != null" >
+        #{fileNm,jdbcType=VARCHAR},
+      </if>
+      <if test="fileRelPath != null" >
+        #{fileRelPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileAbsPath != null" >
+        #{fileAbsPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileExtension != null" >
+        #{fileExtension,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        #{fileSize,jdbcType=BIGINT},
+      </if>
+      <if test="fileContentType != null" >
+        #{fileContentType,jdbcType=VARCHAR},
+      </if>
+      <if test="usedStat != null" >
+        #{usedStat,jdbcType=INTEGER},
+      </if>
+      <if test="dlCnt != null" >
+        #{dlCnt,jdbcType=INTEGER},
+      </if>
+      <if test="expireTs != null" >
+        #{expireTs,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadTs != null" >
+        #{uploadTs,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fsId != null" >
+        #{fsId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="normalPo.SysFileInfoExample" resultType="java.lang.Integer" >
+    select count(*) from sys_file_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_file_info
+    <set >
+      <if test="record.fileId != null" >
+        FILE_ID = #{record.fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduCd != null" >
+        MODU_CD = #{record.moduCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usId != null" >
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduNo != null" >
+        MODU_NO = #{record.moduNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileNm != null" >
+        FILE_NM = #{record.fileNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileRelPath != null" >
+        FILE_REL_PATH = #{record.fileRelPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileAbsPath != null" >
+        FILE_ABS_PATH = #{record.fileAbsPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileExtension != null" >
+        FILE_EXTENSION = #{record.fileExtension,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileSize != null" >
+        FILE_SIZE = #{record.fileSize,jdbcType=BIGINT},
+      </if>
+      <if test="record.fileContentType != null" >
+        FILE_CONTENT_TYPE = #{record.fileContentType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usedStat != null" >
+        USED_STAT = #{record.usedStat,jdbcType=INTEGER},
+      </if>
+      <if test="record.dlCnt != null" >
+        DL_CNT = #{record.dlCnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.expireTs != null" >
+        EXPIRE_TS = #{record.expireTs,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uploadTs != null" >
+        UPLOAD_TS = #{record.uploadTs,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fsId != null" >
+        FS_ID = #{record.fsId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_file_info
+    set FILE_ID = #{record.fileId,jdbcType=VARCHAR},
+      MODU_CD = #{record.moduCd,jdbcType=VARCHAR},
+      US_ID = #{record.usId,jdbcType=VARCHAR},
+      MODU_NO = #{record.moduNo,jdbcType=VARCHAR},
+      FILE_NM = #{record.fileNm,jdbcType=VARCHAR},
+      FILE_REL_PATH = #{record.fileRelPath,jdbcType=VARCHAR},
+      FILE_ABS_PATH = #{record.fileAbsPath,jdbcType=VARCHAR},
+      FILE_EXTENSION = #{record.fileExtension,jdbcType=VARCHAR},
+      FILE_SIZE = #{record.fileSize,jdbcType=BIGINT},
+      FILE_CONTENT_TYPE = #{record.fileContentType,jdbcType=VARCHAR},
+      USED_STAT = #{record.usedStat,jdbcType=INTEGER},
+      DL_CNT = #{record.dlCnt,jdbcType=INTEGER},
+      EXPIRE_TS = #{record.expireTs,jdbcType=TIMESTAMP},
+      UPLOAD_TS = #{record.uploadTs,jdbcType=TIMESTAMP},
+      FS_ID = #{record.fsId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="normalPo.SysFileInfo" >
+    update sys_file_info
+    <set >
+      <if test="moduCd != null" >
+        MODU_CD = #{moduCd,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null" >
+        US_ID = #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="moduNo != null" >
+        MODU_NO = #{moduNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNm != null" >
+        FILE_NM = #{fileNm,jdbcType=VARCHAR},
+      </if>
+      <if test="fileRelPath != null" >
+        FILE_REL_PATH = #{fileRelPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileAbsPath != null" >
+        FILE_ABS_PATH = #{fileAbsPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileExtension != null" >
+        FILE_EXTENSION = #{fileExtension,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        FILE_SIZE = #{fileSize,jdbcType=BIGINT},
+      </if>
+      <if test="fileContentType != null" >
+        FILE_CONTENT_TYPE = #{fileContentType,jdbcType=VARCHAR},
+      </if>
+      <if test="usedStat != null" >
+        USED_STAT = #{usedStat,jdbcType=INTEGER},
+      </if>
+      <if test="dlCnt != null" >
+        DL_CNT = #{dlCnt,jdbcType=INTEGER},
+      </if>
+      <if test="expireTs != null" >
+        EXPIRE_TS = #{expireTs,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadTs != null" >
+        UPLOAD_TS = #{uploadTs,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fsId != null" >
+        FS_ID = #{fsId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="normalPo.SysFileInfo" >
+    update sys_file_info
+    set MODU_CD = #{moduCd,jdbcType=VARCHAR},
+      US_ID = #{usId,jdbcType=VARCHAR},
+      MODU_NO = #{moduNo,jdbcType=VARCHAR},
+      FILE_NM = #{fileNm,jdbcType=VARCHAR},
+      FILE_REL_PATH = #{fileRelPath,jdbcType=VARCHAR},
+      FILE_ABS_PATH = #{fileAbsPath,jdbcType=VARCHAR},
+      FILE_EXTENSION = #{fileExtension,jdbcType=VARCHAR},
+      FILE_SIZE = #{fileSize,jdbcType=BIGINT},
+      FILE_CONTENT_TYPE = #{fileContentType,jdbcType=VARCHAR},
+      USED_STAT = #{usedStat,jdbcType=INTEGER},
+      DL_CNT = #{dlCnt,jdbcType=INTEGER},
+      EXPIRE_TS = #{expireTs,jdbcType=TIMESTAMP},
+      UPLOAD_TS = #{uploadTs,jdbcType=TIMESTAMP},
+      FS_ID = #{fsId,jdbcType=VARCHAR}
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </update>
+</mapper>

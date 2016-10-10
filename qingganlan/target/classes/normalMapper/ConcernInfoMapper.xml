@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="normalMapper.ConcernInfoMapper" >
+  <resultMap id="BaseResultMap" type="normalPo.ConcernInfo" >
+    <id column="CONCERNED_US_ID" property="concernedUsId" jdbcType="VARCHAR" />
+    <result column="US_ID" property="usId" jdbcType="VARCHAR" />
+    <result column="CONCERN_TIME" property="concernTime" jdbcType="TIMESTAMP" />
+    <result column="IS_CONCERN" property="isConcern" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CONCERNED_US_ID, US_ID, CONCERN_TIME, IS_CONCERN
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="normalPo.ConcernInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from concern_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from concern_info
+    where CONCERNED_US_ID = #{concernedUsId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from concern_info
+    where CONCERNED_US_ID = #{concernedUsId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="normalPo.ConcernInfoExample" >
+    delete from concern_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="normalPo.ConcernInfo" >
+    insert into concern_info (CONCERNED_US_ID, US_ID, CONCERN_TIME, 
+      IS_CONCERN)
+    values (#{concernedUsId,jdbcType=VARCHAR}, #{usId,jdbcType=VARCHAR}, #{concernTime,jdbcType=TIMESTAMP}, 
+      #{isConcern,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="normalPo.ConcernInfo" >
+    insert into concern_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="concernedUsId != null" >
+        CONCERNED_US_ID,
+      </if>
+      <if test="usId != null" >
+        US_ID,
+      </if>
+      <if test="concernTime != null" >
+        CONCERN_TIME,
+      </if>
+      <if test="isConcern != null" >
+        IS_CONCERN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="concernedUsId != null" >
+        #{concernedUsId,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null" >
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="concernTime != null" >
+        #{concernTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isConcern != null" >
+        #{isConcern,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="normalPo.ConcernInfoExample" resultType="java.lang.Integer" >
+    select count(*) from concern_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update concern_info
+    <set >
+      <if test="record.concernedUsId != null" >
+        CONCERNED_US_ID = #{record.concernedUsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usId != null" >
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.concernTime != null" >
+        CONCERN_TIME = #{record.concernTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isConcern != null" >
+        IS_CONCERN = #{record.isConcern,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update concern_info
+    set CONCERNED_US_ID = #{record.concernedUsId,jdbcType=VARCHAR},
+      US_ID = #{record.usId,jdbcType=VARCHAR},
+      CONCERN_TIME = #{record.concernTime,jdbcType=TIMESTAMP},
+      IS_CONCERN = #{record.isConcern,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="normalPo.ConcernInfo" >
+    update concern_info
+    <set >
+      <if test="usId != null" >
+        US_ID = #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="concernTime != null" >
+        CONCERN_TIME = #{concernTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isConcern != null" >
+        IS_CONCERN = #{isConcern,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CONCERNED_US_ID = #{concernedUsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="normalPo.ConcernInfo" >
+    update concern_info
+    set US_ID = #{usId,jdbcType=VARCHAR},
+      CONCERN_TIME = #{concernTime,jdbcType=TIMESTAMP},
+      IS_CONCERN = #{isConcern,jdbcType=VARCHAR}
+    where CONCERNED_US_ID = #{concernedUsId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.AuthenticationMapper">
+  <resultMap id="BaseResultMap" type="po.Authentication">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="US_NAME" jdbcType="VARCHAR" property="usName" />
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="PROFESSION" jdbcType="VARCHAR" property="profession" />
+    <result column="PICTURE" jdbcType="VARCHAR" property="picture" />
+    <result column="APPLY_TIME" jdbcType="TIMESTAMP" property="applyTime" />
+    <result column="AUTH_STATE" jdbcType="VARCHAR" property="authState" />
+  </resultMap>
+</mapper>

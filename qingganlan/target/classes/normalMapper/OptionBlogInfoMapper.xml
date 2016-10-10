@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="normalMapper.OptionBlogInfoMapper" >
+  <resultMap id="BaseResultMap" type="normalPo.OptionBlogInfo" >
+    <id column="BLOG_OPT_ID" property="blogOptId" jdbcType="VARCHAR" />
+    <result column="US_ID" property="usId" jdbcType="VARCHAR" />
+    <result column="BLOG_ID" property="blogId" jdbcType="VARCHAR" />
+    <result column="COLLECT_DATE" property="collectDate" jdbcType="TIMESTAMP" />
+    <result column="UPVOTE_DATE" property="upvoteDate" jdbcType="TIMESTAMP" />
+    <result column="FORWARD_DATE" property="forwardDate" jdbcType="TIMESTAMP" />
+    <result column="IS_COLLECTED" property="isCollected" jdbcType="VARCHAR" />
+    <result column="IS_FORWARD" property="isForward" jdbcType="VARCHAR" />
+    <result column="IS_UPVOTE" property="isUpvote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BLOG_OPT_ID, US_ID, BLOG_ID, COLLECT_DATE, UPVOTE_DATE, FORWARD_DATE, IS_COLLECTED, 
+    IS_FORWARD, IS_UPVOTE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="normalPo.OptionBlogInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from option_blog_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from option_blog_info
+    where BLOG_OPT_ID = #{blogOptId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from option_blog_info
+    where BLOG_OPT_ID = #{blogOptId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="normalPo.OptionBlogInfoExample" >
+    delete from option_blog_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="normalPo.OptionBlogInfo" >
+    insert into option_blog_info (BLOG_OPT_ID, US_ID, BLOG_ID, 
+      COLLECT_DATE, UPVOTE_DATE, FORWARD_DATE, 
+      IS_COLLECTED, IS_FORWARD, IS_UPVOTE
+      )
+    values (#{blogOptId,jdbcType=VARCHAR}, #{usId,jdbcType=VARCHAR}, #{blogId,jdbcType=VARCHAR}, 
+      #{collectDate,jdbcType=TIMESTAMP}, #{upvoteDate,jdbcType=TIMESTAMP}, #{forwardDate,jdbcType=TIMESTAMP}, 
+      #{isCollected,jdbcType=VARCHAR}, #{isForward,jdbcType=VARCHAR}, #{isUpvote,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="normalPo.OptionBlogInfo" >
+    insert into option_blog_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="blogOptId != null" >
+        BLOG_OPT_ID,
+      </if>
+      <if test="usId != null" >
+        US_ID,
+      </if>
+      <if test="blogId != null" >
+        BLOG_ID,
+      </if>
+      <if test="collectDate != null" >
+        COLLECT_DATE,
+      </if>
+      <if test="upvoteDate != null" >
+        UPVOTE_DATE,
+      </if>
+      <if test="forwardDate != null" >
+        FORWARD_DATE,
+      </if>
+      <if test="isCollected != null" >
+        IS_COLLECTED,
+      </if>
+      <if test="isForward != null" >
+        IS_FORWARD,
+      </if>
+      <if test="isUpvote != null" >
+        IS_UPVOTE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="blogOptId != null" >
+        #{blogOptId,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null" >
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="blogId != null" >
+        #{blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectDate != null" >
+        #{collectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upvoteDate != null" >
+        #{upvoteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="forwardDate != null" >
+        #{forwardDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isCollected != null" >
+        #{isCollected,jdbcType=VARCHAR},
+      </if>
+      <if test="isForward != null" >
+        #{isForward,jdbcType=VARCHAR},
+      </if>
+      <if test="isUpvote != null" >
+        #{isUpvote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="normalPo.OptionBlogInfoExample" resultType="java.lang.Integer" >
+    select count(*) from option_blog_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update option_blog_info
+    <set >
+      <if test="record.blogOptId != null" >
+        BLOG_OPT_ID = #{record.blogOptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usId != null" >
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogId != null" >
+        BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collectDate != null" >
+        COLLECT_DATE = #{record.collectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.upvoteDate != null" >
+        UPVOTE_DATE = #{record.upvoteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.forwardDate != null" >
+        FORWARD_DATE = #{record.forwardDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isCollected != null" >
+        IS_COLLECTED = #{record.isCollected,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isForward != null" >
+        IS_FORWARD = #{record.isForward,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isUpvote != null" >
+        IS_UPVOTE = #{record.isUpvote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update option_blog_info
+    set BLOG_OPT_ID = #{record.blogOptId,jdbcType=VARCHAR},
+      US_ID = #{record.usId,jdbcType=VARCHAR},
+      BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      COLLECT_DATE = #{record.collectDate,jdbcType=TIMESTAMP},
+      UPVOTE_DATE = #{record.upvoteDate,jdbcType=TIMESTAMP},
+      FORWARD_DATE = #{record.forwardDate,jdbcType=TIMESTAMP},
+      IS_COLLECTED = #{record.isCollected,jdbcType=VARCHAR},
+      IS_FORWARD = #{record.isForward,jdbcType=VARCHAR},
+      IS_UPVOTE = #{record.isUpvote,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="normalPo.OptionBlogInfo" >
+    update option_blog_info
+    <set >
+      <if test="usId != null" >
+        US_ID = #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="blogId != null" >
+        BLOG_ID = #{blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectDate != null" >
+        COLLECT_DATE = #{collectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upvoteDate != null" >
+        UPVOTE_DATE = #{upvoteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="forwardDate != null" >
+        FORWARD_DATE = #{forwardDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isCollected != null" >
+        IS_COLLECTED = #{isCollected,jdbcType=VARCHAR},
+      </if>
+      <if test="isForward != null" >
+        IS_FORWARD = #{isForward,jdbcType=VARCHAR},
+      </if>
+      <if test="isUpvote != null" >
+        IS_UPVOTE = #{isUpvote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BLOG_OPT_ID = #{blogOptId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="normalPo.OptionBlogInfo" >
+    update option_blog_info
+    set US_ID = #{usId,jdbcType=VARCHAR},
+      BLOG_ID = #{blogId,jdbcType=VARCHAR},
+      COLLECT_DATE = #{collectDate,jdbcType=TIMESTAMP},
+      UPVOTE_DATE = #{upvoteDate,jdbcType=TIMESTAMP},
+      FORWARD_DATE = #{forwardDate,jdbcType=TIMESTAMP},
+      IS_COLLECTED = #{isCollected,jdbcType=VARCHAR},
+      IS_FORWARD = #{isForward,jdbcType=VARCHAR},
+      IS_UPVOTE = #{isUpvote,jdbcType=VARCHAR}
+    where BLOG_OPT_ID = #{blogOptId,jdbcType=VARCHAR}
+  </update>
+</mapper>

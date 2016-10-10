@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.OptionBlogInfoMapper">
+  <resultMap id="BaseResultMap" type="po.OptionBlogInfo">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <result column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="BLOG_ID" jdbcType="VARCHAR" property="blogId" />
+    <result column="COLLECT_DATE" jdbcType="TIMESTAMP" property="collectDate" />
+    <result column="UPVOTE_DATE" jdbcType="TIMESTAMP" property="upvoteDate" />
+    <result column="FORWARD_DATE" jdbcType="TIMESTAMP" property="forwardDate" />
+    <result column="IS_COLLECTED" jdbcType="VARCHAR" property="isCollected" />
+    <result column="IS_FORWARD" jdbcType="VARCHAR" property="isForward" />
+    <result column="IS_UPVOTE" jdbcType="VARCHAR" property="isUpvote" />
+  </resultMap>
+</mapper>

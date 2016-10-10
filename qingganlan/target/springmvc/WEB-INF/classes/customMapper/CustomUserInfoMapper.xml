@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="customMapper.CustomUserInfoMapper">
+	<select id="searchMyConcern"  parameterType="Map" resultMap="myConcernMap">
+		select
+			a.CONCERNED_US_ID,
+			a.CONCERN_TIME,
+			b.*
+
+		from
+			concern_info a  
+			LEFT JOIN  user_info b
+			on b.US_ID = a.CONCERNED_US_ID
+		where
+		 	a.US_ID = #{usId}
+	</select>
+	<resultMap id="myConcernMap" type="Map">
+    	<id column="CONCERNED_US_ID" property="concernedUsId" jdbcType="VARCHAR" />
+    	<result column="CONCERN_TIME" property="concernedTime" jdbcType="TIMESTAMP" />
+	    <result column="US_NAME" property="usName" jdbcType="VARCHAR" />
+	    <result column="AGE" property="age" jdbcType="INTEGER" />
+	    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+	    <result column="BIRTH_DATE" property="birthDate" jdbcType="TIMESTAMP" />
+	    <result column="US_PS" property="usPs" jdbcType="VARCHAR" />
+	    <result column="TEL" property="tel" jdbcType="VARCHAR" />
+	    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+	    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+	    <result column="WEICHAT" property="weichat" jdbcType="VARCHAR" />
+	    <result column="PS" property="ps" jdbcType="VARCHAR" />
+	    <result column="HOBBY" property="hobby" jdbcType="VARCHAR" />
+	    <result column="AREA" property="area" jdbcType="VARCHAR" />
+	    <result column="GRADUATE_SCHOOL" property="graduateSchool" jdbcType="VARCHAR" />
+	    <result column="PROFESSION" property="profession" jdbcType="VARCHAR" />
+	    <result column="CHIRCH_TYPE" property="chirchType" jdbcType="VARCHAR" />
+	    <result column="STATE" property="state" jdbcType="VARCHAR" />
+	    <result column="START_TRUTH" property="startTruth" jdbcType="TIMESTAMP" />
+	    <result column="REG_DATE" property="regDate" jdbcType="TIMESTAMP" />
+	    <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP" />
+	    <result column="HEAD_IMG" property="headImg" jdbcType="VARCHAR" />
+	    <result column="LEVEL" property="level" jdbcType="VARCHAR" />
+	    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+	    <result column="TK_ID" property="tkId" jdbcType="VARCHAR" />
+	    <result column="AUTHENTICATION" property="authentication" jdbcType="VARCHAR" />
+	    <result column="IS_BAPTISM" property="isBaptism" jdbcType="VARCHAR" />
+	    <result column="IS_TRUTH" property="isTruth" jdbcType="VARCHAR" />
+	    <result column="BLOG_NO" property="blogNo" jdbcType="INTEGER" />
+	    <result column="COLLECT_BLOG_NO" property="collectBlogNo" jdbcType="INTEGER" />
+	    <result column="CONCERN_NO" property="concernNo" jdbcType="INTEGER" />
+	    <result column="FANS_NO" property="fansNo" jdbcType="INTEGER" />
+	    <result column="MY_FRIEND_NO" property="myFriendNo" jdbcType="INTEGER" />
+	    <result column="COMMENT_NO" property="commentNo" jdbcType="INTEGER" />
+	    <result column="COMMENT_ME_COMMENT_NO" property="commentMeCommentNo" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<select id="getMyCollectBlogs" parameterType="Map" resultMap="myCollectBlogsMap">
+		SELECT
+			DISTINCT(a.BLOG_ID ),
+			a.COLLECT_DATE		,
+			b.US_ID    AS blogUsId ,
+			b.SEND_TIME        ,
+			b.BLOG_IMG         ,
+			b.UPVOTE_NO        ,
+			b.COMMENT_NO       ,<!-- 这里面取出的数据，无论下面的映射map有没有对应的字段，那么都会返回到前台。
+									下面的映射语句只是起到别名的作用。 -->
+			b.COLLECT_NO       ,
+			b.FORWARDING_NO    ,
+			b.IS_DELETE        ,
+			b.IS_FORWARD       ,
+			b.CONTENT          ,
+			b.FORWARD_VALIABLE ,
+			b.BLOG_STATE,
+			c.US_NAME,
+			c.HEAD_IMG
+			
+		FROM option_blog_info a
+		left join blog b
+		on b.BLOG_ID = a.BLOG_ID 
+		left join user_info c
+		on c.US_ID = b.US_ID
+		WHERE
+			a.US_ID= #{usId}
+			AND 
+			IS_COLLECTED ='Y'
+		ORDER BY a.COLLECT_DATE DESC
+	</select>
+	
+	<resultMap id="myCollectBlogsMap" type="Map">
+      		 <!-- 帖子信息 -->
+      		<id column="BLOG_ID" property="blogId" jdbcType="VARCHAR" />
+   		    <result column="COLLECT_DATE" property="collectDate" jdbcType="TIMESTAMP" />
+		    <result column="SEND_TIME" property="sendTime" jdbcType="TIMESTAMP" />
+		    <result column="BLOG_IMG" property="blogImg" jdbcType="VARCHAR" />
+		    <result column="UPVOTE_NO" property="upvoteNo" jdbcType="VARCHAR" />
+		    <result column="COMMENT_NO" property="blogCommentedNo" jdbcType="INTEGER" />
+		    <result column="COLLECT_NO" property="blogCollectedNo" jdbcType="INTEGER" />
+		    <result column="FORWARDING_NO" property="blogForwardedNo" jdbcType="INTEGER" />
+		    <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+		    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+		    <result column="BLOG_STATE" property="blogState" jdbcType="VARCHAR" />
+      		 <!-- 用户信息 -->
+      		 <result column="US_NAME" property="usName" jdbcType="VARCHAR" />
+		    <result column="HEAD_IMG" property="headImg" jdbcType="VARCHAR" />
+
+      		
+	</resultMap>
+	<update id="addBlogNoByUser" parameterType="Map">
+		UPDATE user_info
+		SET BLOG_NO = BLOG_NO + 1
+		WHERE
+			US_ID = #{usId}
+	</update>
+	<update id="reduceBlogNoByUser" parameterType="Map">
+		UPDATE user_info
+		SET BLOG_NO = BLOG_NO - 1
+		WHERE
+			US_ID = #{usId}
+	</update>
+	<update id="addCollectNoByUser" parameterType="Map">
+		UPDATE user_info
+		SET COLLECT_BLOG_NO = COLLECT_BLOG_NO + 1
+		WHERE
+			US_ID = #{usId}
+	</update>
+	<update id="reduceCollectNoByUser" parameterType="Map">
+		UPDATE user_info
+		SET COLLECT_BLOG_NO = COLLECT_BLOG_NO - 1
+		WHERE
+			US_ID = #{usId}
+	</update>
+	<update id="addCommentNoByUser" parameterType="Map">
+		UPDATE user_info
+		SET COMMENT_NO = COMMENT_NO + 1
+		WHERE
+			US_ID = #{usId}
+	</update>
+	<update id="reduceCommentNoByUser" parameterType="Map">
+		UPDATE user_info
+		SET COMMENT_NO = COMMENT_NO - 1
+		WHERE
+			US_ID = #{usId}
+	</update>
+	<select id="userInfoDetail"  parameterType="Map" resultMap="userInfoDetailMap">
+		select
+			a.*
+		from
+			user_info a
+		where
+		 	a.US_ID = #{usId}
+	</select>
+	<resultMap id="userInfoDetailMap" type="Map">
+    	<id column="CONCERNED_US_ID" property="concernedUsId" jdbcType="VARCHAR" />
+    	<result column="CONCERN_TIME" property="concernedTime" jdbcType="TIMESTAMP" />
+	    <result column="US_NAME" property="usName" jdbcType="VARCHAR" />
+	    <result column="AGE" property="age" jdbcType="INTEGER" />
+	    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+	    <result column="BIRTH_DATE" property="birthDate" jdbcType="TIMESTAMP" />
+	    <result column="US_PS" property="usPs" jdbcType="VARCHAR" />
+	    <result column="TEL" property="tel" jdbcType="VARCHAR" />
+	    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+	    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+	    <result column="WEICHAT" property="weichat" jdbcType="VARCHAR" />
+	    <result column="PS" property="ps" jdbcType="VARCHAR" />
+	    <result column="HOBBY" property="hobby" jdbcType="VARCHAR" />
+	    <result column="AREA" property="area" jdbcType="VARCHAR" />
+	    <result column="GRADUATE_SCHOOL" property="graduateSchool" jdbcType="VARCHAR" />
+	    <result column="PROFESSION" property="profession" jdbcType="VARCHAR" />
+	    <result column="CHIRCH_TYPE" property="chirchType" jdbcType="VARCHAR" />
+	    <result column="STATE" property="state" jdbcType="VARCHAR" />
+	    <result column="START_TRUTH" property="startTruth" jdbcType="TIMESTAMP" />
+	    <result column="REG_DATE" property="regDate" jdbcType="TIMESTAMP" />
+	    <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP" />
+	    <result column="HEAD_IMG" property="headImg" jdbcType="VARCHAR" />
+	    <result column="LEVEL" property="level" jdbcType="VARCHAR" />
+	    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+	    <result column="TK_ID" property="tkId" jdbcType="VARCHAR" />
+	    <result column="AUTHENTICATION" property="authentication" jdbcType="VARCHAR" />
+	    <result column="IS_BAPTISM" property="isBaptism" jdbcType="VARCHAR" />
+	    <result column="IS_TRUTH" property="isTruth" jdbcType="VARCHAR" />
+	    <result column="BLOG_NO" property="blogNo" jdbcType="INTEGER" />
+	    <result column="COLLECT_BLOG_NO" property="collectBlogNo" jdbcType="INTEGER" />
+	    <result column="CONCERN_NO" property="concernNo" jdbcType="INTEGER" />
+	    <result column="FANS_NO" property="fansNo" jdbcType="INTEGER" />
+	    <result column="MY_FRIEND_NO" property="myFriendNo" jdbcType="INTEGER" />
+	    <result column="COMMENT_NO" property="commentNo" jdbcType="INTEGER" />
+	    <result column="COMMENT_ME_COMMENT_NO" property="commentMeCommentNo" jdbcType="INTEGER" />
+	    <result column="RECOVER_NO" property="myRecoveryNo" jdbcType="INTEGER" />
+	    <result column="LOG_NO" property="myLogNo" jdbcType="INTEGER" />
+	    <result column="MY_FELLOWSHIP_NO" property="myFellowShipNo" jdbcType="INTEGER" />
+	    <result column="MY_MSG_BOARD_NO" property="myMsgNo" jdbcType="INTEGER" />
+	    
+	</resultMap>
+	
+	<insert id="addUserBatch"  parameterType="Map">
+		insert into user_info
+		(
+		US_ID            ,
+		US_NAME          ,
+		SEX              ,
+		US_PS            ,
+		TEL              ,
+		QQ               ,
+		WEICHAT          ,
+		REG_DATE         ,
+		PROFESSION
+		)               
+		values          
+		(      
+			#{US_ID}	,
+			#{US_NAME}  ,
+			#{SEX}      ,
+			#{US_PS}    ,
+			#{TEL}      ,
+			#{QQ}       ,
+			#{WEICHAT}  ,
+			NOW()       ,
+			#{PROFESSION}
+		)
+	</insert>
+	<select id="getAllUsers" resultType="Map">
+		select US_ID,US_NAME from user_info;
+	</select>
+	<insert id="addFriend">
+		insert into my_friends_info
+		(
+			US_FRIEND_ID     ,
+			FRIEND_ID        ,
+			US_ID            ,
+			DATE             ,
+			IS_SPECIAL
+
+		)               
+		values          
+		(      
+			UUID()	,
+			#{friendId}  ,
+			#{usId}      ,
+			NOW()    ,
+			'N'      
+		)
+	</insert>
+	<delete id="delFriend">
+		delete from my_friends_info where US_FRIEND_ID = #{usFriendId};
+	</delete>
+	<select id="searchUsers" parameterType="Map" resultType="Map">
+		select
+			US_ID       ,
+			US_NAME	    ,
+			AGE	        ,
+			SEX	        ,
+			PS	        ,
+			AREA        ,
+			HEAD_IMG
+		from
+		user_info
+		where
+		  US_NAME like '%${keyword}%'
+	</select>
+	<insert id="joinFellowShip"  parameterType="Map">
+		insert into fellowship_user_relation
+		(
+			FS_US_RELATION_ID    ,
+			FS_ID                ,
+			US_ID                ,
+			JOIN_DATE            ,
+			IS_MASTER
+		)               
+		values          
+		(      
+			UUID()	 ,
+			#{fSId}  ,
+			#{usId}  ,
+			NOW()    ,
+			'N'      
+		)
+	</insert>
+	
+</mapper>
