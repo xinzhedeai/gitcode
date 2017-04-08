@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.VideShareMapper">
+  <resultMap id="BaseResultMap" type="po.VideShare">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="VIDEO_ID" jdbcType="VARCHAR" property="videoId" />
+    <result column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="VIDEO_NAME" jdbcType="VARCHAR" property="videoName" />
+    <result column="VIDEO_DESC" jdbcType="VARCHAR" property="videoDesc" />
+  </resultMap>
+</mapper>

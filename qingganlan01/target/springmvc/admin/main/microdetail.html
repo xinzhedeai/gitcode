@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="author" content="zhaojunbao" />
+<script type="text/javascript" src="../js/microdetail.js?v=20151127001"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+	<div class="row az-user-row">
+		<div class="col-md-12 az-user-all">
+			<div class="az-m9-title">
+				<h5>用户信息管理系统</h5>
+			</div>
+			<h4 class="az-m9-h3">法律解释列表信息</h4>
+			<div class="az-search">
+				<div class="az-search-top">
+					<label for="">查询条件</label>
+					<button type="button" class="btn btn-default btn-md btn reset" id="microdetail-searchReset-btn">重置</button>
+					<button type="button" class="btn btn-default btn-md btn" id="microdetailSearch">搜索</button>
+				</div>
+				<form name="searchForm" id="az-microExpForm">
+					<table class="table  table-bordered al-searchconditionA">
+						<tbody>
+							<tr>
+								<td>
+									<div class="al-value">
+										<center><span>法律id:</span></center>
+									</div>
+									<div class="az-showstyle">
+										<strong id="az-microId" name="nodeId"></strong>
+									</div>
+									<input type="hidden" name="nodeId" id="microdetailNodeId"></input>
+								</td>
+								<td>
+									 <div class="al-value">
+									 	<center><span>法律标题:</span></center>
+									</div>
+									<select class="az-tableInput" name="type" id="detailtype">
+										<option value="解释" selected="true">解释</option>
+										<option value="立法">立法</option>
+									</select>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+				<div class="az-search-func">
+					<label for="">查询结果</label>
+					<ul class="az-ul-common">
+						<li><button type="button" class="btn btn-default btn-md " id="microExp-Order-btn" style="display:none">修改顺序</button></li>
+					</ul>
+				</div>
+				<table id="datagridMicrolow" class="table table-bordered table-hover az-user-tableList"></table>
+				<!--<div id="microExpModalDiv"></div> -->
+				<div class="modal" id="microExpModal">
+					<div class="modal-dialog" style="width: 1000px; margin-top: 250px;">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">&times;</span> <span class="sr-only">Close</span>
+								</button>
+								<h4 class="modal-title">修改微法顺序</h4>
+							</div>
+							<div class="modal-body">
+								<div class="addAdminFormDiv" id="addAdminFormDiv">
+									<form name="modifyOrderForm" id="modifyOrderForm">
+										<table class="table table-bordered az-table-search">
+											<tbody>
+												<tr>
+													<td>
+														<span>微法ID: </span>
+														<label><strong id="microExp_nodeId"></strong></label>
+													</td>
+													<td>
+														<span>内容类型: </span>
+														<select class="form-control al-tableInputA" id="type" disabled="disabled">
+																<option id="exp">解释</option>
+																<option id="buildLow">立法</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<span>微法键值id: </span>
+														<label><strong id="microKeyId"></strong></label>
+													</td>
+													<td>
+														<span>旧序号: </span>
+														<label><strong id="modifyOldOrder"></strong></label>
+													</td>
+												</tr>
+												<tr>
+													<td colspan="2">
+														<span>新序号: </span>
+														<input class="form-control al-tableInputA" placeholder="请输入序号" id="modifyNewOrder">
+													</td>
+													<div class="alert alert-warning aj-alert" id="alter">顺序只能设置数字!</div>
+												</tr>
+											</tbody>
+										</table>
+									</form>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal" id="closebtn">关闭</button>
+								<button type="button" class="btn btn-primary" id="microExp-OrderS-btn">保存</button>
+							</div>
+						</div>
+					</div>
+				</div><!-- modal -->
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

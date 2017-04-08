@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="customMapper.CustomBlogMapper">
+<!--  BlogPost -->
+	<select id="getFriendUsId" parameterType="Map" resultType="Map">
+		SELECT
+			FRIEND_ID
+		FROM
+			my_friends_info
+		WHERE
+			US_ID = #{usId}
+	</select>
+		
+	<select id="getBlogIsByUsId" parameterType="Map" resultType="Map">
+		SELECT
+			a.US_ID
+			<if test="usId != null and usId != ''">
+				,IF (
+					c.BLOG_ID = #{blogId},
+					'Y',
+					'N'
+				) AS IS_Collect
+				,IF (
+					d.BLOG_ID = a.BLOG_ID,
+					'Y',
+					'N'
+				) AS IS_UpVote
+				,IF (
+					f.BLOG_ID = a.BLOG_ID,
+					'Y',
+					'N'
+				) AS IS_FORWARD
+			</if>
+		FROM
+			user_info a
+		<if test="usId != null and usId != ''">
+				LEFT OUTER JOIN collect_blog_info c ON c.BLOG_ID = #{blogId}
+			 		AND a.US_ID = c.US_ID
+		 		LEFT OUTER JOIN upvote_info d ON  d.BLOG_ID = #{blogId}
+			 		AND a.US_ID = d.US_ID
+			
+			 	LEFT OUTER JOIN forward_blog_info f ON f.BLOG_ID = #{blogId}
+			 		AND a.US_ID = f.US_ID		
+ 	 	</if>
+		WHERE
+			a.US_ID = #{usId} 
+			AND a.IS_Delete = 'N'
+			
+	</select>
+   	<select id="getFriendsBlogPosts" parameterType="String" resultType="Map">
+		
+		SELECT
+			a.BLOG_ID           ,
+			a.US_ID             ,
+			a.SEND_TIME         ,
+			a.UPVOTE_NO         ,
+			a.COMMENT_NO        ,
+			a.COLLECT_NO        ,
+			a.FORWARDING_NO     ,
+			a.IS_DELETE         ,
+			a.IS_FORWARD        ,
+			a.CONTENT           ,
+			a.FORWARD_VALIABLE  ,
+			a.BLOG_STATE        ,
+                                
+            b.US_ID             ,     
+			b.US_NAME           ,
+			b.AGE               ,
+			b.SEX               ,
+			b.BIRTH_DATE        ,
+			b.US_PS             ,
+			b.TEL               ,
+			b.EMAIL             ,
+			b.QQ                ,
+			b.WEICHAT           ,
+			b.PS                ,
+			b.HOBBY             ,
+			b.AREA              ,
+			b.GRADUATE_SCHOOL   ,
+			b.PROFESSION        ,
+			b.CHIRCH_TYPE       ,
+			b.STATE             ,
+			b.START_TRUTH       ,
+			b.REG_DATE          ,
+			b.LAST_LOGIN_TIME   ,
+			b.HEAD_IMG          ,
+			b.LEVEL             ,
+			b.TYPE              ,
+			b.TK_ID             ,
+			b.AUTHENTICATION    ,
+			b.IS_BAPTISM        ,
+			b.IS_TRUTH          
+
+		
+		FROM
+			blog a
+		LEFT OUTER JOIN user_info b ON a.US_ID = b.US_ID
+		
+		WHERE
+			a.US_ID = #{friendId}
+		<!-- 	IN 
+	   		<foreach collection="FRIDEND_IDs" index="index" item="item" open="(" separator="," close=")">
+	   			#{item}
+	   		</foreach> -->
+	   	<!-- 	
+		ORDER BY
+			a.SEND_TIME DESC -->
+	</select>
+	
+	<!-- 获取朋友帖子新的思路 -->
+	 	<select id="getFriendsBlogPosts1" parameterType="Map" resultType="Map">
+		
+		SELECT
+			f.FRIEND_ID,
+			b.BLOG_ID           ,
+			b.US_ID             ,
+			b.SEND_TIME         ,
+			b.UPVOTE_NO         ,
+			b.COMMENT_NO        ,
+			b.COLLECT_NO        ,
+			b.FORWARDING_NO     ,
+			b.IS_DELETE         ,
+			b.IS_FORWARD        ,
+			b.CONTENT           ,
+			b.FORWARD_VALIABLE  ,
+			b.BLOG_STATE        ,
+                                
+            a.US_ID             ,     
+			a.US_NAME           ,
+			a.AGE               ,
+			a.SEX               ,
+			a.BIRTH_DATE        ,
+			a.US_PS             ,
+			a.TEL               ,
+			a.EMAIL             ,
+			a.QQ                ,
+			a.WEICHAT           ,
+			a.PS                ,
+			a.HOBBY             ,
+			a.AREA              ,
+			a.GRADUATE_SCHOOL   ,
+			a.PROFESSION        ,
+			a.CHIRCH_TYPE       ,
+			a.STATE             ,
+			a.START_TRUTH       ,
+			a.REG_DATE          ,
+			a.LAST_LOGIN_TIME   ,
+			a.HEAD_IMG          ,
+			a.LEVEL             ,
+			a.TYPE              ,
+			a.TK_ID             ,
+			a.AUTHENTICATION    ,
+			a.IS_BAPTISM        ,
+			a.IS_TRUTH          
+		
+			,IF (
+				(select 
+					count(*)
+				from
+					collect_blog_info c
+				where
+					c.BLOG_ID = b.BLOG_ID
+					and
+					c.US_ID = #{usId}
+				)	= 1,		
+				'Y',
+				'N'
+			) AS IS_COLLECTED
+		<!-- 	,IF (
+				f.BLOG_ID = a.BLOG_ID,
+				'Y',
+				'N'
+			) AS IS_FORWARD -->
+			
+
+		
+		FROM
+			my_friends_info f 
+			
+		LEFT OUTER JOIN blog b ON b.US_ID = f.FRIEND_ID	
+<!-- 		LEFT OUTER JOIN collect_blog_info c ON c.BLOG_ID = b.BLOG_ID
+	 		AND  c.US_ID = #{usId}
+ 		LEFT OUTER JOIN upvote_info d ON  d.BLOG_ID = #{blogId}
+	 		AND a.US_ID = d.US_ID
+	
+	 	LEFT OUTER JOIN forward_blog_info f ON f.BLOG_ID = #{blogId}
+	 		AND a.US_ID = f.US_ID	 -->
+		
+		WHERE
+			a.US_ID = #{usId}
+		<!-- 	IN 
+	   		<foreach collection="FRIDEND_IDs" index="index" item="item" open="(" separator="," close=")">
+	   			#{item}
+	   		</foreach> -->
+	   	<!-- 	
+		ORDER BY
+			a.SEND_TIME DESC -->
+	</select>
+	
+	
+</mapper>

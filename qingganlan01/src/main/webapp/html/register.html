@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>青橄榄-注册页</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="author" content="zjb" />
+<script type="text/javascript" src="/lib/js/includeHead.js?v=20151020001"></script>
+<script type="text/javascript" src="../js/register.js"></script>
+<script type="text/javascript" src="../lib/js/jquery.cityselect.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body class="bg1">
+	<div class="container ">
+		<div class="row index-row ">
+			<form role="form" class="registerForm">
+				<div class="registerInfo opacityL1">
+					<div class="title">
+						<i class="fa fa-lg fa-edit"></i> <span>注册信息</span>
+					</div>
+					<ul>
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="phone" class="col-md-3">注册账号</label>
+								<div class="col-md-4">
+									<input type="text" class="form-control" placeholder="邮箱或手机号" id="username" name="US_ID">
+								</div>
+
+							</div>
+						</li>
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="password" class="col-md-3">用户昵称</label>
+								<div class="col-md-4 ">
+									<input type="text" class="form-control" placeholder="请输入用户昵称"
+										id="usName" name="US_NAME">
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="password" class="col-md-3">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+								<div class="col-md-4 ">
+									<input type="password" class="form-control"
+										placeholder="请输入用户密码" name="US_PS" id="password">
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="password" class="col-md-3">确&nbsp;&nbsp;认&nbsp;&nbsp;密&nbsp;&nbsp;码：</label>
+								<div class="col-md-4 ">
+									<input type="password" class="form-control"
+										placeholder="请输入确认密码" id="repassword">
+								</div>
+							</div>
+						</li>
+					
+					</ul>
+				</div>
+				<div class="registerMyBelief">
+					<div class="title">
+						<i class="fa fa-lg fa-twitter"></i> <span>我的信仰</span>
+					</div>
+					<ul>
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="exampleInputEmail1" class="col-md-3">信仰：</label>
+								<div class="col-md-4 ">
+									<select class="form-control" name="IS_TRUTH">
+										<option value="">请选择...</option>
+										<option value="Y">基督信仰</option>
+										<option value="N">暂时是无神论者</option>
+									</select>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="exampleInputEmail1" class="col-md-3 ">开始信主的日期：</label>
+								<div class="col-md-4 ">
+									<input size="16" type="text"  class="form-control startDate" name="START_TRUTH">
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="form-group form-group-lg">
+								<label class="col-md-3">敬拜地点类型</label> 
+								<input type="radio" name="CHIRCH_TYPE" id="homeChurch" value="family"> 家庭教会 
+								<input type="radio" name="CHIRCH_TYPE" id="ThreeSelfChurch" value="ThreeFree">三自教会
+							</div>
+						</li>
+						<li>
+
+							<div class="form-group form-group-lg">
+								<label class="col-md-3">是否受洗</label>
+								 <input type="radio" name="IS_BAPTISM" id="receiveBaptismOk" value="N">
+								还未受洗 
+								<input type="radio" name="IS_BAPTISM" id="receiveBaptismNo" value="Y"> 已受洗
+							</div> 
+						</li>
+
+					</ul>
+				</div>
+				<div class="personalDetail">
+					<div class="title">
+						<i class="fa fa-lg fa-user"></i> <span>个人资料</span>
+					</div>
+					<ul>
+
+
+						<li>
+							<div class="form-group form-group-lg">
+								<label class="col-md-3 labelSex"> 我的性别：</label>
+								<div class="registerSex">
+									<input type="radio" name="SEX" id="man" value="男" checked>
+									男 <input type="radio" name="SEX" id="woman" value="女" checked>
+									女
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="exampleInputEmail1" class="col-md-3">出生日期：</label>
+								<div class="col-md-4 ">
+									<input size="16" type="text" class="form-control startDate" name="BIRTH_DATE">
+								</div>
+							</div>
+						</li>
+
+
+
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="" class="col-md-3"> 毕业学校：</label>
+								<div class="col-md-4 ">
+									<input type="text" class="form-control"
+										placeholder="请输入毕业学校" id="" name="GRADUATE_SCHOOL">
+								</div>
+							</div>
+						</li>
+					<!-- 	<li>
+							<div class="form-group form-group-lg">
+								<label for="" class="col-md-3"> 所学专业：</label>
+								<div class="col-md-4 ">
+									<input type="text" class="form-control"
+										placeholder="请输入所学专业" id=""  name="profession">
+								</div>
+							</div>
+						</li> -->
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="" class="col-md-3">职业：</label>
+								<div class="col-md-4 ">
+									<select class="form-control"  name="PROFESSION">
+										<option value="" >请选择...</option>
+										<option value="0">牧师/传道人</option>
+										<option value="1">软件工程师</option>
+										<option value="2">美工设计师</option>
+										<option value="3">研发人员</option>
+										<option value="4">销售人员</option>
+										<option value="5">管理人员</option>
+										<option value="6">财务人员</option>
+										<option value="7">行政/后勤/客服</option>
+										<option value="8">教师</option>
+										<option value="9">学生</option>
+										<option value="10">公务员</option>
+										<option value="11">自主创业</option>
+										<option value="12">其它职业</option>
+									</select>
+								</div>
+							</div>
+						</li>
+
+						<li>
+							<div class="form-group form-group-lg">
+								<label class=" workPlaceLabel col-md-4">居住地：</label>
+								<div class=" workPlace col-md-8" id="city_2">
+								<!-- 	<select class="form-control" name="province" id="s1">
+
+										<option></option>
+									</select> <select class="form-control" name="city" id="s2">
+										<option></option>
+									</select> <select class="form-control" name="town" id="s3">
+										<option></option>
+									</select>  -->
+									<select class="prov form-control" id="prov"></select> 
+									<select class="city form-control" id="city" disabled="disabled" ></select>
+									<select class="dist form-control" id="dist" disabled="disabled"></select>
+								</div>
+							</div>
+						</li>
+					
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="password" class="col-md-3">兴趣爱好：</label>
+								<div class="col-md-4 ">
+									<input type="text" class="form-control" placeholder="请输入兴趣爱好"
+										id="" name="HOBBY">
+								</div>
+							</div>
+						</li>
+						<li class="regTextArea">
+							<div class="form-group form-group-lg">
+								<label for="password" class="col-md-4 bibleText">个性签名：</label>
+								<br>
+								<br>
+								<textarea class="form-control register-textarea"
+									id="index-area-top" name="PS">圣经中你最喜欢的一节经文
+								</textarea>
+								<br>
+
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="myContactWay">
+					<div class="title">
+						<i class="fa fa-lg fa-phone"></i> <span>我的联系方式</span>
+					</div>
+					<ul>
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="" class="col-md-3">手机号：</label>
+								<div class="col-md-4 ">
+									<input type="text" class="form-control" placeholder="请输入手机号"
+										id="" name="TEL">
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="" class="col-md-3">邮箱：</label>
+								<div class="col-md-4 ">
+									<input type="text" class="form-control" placeholder="请输入邮箱号"
+										id="" name="EMAIL">
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="password" class="col-md-3">qq号：</label>
+								<div class="col-md-4 ">
+									<input type="text" class="form-control" placeholder="请输入qq号"
+										id="" name="QQ">
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="form-group form-group-lg">
+								<label for="" class="col-md-3">微信号：</label>
+								<div class="col-md-4 ">
+									<input type="text" class="form-control" placeholder="请输入qq号"
+										id="" name="WEICHAT">
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<button type="button" class="btn btn-primary btn-lg regBtn" id="ok">提交注册</button>
+			</form>
+
+		</div>
+	</div>
+</body>
+</html>

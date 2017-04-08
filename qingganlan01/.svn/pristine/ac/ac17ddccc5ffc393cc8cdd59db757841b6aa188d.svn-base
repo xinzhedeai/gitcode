@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>青橄榄-我的见证</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="author" content="zjb" />
+	<script type="text/javascript" src="/lib/js/includeHead.js?v=20151020001"></script>
+	<script type="text/javascript" src="/js/myLog.js?v=20151020001"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script type="text/javascript">
+/* 	$(function(){
+  // $('#table_id').DataTable();
+	}) */
+	   
+	</script>
+</head>
+
+<body>
+	<div class="header"></div>
+	<div class="container">
+		<div class="row common-row logRowHeight">
+			<div class="person-c-headImage">
+					<!-- <img src="../img/qq.png" alt="" >
+					<span>耶和华是我的的牧者！</span> -->
+			</div>
+			<div class="col-md-12">
+				<div class="tabbable" id="tabs-1">
+					<ul class="nav nav-tabs">
+						<li class="active" id="logTabWitness">
+							<a data-toggle="tab" href="#panel-1" >我的见证</a>
+						</li>
+						<li  id="logTabQT">
+							<a data-toggle="tab" href="#panel-2" >灵修日志</a>
+						</li>
+						<!-- <li>
+							<a data-toggle="tab" href="#panel-3"  id="bm3">精华帖</a>
+						</li> -->
+					
+					</ul>
+					<div class="tab-content myWit-tab-content">
+						<div class="tab-pane active " id="panel-1">
+							<div class="myWintnessFunc">
+								<ul>
+									<li>
+										<button class="btn btn-primary" data-toggle="modal" data-target="#mymodal-data" type="button">我要写见证</button>
+									</li>
+								</ul>
+							</div>	
+							<div class="WitnessContent"><!-- 我的日志表格开始 -->
+								<table id="myLogDatagrid" class="display myLogTable" cellspacing="0" width="100%"></table>
+							</div><!-- 我的日志表格结束 -->
+						</div>
+						<div class="tab-pane " id="panel-2">
+							<div class="myWintnessFunc">
+								<ul>
+									<li>
+										<button class="btn btn-primary" data-toggle="modal" data-target="#mymodal-data" type="button">我要写灵修日志</button>
+									</li>
+								</ul>
+							</div>
+							<div class="WitnessContent"><!-- 我的日志表格开始 -->
+								<table id="myLogDatagridQT" class="display myLogTable" cellspacing="0" width="100%"></table>
+							</div><!-- 我的日志表格结束 -->
+						</div>
+						<div class="tab-pane l-tab-pane-index" id="panel-3">
+						</div>
+					</div>
+				</div>
+				<!-- 模态框开始 -->
+				<!-- data-target触发模态弹出窗元素 -->
+				
+				<!-- 模态弹出窗内容 -->
+				<div class="modal fade" id="mymodal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+					<div class="modal-dialog" id="">
+						<div class="modal-content" style="width: 800px;">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+								<h4 class="modal-title">我的日志</h4>
+							</div>
+							<div class="modal-body">
+								<form role="form">
+								  <div class="form-group">
+								   	<label for="logTitle">标题</label>
+								    <input type="text" value="" name="logTitle" class="form-control logTitle" placeholder="请输入见证/日志标题">
+									<label for="logContent">内容</label>
+									<!-- <textarea class="form-control logContent" rows="3" name="logContent" ></textarea> -->
+								  </div>
+								</form>  
+								
+							</div>
+							<script id="logEditor" type="text/plain" style="width:767px; height: 170px; margin:0px auto 40px 15px;"></script>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-primary logBtn" id="addLog">发表见证</button>
+								<button type="button" class="btn btn-primary logBtn" id="addLogQT" style="display:none;">发表灵修日志</button>
+							</div>
+						</div>
+					</div>
+				</div><!-- 模态框 -->
+			</div>
+		</div>
+	</div>
+	<div class="footer"></div>
+</body>
+</html>

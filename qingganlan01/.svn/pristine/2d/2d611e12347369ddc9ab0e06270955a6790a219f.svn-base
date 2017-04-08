@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="normalMapper.WantedWebMapper" >
+  <resultMap id="BaseResultMap" type="normalPo.WantedWeb" >
+    <result column="WANTED_ID" property="wantedId" jdbcType="VARCHAR" />
+    <result column="WANTED_ADDRESS" property="wantedAddress" jdbcType="VARCHAR" />
+    <result column="WANTED_DESC" property="wantedDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    WANTED_ID, WANTED_ADDRESS, WANTED_DESC
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="normalPo.WantedWebExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wanted_web
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="normalPo.WantedWebExample" >
+    delete from wanted_web
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="normalPo.WantedWeb" >
+    insert into wanted_web (WANTED_ID, WANTED_ADDRESS, WANTED_DESC
+      )
+    values (#{wantedId,jdbcType=VARCHAR}, #{wantedAddress,jdbcType=VARCHAR}, #{wantedDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="normalPo.WantedWeb" >
+    insert into wanted_web
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wantedId != null" >
+        WANTED_ID,
+      </if>
+      <if test="wantedAddress != null" >
+        WANTED_ADDRESS,
+      </if>
+      <if test="wantedDesc != null" >
+        WANTED_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wantedId != null" >
+        #{wantedId,jdbcType=VARCHAR},
+      </if>
+      <if test="wantedAddress != null" >
+        #{wantedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="wantedDesc != null" >
+        #{wantedDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="normalPo.WantedWebExample" resultType="java.lang.Integer" >
+    select count(*) from wanted_web
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wanted_web
+    <set >
+      <if test="record.wantedId != null" >
+        WANTED_ID = #{record.wantedId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wantedAddress != null" >
+        WANTED_ADDRESS = #{record.wantedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wantedDesc != null" >
+        WANTED_DESC = #{record.wantedDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wanted_web
+    set WANTED_ID = #{record.wantedId,jdbcType=VARCHAR},
+      WANTED_ADDRESS = #{record.wantedAddress,jdbcType=VARCHAR},
+      WANTED_DESC = #{record.wantedDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

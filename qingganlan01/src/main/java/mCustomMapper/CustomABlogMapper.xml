@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mCustomMapper.CustomABlogMapper">
+<select id="searchBlogs" parameterType="Map" resultType="Map">
+		SELECT
+			a.*,
+			b.US_NAME
+		FROM
+			blog a
+ 	 	LEFT OUTER JOIN user_info b ON b.US_ID = a.US_ID	
+		WHERE
+			1 = 1
+	 	<if test="userId != null and userId != ''">
+		 	and a.US_ID = #{userId}
+	 	</if>
+	 	<if test="content != null and content != ''">
+		 	and a.CONTENT like '%${content}%'
+	 	</if>
+	 	<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>
+	</select>
+	
+	<delete id="deleteBlog">
+		delete from blog 
+		WHERE
+			BLOG_ID IN 
+   		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+   			#{item}
+   		</foreach>
+	</delete>
+	<select id="getAllComments" parameterType="Map" resultType="Map">
+		SELECT
+			a.*,
+			b.US_NAME AS COMMENT_US_NAME,
+			d.US_NAME AS BLOG_US_NAME
+		FROM
+			comment_info a
+ 	 	LEFT OUTER JOIN user_info b ON a.COMMENT_US_ID = b.US_ID	
+ 	 	LEFT OUTER JOIN blog c ON c.BLOG_ID = a.BLOG_ID	
+ 	 	LEFT OUTER JOIN user_info d ON d.US_ID = c.US_ID	
+		WHERE
+			a.IS_DELETE = 'N'
+		<if test="blogPostId != null and blogPostId != ''">
+		 	and a.BLOG_ID = #{blogPostId}
+	 	</if>
+	 	<if test="userId != null and userId != ''">
+		 	and a.COMMENT_US_ID = #{userId}
+	 	</if>
+	 	<if test="content != null and content != ''">
+		 	and a.COMMENT_CONTENT like '%${content}%'
+	 	</if>
+	 	<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>
+	</select>
+	<select id="getblogPostId" parameterType="Map" resultType="Map">
+		SELECT 
+			BLOG_ID
+		FROM
+			blog 
+		WHERE IS_DELETE = 'N'
+    </select>
+    
+    <select id="getAllreplys" parameterType="Map" resultType="Map">
+		SELECT
+			a.*,
+			b.US_NAME AS REPLY_US_NAME,
+			c.US_NAME AS REPLY_REPLY_US_NAME
+		FROM
+			reply_info a
+ 	 	LEFT OUTER JOIN user_info b ON a.REPLY_US_ID = b.US_ID	
+ 	 	LEFT OUTER JOIN user_info c ON a.REPLY_REPLY_US_ID = c.US_ID	
+		WHERE
+			a.IS_DELETE = 'N'
+		<if test="commentId != null and commentId != ''">
+		 	and a.COMMENT_ID = #{commentId}
+	 	</if>
+	 	<if test="replyUserId != null and replyUserId != ''">
+		 	and a.REPLY_US_ID = #{replyUserId}
+	 	</if>
+	 	<if test="content != null and content != ''">
+		 	and a.REPLY_CONTENT like '%${content}%'
+	 	</if>
+	 	<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>
+	</select>
+	
+	<select id="getCommentId" parameterType="Map" resultType="Map">
+		SELECT 
+			COMMENT_ID
+		FROM
+			comment_info 
+		WHERE IS_DELETE = 'N'
+    </select>
+    <delete id="deleteComment">
+		DELETE FROM comment_info
+		WHERE
+			COMMENT_ID IN 
+   		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+   			#{item}
+   		</foreach>
+	</delete>
+    <delete id="deletereply">
+		DELETE FROM reply_info
+		WHERE
+			REPLY_ID IN 
+   		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+   			#{item}
+   		</foreach>
+	</delete>
+	
+	
+</mapper>

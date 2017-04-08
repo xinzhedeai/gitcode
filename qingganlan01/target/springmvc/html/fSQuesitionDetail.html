@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>青橄榄-团契主页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="author" content="zjb" />
+	<script type="text/javascript" src="/lib/js/includeHead.js?v=20151020001"></script>
+	<script type="text/javascript" src="/js/fSQuesitionDetail.js?v=20151020001"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	
+</head>
+<body>
+	<div class="header"></div>	
+	<div class="person-c-headImage">
+			<!-- <img src="../img/qq.png" alt="" >
+			<span>耶和华是我的的牧者！</span> -->
+	</div>
+	<div class="container">
+		<div class="row common-row logRowHeight">
+			
+			<div class="col-md-12 fellowShipAlbum">
+				<div class="fSQContent fSQContentR"><!-- 提问人信息模块开始 -->
+		<!-- 			<div class="requestUserDetail">
+						<img alt="" src="/lib/img/images/default_blog_img.jpg" class="thumbnail fSQUserHeadImg" > 
+						<span><i class="fa fa-md fa-user"></i>信者得爱</span>
+						<span><i class="fa fa-md fa-edit"></i>耶和华是我的牧者,我必不致缺乏！</span> <span><i class="fa fa lg fa-home"></i>威海</span> <span><i class="fa fa-md fa-clock-o"></i>2016-1-18</span>
+					</div>
+					<div class="fSQDetail">
+						<div class="questionTitle">
+							<label>为什么？？？？</label>
+							<ul class="quesitionTitleUl">
+								<li>发表时间2016-8-8</li>
+								<li>浏览次数1234</li>
+							</ul>
+						</div>
+						<div class="quesitionContent">
+							<p>耶和华是我的牧者,我必不致缺乏！</p>
+						</div>
+					</div> -->
+				</div><!-- 提问人信息模块结束 -->
+					
+			</div><!-- col-md-12结束 -->
+			<button class="btn btn-success fSAnswerBtn" data-toggle="modal" data-target="#mymodal-data" type="button">我要回答该问题</button>
+			<div class="col-md-12 fSQAnswerAll"><!-- 问题答案列表开始col12 -->
+	<!-- 			<ul>
+					<li>
+						<div class="fSQContent">
+							回复人信息模块开始
+							<div class="answerUserDetail">
+								<img alt="" src="/lib/img/images/default_blog_img.jpg" class="thumbnail fSQUserHeadImg" > 
+								<span><i class="fa fa-md fa-user"></i>信者得爱</span>
+								<span><i class="fa fa-md fa-edit"></i>耶和华是我的牧者,我必不致缺乏！</span> <span><i class="fa fa lg fa-home"></i>威海</span> <span><i class="fa fa-md fa-clock-o"></i>2016-1-18</span>
+							</div>
+							<div class="fSQDetail">
+								<div class="answerTitle">
+									<ul class="answerTitleUl">
+										<li>回答于2016-8-8</li><i class="fa fa-lg fa-thumbs-o-up myComment" onclick="showCommentDiv();"></i><i class="fa fa-lg fa-comment-o myComment" onclick="showCommentDiv();"></i>
+									</ul>
+								</div>
+								<div class="answerContent">
+									<p class="fSReplyContent">耶和华是我的牧者,我必不致缺乏！</p>
+									<p class="fSReplyReplyContent">回答的内容:哈利路亚！</p>
+								</div>
+							</div>
+						</div> 回复人信息模块结束
+					</li>
+				</ul> -->
+			</div><!-- 问题答案列表结束col12-->
+		</div>
+			<!-- 模态弹出窗内容 -->
+		<div class="modal fade" id="mymodal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+			<div class="modal-dialog" id="">
+				<div class="modal-content" style="width: 800px;">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title">回答问题</h4>
+					</div>
+					<div class="modal-body">
+						<form role="form">
+						  <div class="form-group">
+							<input type="hidden" class="quesitionId" name="quesitionId">
+							<input type="hidden" class="requestReplyId"  name="requestReplyId">
+							<label for="logContent">内容</label>
+						  </div>
+						</form>  
+						<script id="logEditor" type="text/plain" style="width:767px; height: 170px; margin:0px auto 40px 1px;"></script>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary logBtn" id="addAnswer">回复提问人</button>
+						<button type="button" class="btn btn-primary logBtn" id="addReplyReply" style="display:none;">回复解答人</button>
+					</div>
+				</div>
+			</div>
+		</div><!-- 模态框 -->
+	</div>	
+	<div class="footer"></div>
+</body>
+</html>

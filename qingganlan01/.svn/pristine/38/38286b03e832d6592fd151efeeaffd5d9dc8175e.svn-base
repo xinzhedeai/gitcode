@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="lvhejing" />
+	<script type="text/javascript" src="../js/admin.js?v=20151201002"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<div class="row az-user-row">
+	<div class="col-md-12 az-user-all">
+		<div class="az-m9-title">
+			<h5>管理员信息管理</h5>
+		</div>
+		<h4 class="az-m9-h3">管理员信息</h4>
+		<div class="az-search">
+			<div class="az-search-top">
+				<label>查询条件</label>
+				<button type="button" class="btn btn-default btn-md btn reset" id="admin-searchReset-btn">重置</button>
+				<button type="button" class="btn btn-default" id="al-Search">搜索</button>
+			</div>
+			<form id="al-searchForms" name="al-searchForms">
+				<table class="table table-bordered al-searchcondition" >
+					<tr>
+						<td>
+							<div class="al-value">
+								<center><span>管理员ID:</span></center>
+							</div>
+							<input type="text" class="form-control" name="userId" id="adminId">
+						</td>
+						<td>
+							<div class="al-value">
+								<center><span>姓名:</span></center>
+							</div>
+							<input type="text" class="form-control" name="name" id="adminName">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div class="al-value">
+								<center><span>权限:</span></center>
+							</div>
+							<select name="auth" id="adminAuth">
+								<option value="">全部</option>
+								<option value="ADMIN">超级管理员</option>
+								<option value="BLOGMANAGER">微法管理员</option>
+								<option value="USERMANAGER">帐号管理员</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<div class="al-cxjg">
+				<label>查询结果</label>
+				<button type="button" class="btn btn-default" id="al-resetpwd">密码重置</button>
+				<button type="button" class="btn btn-default" id="al-delete">删除</button>
+				<!-- <button type="button" class="btn btn-default" id="al-modify">修改</button> -->
+				<button type="button" class="btn btn-default" id="al-add">添加</button>
+			</div>
+			
+			<table id="AdminDataGridblog">
+				
+			</table>
+			<div class="modal" id="amodal">
+				 <div class="modal-dialog" style="width:1000px; margin-top:250px;">
+					 <div class="modal-content">
+						<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							 <span aria-hidden="true">&times;</span>
+							 <span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title">修改管理员信息</h4>
+					</div>
+					<div class="modal-body">
+						<div class="modifyAdminFormDiv" id="modifyAdminFormDiv">
+							 <form name="modifyAdminForm" id="modifyAdminForm">
+							 	<table class="table table-bordered al-table-search">
+							 		<tbody>
+										<tr><td><span>管理员ID: </span><input type="text" name="adId" class="form-control al-tableInput" placeholder="请输入用户昵称" id="adId">
+											</td>
+											<td><span>姓名: </span><input type="text" name="name" class="form-control al-tableInput" placeholder="请输入用户昵称" id="name"></td>
+										</tr>
+										<tr><td><span>权限: </span>
+										 	 <select class="form-control al-tableInput" name="auth" id="auth">
+											 	 <option value="ADMIN" class="superUser">超级管理员</option>
+												 <option value="BLOGMANAGER" class="BlogUser">微法管理员</option>
+												 <option value="USERMANAGER" class="AccountUser">帐号管理员</option>
+										 	 </select></td>
+											<td><span>性别: </span>
+											 <select class="form-control al-tableInput" id="sex">
+												 <option id="boy">男</option>
+												 <option id="girl">女</option>
+											 </select></td>
+										</tr>
+										<tr><td><span>联系方式: </span>
+											 <input type="text" name="phone" class="form-control al-tableInput" placeholder="请输入联系方式" id="phone"></td>
+											 <td><span>邮箱: </span>
+											 <input type="text" name="email" class="form-control al-tableInput" placeholder="请输入联系方式" id="email"></td>
+										</tr>
+									</tbody>
+								</table>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					 <button type="button" class="btn btn-default" id="ModifyCloseBtn">关闭</button>
+					 <button type="button" class="btn btn-primary" id="AdminModifySaveBtn">保存</button>
+					 </div>
+				</div>
+			</div>
+		</div> 
+			<div class="modal" id="mymodal">
+				<div class="modal-dialog" style="width:1000px; margin-top:250px;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+							<h4 class="modal-title">添加管理员信息</h4>
+						</div>
+						<div class="modal-body">
+							<div class="addAdminFormDiv" id="addAdminFormDiv">
+				 				<form name="addAdminForm" id="addAdminForm">
+									<table class="table table-bordered al-table-search">
+										<tbody>
+											<tr>
+												<td><span>管理员ID: </span><input type="text" name="adId" class="form-control al-tableInput" placeholder="请输入账号"  id="SadId"></td>
+												<td><span>姓名: </span><input type="text" name="name" class="form-control al-tableInput" placeholder="请输入姓名" id="Sname"></td>
+											</tr>
+											<tr>
+												<td><span>联系方式: </span><input type="text" name="phone" class="form-control al-tableInput" placeholder="请输入联系方式" id="Sphone"></td>
+												<td><span>性别: </span>
+													<select class="form-control al-tableInput" id="Ssex">
+														 <option id="boy">男</option>
+														 <option id="girl">女</option>
+													</select>
+												</td>
+											</tr>
+											<tr><td><span>邮箱: </span>
+												 <input type="text" name="email" class="form-control al-tableInput" placeholder="请输入邮箱" id="Semail"></td>
+												 <td><span>权限: </span>
+												 <select class="form-control al-tableInput" name="auth" id="Sauth">
+													 <option value="ADMIN" class="superUser" >超级管理员</option>
+													 <option value="BLOGMANAGER" class="BlogUser" >微法管理员</option>
+													 <option value="USERMANAGER" class="AccountUser" >帐号管理员</option>
+												 </td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer">
+							 <button type="button" class="btn btn-default" data-dismiss="modal" id="closebtn">关闭</button>
+							 <button type="button" class="btn btn-primary" id="savebtn">保存</button>
+						 </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="zhaojunbao" />
+	<script type="text/javascript" src="../js/auth.js?v=20151222001"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+	<div class="row az-user-row">
+		<div class="col-md-12 az-user-all">
+			<div class="az-m9-title">
+				<h5>用户认证信息管理</h5>
+			</div>
+			<h4 class="az-m9-h3">认证信息</h4>
+			<div class="az-search">
+				<div class="az-search-top">
+					<label for="">查询条件</label>
+					<button type="button" class="btn btn-default btn-md btn reset" id="auth-searchReset-btn">重置</button>
+					<button type="button" class="btn btn-default btn-md btn" id="az-authSearch">搜索</button>
+				</div>
+				<form name="searchForm" id="az-auth-searchForm">
+					<table class="table  table-bordered al-searchcondition">
+					   <tbody>
+					     <tr>
+					        <td>
+					        	<span class="aj-span">用户昵称: </span>
+	  							<input type="text" name="nickName" id="az-auth-sName">
+							</td>
+					     	 <td>
+					     	 	<span class="aj-span">认证: </span>
+	  							<select class=" az-tableInput" name="state">
+  									<option value="">全部</option>
+									<option value="Y">已认证</option>
+									<option value="N">未认证</option>
+									<option value="FAILED">认证失败</option>
+								</select>
+							</td>
+					     </tr>
+					   </tbody>
+					 </table>
+				 </form>
+				 <div class="az-search-func">
+					<label for="">查询结果</label>
+				</div>
+				<table id="datagridAuth" class="table table-bordered table-hover az-user-tableList"></table>
+				<div id="authModalDiv">
+					<div class="modal" id="AuthDetailModal"><div class="modal-dialog" style="width:1000px; margin-top:200px;">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+								</button>
+								<h4 class="modal-title">用户认证相关信息详情</h4></div>
+								<div class="modal-body">
+									<form name="userDetailForm" id="authDetailForm">
+										<table class="table  table-bordered az-table-searchA" id="az-auth-mDetail">
+										<tbody>
+											<tr>
+												<td><span>用户ID: </span> </td>
+												<td><strong id="authDetail_userId"></strong></td>
+												<td><span>登录ID: </span> </td>
+												<td><strong id="authDetail_landId"></strong></td>
+											</tr>
+											<tr>
+												<td><span>昵称: </span> </td>
+												<td><strong id="authDetail_name"></strong></td>
+												<td><span>手机号码: </span> </td>
+												<td><strong id="authDetail_Tel"></strong></td>
+											</tr>
+											<tr>
+												<!-- <td><span>邮箱号码: </span> </td>
+												<td><strong id="authDetail_Email"></strong></td> -->
+												<td><span>身份证号: </span> </td>
+												<td><strong id="authDetail_cardId"></strong></td>
+												<td><span>认证日期: </span> </td>
+												<td><strong id="authDetail_Date"></strong></td>
+												<!-- <td><span>个性签名: </span> </td>
+												<td><strong id="authDetail_PS"></strong></td> -->
+											</tr>
+											<tr>
+												<td><span>所在地: </span> </td>
+												<td><strong id="authDetail_Area"></strong></td>
+												<td><span>注册日期: </span> </td>
+												<td><strong id="authDetail_RegDate"></strong></td>
+											</tr>
+											<tr>
+												<td><span>性别: </span> </td>
+												<td><strong id="authDetail_Sex"></strong></td>
+												<td><span>是否认证: </span> </td>
+												<td><strong id="authDetail_Authen"></strong></td>
+											</tr>
+											<tr>
+												<td><span>职业: </span> </td>
+												<td><strong id="authDetail_Profession"></strong></td>
+												<td><span>状态: </span> </td>
+												<td><strong id="authDetail_Limit"></strong></td>
+											</tr>
+											<tr>
+											<tr>
+												<td><span>是否受洗: </span> </td>
+												<td><strong id="is_baptism"></strong></td>
+												<td><span>参加教会类型: </span> </td>
+												<td><strong id="church_type"></strong></td>
+											</tr>
+										</tbody>
+										</table>
+										<div id="authPreviewArea"></div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" id="auth-saveDetailModal-btn" style="display:none;">认证通过</button>	
+									<button type="button" class="btn btn-default" id="auth-noSaveDetailModal-btn" style="display:none;">拒绝认证</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal" id="az-auth-closeM">取消</button>	
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

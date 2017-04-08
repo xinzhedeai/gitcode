@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="normalMapper.ReplyInfoMapper" >
+  <resultMap id="BaseResultMap" type="normalPo.ReplyInfo" >
+    <id column="REPLY_ID" property="replyId" jdbcType="VARCHAR" />
+    <result column="COMMENT_ID" property="commentId" jdbcType="VARCHAR" />
+    <result column="REPLY_US_ID" property="replyUsId" jdbcType="VARCHAR" />
+    <result column="REPLY_CONTENT" property="replyContent" jdbcType="VARCHAR" />
+    <result column="REPLY_DATE" property="replyDate" jdbcType="TIMESTAMP" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+    <result column="REPLY_REPLY_US_ID" property="replyReplyUsId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    REPLY_ID, COMMENT_ID, REPLY_US_ID, REPLY_CONTENT, REPLY_DATE, IS_DELETE, REPLY_REPLY_US_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="normalPo.ReplyInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from reply_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from reply_info
+    where REPLY_ID = #{replyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from reply_info
+    where REPLY_ID = #{replyId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="normalPo.ReplyInfoExample" >
+    delete from reply_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="normalPo.ReplyInfo" >
+    insert into reply_info (REPLY_ID, COMMENT_ID, REPLY_US_ID, 
+      REPLY_CONTENT, REPLY_DATE, IS_DELETE, 
+      REPLY_REPLY_US_ID)
+    values (#{replyId,jdbcType=VARCHAR}, #{commentId,jdbcType=VARCHAR}, #{replyUsId,jdbcType=VARCHAR}, 
+      #{replyContent,jdbcType=VARCHAR}, #{replyDate,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=VARCHAR}, 
+      #{replyReplyUsId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="normalPo.ReplyInfo" >
+    insert into reply_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="replyId != null" >
+        REPLY_ID,
+      </if>
+      <if test="commentId != null" >
+        COMMENT_ID,
+      </if>
+      <if test="replyUsId != null" >
+        REPLY_US_ID,
+      </if>
+      <if test="replyContent != null" >
+        REPLY_CONTENT,
+      </if>
+      <if test="replyDate != null" >
+        REPLY_DATE,
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="replyReplyUsId != null" >
+        REPLY_REPLY_US_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="replyId != null" >
+        #{replyId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentId != null" >
+        #{commentId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyUsId != null" >
+        #{replyUsId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyContent != null" >
+        #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyDate != null" >
+        #{replyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="replyReplyUsId != null" >
+        #{replyReplyUsId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="normalPo.ReplyInfoExample" resultType="java.lang.Integer" >
+    select count(*) from reply_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update reply_info
+    <set >
+      <if test="record.replyId != null" >
+        REPLY_ID = #{record.replyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentId != null" >
+        COMMENT_ID = #{record.commentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyUsId != null" >
+        REPLY_US_ID = #{record.replyUsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyContent != null" >
+        REPLY_CONTENT = #{record.replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyDate != null" >
+        REPLY_DATE = #{record.replyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyReplyUsId != null" >
+        REPLY_REPLY_US_ID = #{record.replyReplyUsId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update reply_info
+    set REPLY_ID = #{record.replyId,jdbcType=VARCHAR},
+      COMMENT_ID = #{record.commentId,jdbcType=VARCHAR},
+      REPLY_US_ID = #{record.replyUsId,jdbcType=VARCHAR},
+      REPLY_CONTENT = #{record.replyContent,jdbcType=VARCHAR},
+      REPLY_DATE = #{record.replyDate,jdbcType=TIMESTAMP},
+      IS_DELETE = #{record.isDelete,jdbcType=VARCHAR},
+      REPLY_REPLY_US_ID = #{record.replyReplyUsId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="normalPo.ReplyInfo" >
+    update reply_info
+    <set >
+      <if test="commentId != null" >
+        COMMENT_ID = #{commentId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyUsId != null" >
+        REPLY_US_ID = #{replyUsId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyContent != null" >
+        REPLY_CONTENT = #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyDate != null" >
+        REPLY_DATE = #{replyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="replyReplyUsId != null" >
+        REPLY_REPLY_US_ID = #{replyReplyUsId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where REPLY_ID = #{replyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="normalPo.ReplyInfo" >
+    update reply_info
+    set COMMENT_ID = #{commentId,jdbcType=VARCHAR},
+      REPLY_US_ID = #{replyUsId,jdbcType=VARCHAR},
+      REPLY_CONTENT = #{replyContent,jdbcType=VARCHAR},
+      REPLY_DATE = #{replyDate,jdbcType=TIMESTAMP},
+      IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+      REPLY_REPLY_US_ID = #{replyReplyUsId,jdbcType=VARCHAR}
+    where REPLY_ID = #{replyId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="jianghaipeng" />
+	<script type="text/javascript" src="../js/leftslide.js?v=20151130001"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	
+</head>
+<body>
+	<div class="leftsidebar_box">
+		<dl class="aj-tip system_log"><!-- <img src="/admin/images/admin_top2.png"></img>  --><!--  青橄榄团契交流系统后台 --></dl>
+		<dl class="system_log al-listtree">
+			<dt >帐号管理<i class="fa fa-caret-right"></i></dt>
+			<dd class="first_dd"><a href="#" rel="accountuser" id="useraccount"><span><i class="fa fa-md fa-user"></i></span>用户帐号</a></dd>
+			<dd><a href="#" rel="accountadmin" id="adminaccount"><span><i class="fa fa-md fa-th-large"></i></span> 管理员帐号</a></dd>
+			<dd><a href="#" rel="authidentity" id="identityauth"><span><i class="fa fa-md fa-list-alt"></i></span>身份认证</a></dd>
+		</dl>
+	
+		<dl class="custom">
+			<dt>帖子管理<i class="fa fa-caret-right"></i></dt>
+			<dd class="first_dd"><a href="#" rel="manageblog" id="blogmanage"><span><i class="fa fa-md fa-comment"></i></span>帖子管理</a></dd>
+			<dd><a href="#" rel="managecomment" id="commentmanage"><span><i class="fa fa-md fa-comments"></i></span>评论管理</a></dd>
+			<dd><a href="#" rel="managereply" id="replymanage"><span><i class="fa fa-md fa-comments"></i></span>回复管理</a></dd>
+		</dl>
+	
+		<dl class="channel">
+			<dt>好友管理<i class="fa fa-caret-right"></i></dt>
+			<dd class="first_dd"><a href="#" rel="managemfinfo" id="mfinfomanage"><span><i class="fa fa-md fa-users"></i></span>好友信息管理</a></dd>
+			<div class="aj-elsedisp"><a href="#" rel="personad" id="adperson">管理员个人信息</a></div>
+			<!-- <div class="aj-elsedisp"><a href="#" rel="detailmf" id="mfdetail">微法详情</a></div>
+			<div class="aj-elsedisp"><a href="#" rel="contantdetail" id="detailcontant">详细内容</a></div>
+			<div class="aj-elsedisp"><a href="#" rel="titleedite" id="editetitle">修改标题</a></div>
+			<div class="aj-elsedisp"><a href="#" rel="contantedite" id="editecontant">修改内容</a></div> -->
+		</dl>
+		
+		<dl class="fellowShip">
+			<dt>团契管理<i class="fa fa-caret-right"></i></dt>
+			<dd class="first_dd"><a href="#" rel="manageFSInfo" id="FSInfomanage"><span><i class="fa fa-md fa-home"></i></span>团契信息管理</a></dd>
+			<dd><a href="#" rel="manageFSPray" id="FSPraymanage"><span><i class="fa fa-md fa-twitter"></i></span>团契祷告管理</a></dd>
+			<dd><a href="#" rel="manageFSMemberInfo" id="FSMemberInfomanage"><span><i class="fa fa-md  fa-users"></i></span>团契成员管理</a></dd>
+			<dd><a href="#" rel="manageFSQuesition" id="FSQuesitionmanage"><span><i class="fa fa-md  fa-question"></i></span>团契问题答疑管理</a></dd>
+<!-- 			<dd><a href="#" rel="managecomment" id="commentmanage"><span><i class="fa fa-md fa-comments"></i></span>评论管理</a></dd>
+			<dd><a href="#" rel="managereply" id="replymanage"><span><i class="fa fa-md fa-comments"></i></span>回复管理</a></dd> -->
+		</dl>
+		<dl class="church">
+			<dt>教会管理<i class="fa fa-caret-right"></i></dt>
+			<dd class="first_dd"><a href="#" rel="managechurch" id="churchmanage"><span><i class="fa fa-md fa-home"></i></span>教会信息管理</a></dd>
+<!-- 			<dd><a href="#" rel="managecomment" id="commentmanage"><span><i class="fa fa-md fa-comments"></i></span>评论管理</a></dd>
+			<dd><a href="#" rel="managereply" id="replymanage"><span><i class="fa fa-md fa-comments"></i></span>回复管理</a></dd> -->
+		</dl>
+		<dl class="log">
+			<dt>日志管理<i class="fa fa-caret-right"></i></dt>
+			<dd class="first_dd"><a href="#" rel="managelog" id="logmanage"><span><i class="fa fa-md fa-pencil-square-o"></i></span>日志管理</a></dd>
+<!-- 			<dd><a href="#" rel="managecomment" id="commentmanage"><span><i class="fa fa-md fa-comments"></i></span>评论管理</a></dd>
+			<dd><a href="#" rel="managereply" id="replymanage"><span><i class="fa fa-md fa-comments"></i></span>回复管理</a></dd> -->
+		</dl>
+	</div>
+</body>
+</html>
+

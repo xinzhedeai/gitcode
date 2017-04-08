@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>青橄榄团契交流系统--后台</title>
+	<script type="text/javascript" src="../js/header.js?v=20151124001"></script>
+	<link type="text/css" href="/lib/css/admin.css" rel="stylesheet">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<div class="row aj-row">
+<img src="/admin/images/admin_top3.png" class="headerImg"></img> 
+	<div class="aj-col">
+		<div class="aj-welcome" id="welcome"></div>
+		<div class="aj-lout"><a  id="loginout" href="#">退出登录</a></div>
+	</div>
+</div>
+</body>
+</html>

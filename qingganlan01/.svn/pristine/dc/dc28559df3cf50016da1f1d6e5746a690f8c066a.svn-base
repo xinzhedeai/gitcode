@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="author" content="lvhejing" />
+<script type="text/javascript" src="../js/editcontent.js?v=20151127001"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+	<div class="row az-user-row">
+		<div class="col-md-12 az-user-all">
+			<div class="az-m9-title">
+				<h5>微法信息管理</h5>
+			</div>
+			<h4 class="az-m9-h3">微法解释详情</h4>
+			<div class="az-search az-editlow">
+				<form name="searchForm" id="aj-searchForm">
+					<table class="table table-bordered al-searchconditionA">
+						<tbody>
+							<tr>
+								<td>
+									 <div class="al-value">
+										<center><span>微法ID:</span></center>
+									</div>
+									<div class="az-showstyle">
+									 	<label><strong id="nodeid" name="NodeID"></strong></label>
+									</div>
+								</td>
+								<td>
+									 <div class="al-value">
+										<center><span>微法名称:</span></center>
+									</div>
+									<div class="az-showstyle">
+										<label><strong id="lawname" name="LawName"></strong></label>
+									</div>
+								</td>
+							</tr>
+						    <tr>
+						       <td>
+						        	<div class="al-value">
+										<center><span class="aj-span">键值ID:</span></center>
+									</div>
+		  							<div class="az-showstyle">
+										<label><strong id="keyid" name="KeyID"></strong></label>
+									</div>
+								</td>
+						     	 <td>
+						        	 <div class="al-value">
+									 	<center><span>法律解释名称:</span></center>
+									</div>
+									<div class="az-showstyle">
+										<label><strong id="upupid" name="UPupID"></strong></label>
+									</div>
+								</td>
+					     	</tr>
+							<tr>
+								 <td>
+						        	<div class="al-value">
+										<center><span class="aj-span">解释详情标题: </span></center>
+									</div>
+		  							<div class="az-showstyle">
+										<label><strong id="title" name="Title"></strong></label>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+				<span>修改解释详细内容: </span>
+				<br><br>
+				<script id="editorContents" type="text/plain" style="width:655px; height:200px;"></script>
+				<div class="al-editcontentsave">
+					<ul>
+						<li><button type="button" class="btn btn-default btn-md " id="editContentBtn">保存</button></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

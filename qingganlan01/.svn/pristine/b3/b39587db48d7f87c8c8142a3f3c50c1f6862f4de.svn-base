@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="author" content="jianghaipeng" />
+<script type="text/javascript" src="/admin/js/fellowShipMember.js?v=20151222001"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+	<div class="row az-user-row">
+		<div class="col-md-12 az-user-all">
+			<div class="az-m9-title">
+				<h5>团契信息管理</h5>
+			</div>
+			<h4 class="az-m9-h3">基本信息</h4>
+			<div class="az-search">
+				<div class="az-search-top">
+					<label for="">查询条件</label>
+					<button type="button" class="btn btn-default btn-md btn reset" id="fS-Member-eset-btn">重置</button>
+					<button type="button" class="btn btn-default btn-md btn" id="aj-basicSearchFsMember">搜索</button>
+					<button type="button" class="btn btn-default btn-md btn excelBtn" id="">excel导出</button>
+				</div>
+				<form name="searchForm" id="aj-searchFormFSMember">
+					<table class="table  table-bordered al-searchcondition">
+						<tbody>
+							<tr>
+								<td>
+									<div class="al-value">
+										<center>
+											<span>团契名称:</span>
+										</center>
+									</div> 
+									<input type="text" name="fellowShipId" id="fellowShipId">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+				<div class="az-search-func">
+					<label for="">查询结果</label>
+					<!-- <ul class="az-ul-common">
+						<li><button type="button" class="btn btn-default btn-md " id="al-setmicrolowauthor" style="display:none;">设定微法律作者</button></li>
+						<li><button type="button" class="btn btn-default btn-md " id="aj-delhotnode">取消热点法</button></li>
+						<li><button type="button" class="btn btn-default btn-md " id="aj-sethotnode">设为热点法</button></li>
+					</ul> -->
+
+				</div>
+				<table id="datagridFSMember1" class="table table-bordered table-hover az-user-tableList"></table>
+				<div class="modal" id="mymodalBasic">
+					<div class="modal-dialog" style="width: 1000px; margin-top: 250px;">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">&times;</span> <span class="sr-only">Close</span>
+								</button>
+								<h4 class="modal-title">设定微法律作者</h4>
+							</div>
+							<div class="modal-body">
+								<div class="setAuthorFormDiv" id="setAuthorFormDiv">
+									<form name="setAuthorForm" id="setAuthorForm">
+										<table class="table table-bordered  al-searchcondition al-searchconditionB ">
+											<tbody>
+												<tr>
+													<td>
+														<div class="al-spanstyle">微法ID:</div> 
+															<input type="text" name="microId" class="form-control al-tableInput" id="microId">
+													</td>
+													<td>
+														<div class="al-spanstyle">微法标题:</div> 
+														<input type="text" name="microTitle" class="form-control al-tableInput" id="microTitle">
+													</td>	
+												</tr>
+												
+												<tr>
+													<td colspan="2">
+														<div class="al-spanstyle">微法律作者:</div> 
+														<input type="text" class="microAuthor" name="microAuthor" id="microAuthor">
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</form>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" id="setCloseBtn">取消</button>
+								<button type="button" class="btn btn-primary" id="setSaveBtn">确定</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			<!-- 	<div id="MicroModalDiv"></div> -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>

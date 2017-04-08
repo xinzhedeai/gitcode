@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="normalMapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="normalPo.UserInfo" >
+    <id column="US_ID" property="usId" jdbcType="VARCHAR" />
+    <result column="US_NAME" property="usName" jdbcType="VARCHAR" />
+    <result column="AGE" property="age" jdbcType="INTEGER" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="BIRTH_DATE" property="birthDate" jdbcType="TIMESTAMP" />
+    <result column="US_PS" property="usPs" jdbcType="VARCHAR" />
+    <result column="TEL" property="tel" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="WEICHAT" property="weichat" jdbcType="VARCHAR" />
+    <result column="PS" property="ps" jdbcType="VARCHAR" />
+    <result column="HOBBY" property="hobby" jdbcType="VARCHAR" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="GRADUATE_SCHOOL" property="graduateSchool" jdbcType="VARCHAR" />
+    <result column="PROFESSION" property="profession" jdbcType="VARCHAR" />
+    <result column="CHIRCH_TYPE" property="chirchType" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="START_TRUTH" property="startTruth" jdbcType="TIMESTAMP" />
+    <result column="REG_DATE" property="regDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="HEAD_IMG" property="headImg" jdbcType="VARCHAR" />
+    <result column="LEVEL" property="level" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="TK_ID" property="tkId" jdbcType="VARCHAR" />
+    <result column="AUTHENTICATION" property="authentication" jdbcType="VARCHAR" />
+    <result column="IS_BAPTISM" property="isBaptism" jdbcType="VARCHAR" />
+    <result column="IS_TRUTH" property="isTruth" jdbcType="VARCHAR" />
+    <result column="BLOG_NO" property="blogNo" jdbcType="INTEGER" />
+    <result column="COLLECT_BLOG_NO" property="collectBlogNo" jdbcType="INTEGER" />
+    <result column="CONCERN_NO" property="concernNo" jdbcType="INTEGER" />
+    <result column="FANS_NO" property="fansNo" jdbcType="INTEGER" />
+    <result column="MY_FRIEND_NO" property="myFriendNo" jdbcType="INTEGER" />
+    <result column="COMMENT_NO" property="commentNo" jdbcType="INTEGER" />
+    <result column="COMMENT_ME_COMMENT_NO" property="commentMeCommentNo" jdbcType="INTEGER" />
+    <result column="RECOVER_NO" property="recoverNo" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    US_ID, US_NAME, AGE, SEX, BIRTH_DATE, US_PS, TEL, EMAIL, QQ, WEICHAT, PS, HOBBY, 
+    AREA, GRADUATE_SCHOOL, PROFESSION, CHIRCH_TYPE, STATE, START_TRUTH, REG_DATE, LAST_LOGIN_TIME, 
+    HEAD_IMG, LEVEL, TYPE, TK_ID, AUTHENTICATION, IS_BAPTISM, IS_TRUTH, BLOG_NO, COLLECT_BLOG_NO, 
+    CONCERN_NO, FANS_NO, MY_FRIEND_NO, COMMENT_NO, COMMENT_ME_COMMENT_NO, RECOVER_NO
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="normalPo.UserInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_info
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="normalPo.UserInfoExample" >
+    delete from user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="normalPo.UserInfo" >
+    insert into user_info (US_ID, US_NAME, AGE, 
+      SEX, BIRTH_DATE, US_PS, 
+      TEL, EMAIL, QQ, WEICHAT, 
+      PS, HOBBY, AREA, GRADUATE_SCHOOL, 
+      PROFESSION, CHIRCH_TYPE, STATE, 
+      START_TRUTH, REG_DATE, LAST_LOGIN_TIME, 
+      HEAD_IMG, LEVEL, TYPE, 
+      TK_ID, AUTHENTICATION, IS_BAPTISM, 
+      IS_TRUTH, BLOG_NO, COLLECT_BLOG_NO, 
+      CONCERN_NO, FANS_NO, MY_FRIEND_NO, 
+      COMMENT_NO, COMMENT_ME_COMMENT_NO, RECOVER_NO
+      )
+    values (#{usId,jdbcType=VARCHAR}, #{usName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{sex,jdbcType=VARCHAR}, #{birthDate,jdbcType=TIMESTAMP}, #{usPs,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{weichat,jdbcType=VARCHAR}, 
+      #{ps,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, 
+      #{profession,jdbcType=VARCHAR}, #{chirchType,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{startTruth,jdbcType=TIMESTAMP}, #{regDate,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{headImg,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{tkId,jdbcType=VARCHAR}, #{authentication,jdbcType=VARCHAR}, #{isBaptism,jdbcType=VARCHAR}, 
+      #{isTruth,jdbcType=VARCHAR}, #{blogNo,jdbcType=INTEGER}, #{collectBlogNo,jdbcType=INTEGER}, 
+      #{concernNo,jdbcType=INTEGER}, #{fansNo,jdbcType=INTEGER}, #{myFriendNo,jdbcType=INTEGER}, 
+      #{commentNo,jdbcType=INTEGER}, #{commentMeCommentNo,jdbcType=INTEGER}, #{recoverNo,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="normalPo.UserInfo" >
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="usId != null" >
+        US_ID,
+      </if>
+      <if test="usName != null" >
+        US_NAME,
+      </if>
+      <if test="age != null" >
+        AGE,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="birthDate != null" >
+        BIRTH_DATE,
+      </if>
+      <if test="usPs != null" >
+        US_PS,
+      </if>
+      <if test="tel != null" >
+        TEL,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="weichat != null" >
+        WEICHAT,
+      </if>
+      <if test="ps != null" >
+        PS,
+      </if>
+      <if test="hobby != null" >
+        HOBBY,
+      </if>
+      <if test="area != null" >
+        AREA,
+      </if>
+      <if test="graduateSchool != null" >
+        GRADUATE_SCHOOL,
+      </if>
+      <if test="profession != null" >
+        PROFESSION,
+      </if>
+      <if test="chirchType != null" >
+        CHIRCH_TYPE,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="startTruth != null" >
+        START_TRUTH,
+      </if>
+      <if test="regDate != null" >
+        REG_DATE,
+      </if>
+      <if test="lastLoginTime != null" >
+        LAST_LOGIN_TIME,
+      </if>
+      <if test="headImg != null" >
+        HEAD_IMG,
+      </if>
+      <if test="level != null" >
+        LEVEL,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="tkId != null" >
+        TK_ID,
+      </if>
+      <if test="authentication != null" >
+        AUTHENTICATION,
+      </if>
+      <if test="isBaptism != null" >
+        IS_BAPTISM,
+      </if>
+      <if test="isTruth != null" >
+        IS_TRUTH,
+      </if>
+      <if test="blogNo != null" >
+        BLOG_NO,
+      </if>
+      <if test="collectBlogNo != null" >
+        COLLECT_BLOG_NO,
+      </if>
+      <if test="concernNo != null" >
+        CONCERN_NO,
+      </if>
+      <if test="fansNo != null" >
+        FANS_NO,
+      </if>
+      <if test="myFriendNo != null" >
+        MY_FRIEND_NO,
+      </if>
+      <if test="commentNo != null" >
+        COMMENT_NO,
+      </if>
+      <if test="commentMeCommentNo != null" >
+        COMMENT_ME_COMMENT_NO,
+      </if>
+      <if test="recoverNo != null" >
+        RECOVER_NO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="usId != null" >
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="usName != null" >
+        #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null" >
+        #{birthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usPs != null" >
+        #{usPs,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="weichat != null" >
+        #{weichat,jdbcType=VARCHAR},
+      </if>
+      <if test="ps != null" >
+        #{ps,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null" >
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateSchool != null" >
+        #{graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="chirchType != null" >
+        #{chirchType,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="startTruth != null" >
+        #{startTruth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regDate != null" >
+        #{regDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="headImg != null" >
+        #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="tkId != null" >
+        #{tkId,jdbcType=VARCHAR},
+      </if>
+      <if test="authentication != null" >
+        #{authentication,jdbcType=VARCHAR},
+      </if>
+      <if test="isBaptism != null" >
+        #{isBaptism,jdbcType=VARCHAR},
+      </if>
+      <if test="isTruth != null" >
+        #{isTruth,jdbcType=VARCHAR},
+      </if>
+      <if test="blogNo != null" >
+        #{blogNo,jdbcType=INTEGER},
+      </if>
+      <if test="collectBlogNo != null" >
+        #{collectBlogNo,jdbcType=INTEGER},
+      </if>
+      <if test="concernNo != null" >
+        #{concernNo,jdbcType=INTEGER},
+      </if>
+      <if test="fansNo != null" >
+        #{fansNo,jdbcType=INTEGER},
+      </if>
+      <if test="myFriendNo != null" >
+        #{myFriendNo,jdbcType=INTEGER},
+      </if>
+      <if test="commentNo != null" >
+        #{commentNo,jdbcType=INTEGER},
+      </if>
+      <if test="commentMeCommentNo != null" >
+        #{commentMeCommentNo,jdbcType=INTEGER},
+      </if>
+      <if test="recoverNo != null" >
+        #{recoverNo,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="normalPo.UserInfoExample" resultType="java.lang.Integer" >
+    select count(*) from user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_info
+    <set >
+      <if test="record.usId != null" >
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usName != null" >
+        US_NAME = #{record.usName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        AGE = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null" >
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthDate != null" >
+        BIRTH_DATE = #{record.birthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.usPs != null" >
+        US_PS = #{record.usPs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        TEL = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        QQ = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weichat != null" >
+        WEICHAT = #{record.weichat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ps != null" >
+        PS = #{record.ps,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hobby != null" >
+        HOBBY = #{record.hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        AREA = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduateSchool != null" >
+        GRADUATE_SCHOOL = #{record.graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profession != null" >
+        PROFESSION = #{record.profession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chirchType != null" >
+        CHIRCH_TYPE = #{record.chirchType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTruth != null" >
+        START_TRUTH = #{record.startTruth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.regDate != null" >
+        REG_DATE = #{record.regDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastLoginTime != null" >
+        LAST_LOGIN_TIME = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.headImg != null" >
+        HEAD_IMG = #{record.headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        LEVEL = #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tkId != null" >
+        TK_ID = #{record.tkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authentication != null" >
+        AUTHENTICATION = #{record.authentication,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isBaptism != null" >
+        IS_BAPTISM = #{record.isBaptism,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isTruth != null" >
+        IS_TRUTH = #{record.isTruth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogNo != null" >
+        BLOG_NO = #{record.blogNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectBlogNo != null" >
+        COLLECT_BLOG_NO = #{record.collectBlogNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.concernNo != null" >
+        CONCERN_NO = #{record.concernNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.fansNo != null" >
+        FANS_NO = #{record.fansNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.myFriendNo != null" >
+        MY_FRIEND_NO = #{record.myFriendNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentNo != null" >
+        COMMENT_NO = #{record.commentNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentMeCommentNo != null" >
+        COMMENT_ME_COMMENT_NO = #{record.commentMeCommentNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.recoverNo != null" >
+        RECOVER_NO = #{record.recoverNo,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_info
+    set US_ID = #{record.usId,jdbcType=VARCHAR},
+      US_NAME = #{record.usName,jdbcType=VARCHAR},
+      AGE = #{record.age,jdbcType=INTEGER},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      BIRTH_DATE = #{record.birthDate,jdbcType=TIMESTAMP},
+      US_PS = #{record.usPs,jdbcType=VARCHAR},
+      TEL = #{record.tel,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      QQ = #{record.qq,jdbcType=VARCHAR},
+      WEICHAT = #{record.weichat,jdbcType=VARCHAR},
+      PS = #{record.ps,jdbcType=VARCHAR},
+      HOBBY = #{record.hobby,jdbcType=VARCHAR},
+      AREA = #{record.area,jdbcType=VARCHAR},
+      GRADUATE_SCHOOL = #{record.graduateSchool,jdbcType=VARCHAR},
+      PROFESSION = #{record.profession,jdbcType=VARCHAR},
+      CHIRCH_TYPE = #{record.chirchType,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      START_TRUTH = #{record.startTruth,jdbcType=TIMESTAMP},
+      REG_DATE = #{record.regDate,jdbcType=TIMESTAMP},
+      LAST_LOGIN_TIME = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      HEAD_IMG = #{record.headImg,jdbcType=VARCHAR},
+      LEVEL = #{record.level,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      TK_ID = #{record.tkId,jdbcType=VARCHAR},
+      AUTHENTICATION = #{record.authentication,jdbcType=VARCHAR},
+      IS_BAPTISM = #{record.isBaptism,jdbcType=VARCHAR},
+      IS_TRUTH = #{record.isTruth,jdbcType=VARCHAR},
+      BLOG_NO = #{record.blogNo,jdbcType=INTEGER},
+      COLLECT_BLOG_NO = #{record.collectBlogNo,jdbcType=INTEGER},
+      CONCERN_NO = #{record.concernNo,jdbcType=INTEGER},
+      FANS_NO = #{record.fansNo,jdbcType=INTEGER},
+      MY_FRIEND_NO = #{record.myFriendNo,jdbcType=INTEGER},
+      COMMENT_NO = #{record.commentNo,jdbcType=INTEGER},
+      COMMENT_ME_COMMENT_NO = #{record.commentMeCommentNo,jdbcType=INTEGER},
+      RECOVER_NO = #{record.recoverNo,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="normalPo.UserInfo" >
+    update user_info
+    <set >
+      <if test="usName != null" >
+        US_NAME = #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        AGE = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null" >
+        BIRTH_DATE = #{birthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usPs != null" >
+        US_PS = #{usPs,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        TEL = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="weichat != null" >
+        WEICHAT = #{weichat,jdbcType=VARCHAR},
+      </if>
+      <if test="ps != null" >
+        PS = #{ps,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null" >
+        HOBBY = #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateSchool != null" >
+        GRADUATE_SCHOOL = #{graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        PROFESSION = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="chirchType != null" >
+        CHIRCH_TYPE = #{chirchType,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="startTruth != null" >
+        START_TRUTH = #{startTruth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regDate != null" >
+        REG_DATE = #{regDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null" >
+        LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="headImg != null" >
+        HEAD_IMG = #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        LEVEL = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="tkId != null" >
+        TK_ID = #{tkId,jdbcType=VARCHAR},
+      </if>
+      <if test="authentication != null" >
+        AUTHENTICATION = #{authentication,jdbcType=VARCHAR},
+      </if>
+      <if test="isBaptism != null" >
+        IS_BAPTISM = #{isBaptism,jdbcType=VARCHAR},
+      </if>
+      <if test="isTruth != null" >
+        IS_TRUTH = #{isTruth,jdbcType=VARCHAR},
+      </if>
+      <if test="blogNo != null" >
+        BLOG_NO = #{blogNo,jdbcType=INTEGER},
+      </if>
+      <if test="collectBlogNo != null" >
+        COLLECT_BLOG_NO = #{collectBlogNo,jdbcType=INTEGER},
+      </if>
+      <if test="concernNo != null" >
+        CONCERN_NO = #{concernNo,jdbcType=INTEGER},
+      </if>
+      <if test="fansNo != null" >
+        FANS_NO = #{fansNo,jdbcType=INTEGER},
+      </if>
+      <if test="myFriendNo != null" >
+        MY_FRIEND_NO = #{myFriendNo,jdbcType=INTEGER},
+      </if>
+      <if test="commentNo != null" >
+        COMMENT_NO = #{commentNo,jdbcType=INTEGER},
+      </if>
+      <if test="commentMeCommentNo != null" >
+        COMMENT_ME_COMMENT_NO = #{commentMeCommentNo,jdbcType=INTEGER},
+      </if>
+      <if test="recoverNo != null" >
+        RECOVER_NO = #{recoverNo,jdbcType=INTEGER},
+      </if>
+    </set>
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="normalPo.UserInfo" >
+    update user_info
+    set US_NAME = #{usName,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=INTEGER},
+      SEX = #{sex,jdbcType=VARCHAR},
+      BIRTH_DATE = #{birthDate,jdbcType=TIMESTAMP},
+      US_PS = #{usPs,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      WEICHAT = #{weichat,jdbcType=VARCHAR},
+      PS = #{ps,jdbcType=VARCHAR},
+      HOBBY = #{hobby,jdbcType=VARCHAR},
+      AREA = #{area,jdbcType=VARCHAR},
+      GRADUATE_SCHOOL = #{graduateSchool,jdbcType=VARCHAR},
+      PROFESSION = #{profession,jdbcType=VARCHAR},
+      CHIRCH_TYPE = #{chirchType,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      START_TRUTH = #{startTruth,jdbcType=TIMESTAMP},
+      REG_DATE = #{regDate,jdbcType=TIMESTAMP},
+      LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+      HEAD_IMG = #{headImg,jdbcType=VARCHAR},
+      LEVEL = #{level,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      TK_ID = #{tkId,jdbcType=VARCHAR},
+      AUTHENTICATION = #{authentication,jdbcType=VARCHAR},
+      IS_BAPTISM = #{isBaptism,jdbcType=VARCHAR},
+      IS_TRUTH = #{isTruth,jdbcType=VARCHAR},
+      BLOG_NO = #{blogNo,jdbcType=INTEGER},
+      COLLECT_BLOG_NO = #{collectBlogNo,jdbcType=INTEGER},
+      CONCERN_NO = #{concernNo,jdbcType=INTEGER},
+      FANS_NO = #{fansNo,jdbcType=INTEGER},
+      MY_FRIEND_NO = #{myFriendNo,jdbcType=INTEGER},
+      COMMENT_NO = #{commentNo,jdbcType=INTEGER},
+      COMMENT_ME_COMMENT_NO = #{commentMeCommentNo,jdbcType=INTEGER},
+      RECOVER_NO = #{recoverNo,jdbcType=INTEGER}
+    where US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+</mapper>

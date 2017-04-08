@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="customMapper.CustomFellowShipMapper">
+	<select id="getMyFellowShips"  parameterType="Map" resultMap="MyFellowResultMap">
+		SELECT 
+			a.FS_ID           ,
+			a.FS_NAME           ,
+			a.FS_HEAD_IMG       ,
+			a.BUILD_DATE        ,
+			a.TYPE              ,
+			a.ADDRESS           ,
+			a.FS_BUILD_US_ID    ,
+			a.FS_PS				
+		FROM 
+		fellowship_info a
+		WHERE a.FS_BUILD_US_ID = #{usId}
+	</select>
+	 <resultMap id="MyFellowResultMap" type="Map" >
+	   <!--  <id column="FS_US_RELATION_ID" property="fsUsRelationId" jdbcType="VARCHAR" />
+	    <result column="FS_ID" property="fsId" jdbcType="VARCHAR" />
+	    <result column="US_ID" property="usId" jdbcType="VARCHAR" />
+	    <result column="JOIN_DATE" property="joinDate" jdbcType="TIMESTAMP" /> -->
+   		
+   		<!-- 获取团契 -->
+   		<id column="FS_ID" property="fsId" jdbcType="VARCHAR" />
+   		 <result column="FS_NAME" property="fsName" jdbcType="VARCHAR" />
+	    <result column="FS_HEAD_IMG" property="fsHeadImg" jdbcType="VARCHAR" />
+	    <result column="BUILD_DATE" property="buildDate" jdbcType="TIMESTAMP" />
+	    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+	    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+	    <result column="FS_BUILD_US_ID" property="fsBuildUsId" jdbcType="VARCHAR" />
+	    <result column="FS_PS" property="fsPs" jdbcType="VARCHAR" />
+  </resultMap>
+  	<select id="searchMyJoinFS"  parameterType="Map" resultType="Map">
+		SELECT 
+			a.FS_US_RELATION_ID,
+			a.FS_ID            ,
+			a.US_ID            ,
+			a.JOIN_DATE        ,
+			b.FS_NAME           ,
+			b.FS_HEAD_IMG       ,
+			b.BUILD_DATE        ,
+			b.TYPE              ,
+			b.ADDRESS           ,
+			b.FS_BUILD_US_ID    ,
+			b.FS_PS				
+		FROM 
+		fellowship_user_relation a
+		LEFT JOIN fellowship_info b
+		ON b.FS_ID = a.FS_ID
+		WHERE b.FS_BUILD_US_ID != #{usId} and a.US_ID = #{usId}
+	</select>
+  	<select id="getFellowShipDetail"  parameterType="Map" resultMap="fellowShipDetailResultMap">
+		SELECT 
+			a.FS_ID,
+			a.FS_NAME           ,
+			a.FS_HEAD_IMG       ,
+			a.BUILD_DATE        ,
+			a.TYPE              ,
+			a.ADDRESS           ,
+			a.FS_BUILD_US_ID    ,
+			a.FS_PS				,
+			(select count(FILE_ID) from sys_file_info where FS_ID  = #{fsId}) AS FS_PIC_NO,
+			(select count(PRAY_ID) from pray_wall_info where FS_ID  = #{fsId}) AS FS_PRAY_NO,
+			(select count(QUESITION_ID) from fellowship_request where FS_ID  = #{fsId}) AS FS_QUESITION_NO,
+			c.US_ID		AS FELLOWSHIP_MEMBER_US_ID,
+	
+			c.US_NAME                   ,
+			c.AGE                       ,
+			c.SEX                       ,
+			c.BIRTH_DATE                ,
+			c.PS                        ,
+			c.HOBBY                     ,
+			c.AREA                      ,
+			c.GRADUATE_SCHOOL           ,
+			c.PROFESSION                ,
+			c.CHIRCH_TYPE               ,
+			c.STATE                     ,
+			c.REG_DATE                  ,
+			c.LAST_LOGIN_TIME           ,
+			c.HEAD_IMG                  ,
+			c.BLOG_NO                   ,
+			c.COLLECT_BLOG_NO           ,
+			c.CONCERN_NO                ,
+			c.FANS_NO                   ,
+			c.MY_FRIEND_NO              ,
+			c.COMMENT_NO                ,
+			c.COMMENT_ME_COMMENT_NO,
+			d.US_NAME AS FELLOWSHIP_MASTER_NAME,
+			e.IS_CONCERN,
+			<!-- (select count(US_ID) FROM fellowship_user_relation) AS membersNo, -->
+			(SELECT COUNT(US_ID) FROM fellowship_user_relation WHERE FS_ID = a.FS_ID) AS membersNo 
+		FROM 
+		fellowship_info a
+		LEFT JOIN fellowship_user_relation b
+		ON b.FS_ID = a.FS_ID
+		<!-- LEFT JOIN fellowship_user_relation c
+		ON c.FS_ID = a.FS_ID -->
+		LEFT JOIN user_info c
+		ON c.US_ID = b.US_ID
+		LEFT JOIN user_info d
+		ON d.US_ID = a.FS_BUILD_US_ID
+		LEFT JOIN concern_info e
+		ON e.US_ID = #{usId}
+		AND e.CONCERNED_US_ID = c.US_ID
+		WHERE a.FS_ID = #{fsId}
+	</select>
+	 <resultMap id="fellowShipDetailResultMap" type="Map" >
+	    <!-- 获取团契 -->
+	    <id column="FS_ID" property="fsId" jdbcType="VARCHAR" />
+   		 <result column="FS_NAME" property="fsName" jdbcType="VARCHAR" />
+	    <result column="FS_HEAD_IMG" property="fsHeadImg" jdbcType="VARCHAR" />
+	    <result column="BUILD_DATE" property="buildDate" jdbcType="TIMESTAMP" />
+	    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+	    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+	    <result column="FS_BUILD_US_ID" property="fsBuildUsId" jdbcType="VARCHAR" />
+	    <result column="FS_PS" property="fsPs" jdbcType="VARCHAR" />
+	     <result column="membersNo" property="membersNo" jdbcType="INTEGER" />
+	     <result column="FELLOWSHIP_MASTER_NAME" property="fellowShipMasterName" jdbcType="VARCHAR" />
+	     
+	    <result column="FS_PIC_NO" property="fsPicNo" jdbcType="INTEGER" />
+	    <result column="FS_PRAY_NO" property="fsPrayNo" jdbcType="INTEGER" />
+	    <result column="FS_QUESITION_NO" property="fsQuesitionNo" jdbcType="INTEGER" />
+	    
+	    <!--获取团契的成员信息  -->
+	    <collection property="fellowMembers" ofType="Map" javaType="ArrayList">
+   		    <id column="FELLOWSHIP_MEMBER_US_ID" property="fellowMemberUsId"/>
+   		     <result column="US_NAME" property="usName" jdbcType="VARCHAR" />
+		    <result column="AGE" property="age" jdbcType="INTEGER" />
+		    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+		    <result column="BIRTH_DATE" property="birthDate" jdbcType="TIMESTAMP" />
+		    <result column="PS" property="ps" jdbcType="VARCHAR" />
+		    <result column="HOBBY" property="hobby" jdbcType="VARCHAR" />
+		    <result column="AREA" property="area" jdbcType="VARCHAR" />
+		    <result column="GRADUATE_SCHOOL" property="graduateSchool" jdbcType="VARCHAR" />
+		    <result column="PROFESSION" property="profession" jdbcType="VARCHAR" />
+		    <result column="CHIRCH_TYPE" property="chirchType" jdbcType="VARCHAR" />
+		    <result column="STATE" property="state" jdbcType="VARCHAR" />
+		    <result column="START_TRUTH" property="startTruth" jdbcType="TIMESTAMP" />
+		    <result column="REG_DATE" property="regDate" jdbcType="TIMESTAMP" />
+		    <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP" />
+		    <result column="HEAD_IMG" property="headImg" jdbcType="VARCHAR" />
+		    <result column="BLOG_NO" property="blogNo" jdbcType="INTEGER" />
+		    <result column="COLLECT_BLOG_NO" property="collectBlogNo" jdbcType="INTEGER" />
+		    <result column="CONCERN_NO" property="concernNo" jdbcType="INTEGER" />
+		    <result column="FANS_NO" property="fansNo" jdbcType="INTEGER" />
+		    <result column="MY_FRIEND_NO" property="myFriendNo" jdbcType="INTEGER" />
+		    <result column="COMMENT_NO" property="commentNo" jdbcType="INTEGER" />
+		    <result column="COMMENT_ME_COMMENT_NO" property="commentMeCommentNo" jdbcType="INTEGER" />
+		    <result column="IS_CONCERN" property="isConcern" jdbcType="VARCHAR" />
+		    
+   		</collection>
+  </resultMap>
+  
+   <insert id="addPray"  parameterType="Map">
+		insert into pray_wall_info
+		(
+			<!-- PRAY_ID         , -->
+			RECEIVER_NAME   ,
+			SENDER_NAME     ,
+			PRAY_CONTENT    ,
+			PRAY_DATE       ,
+			FS_ID
+
+		
+		)               
+		values          
+		(      
+			<!-- UUID()			, -->
+			#{receiverName} ,
+			#{senderName}   ,
+			#{prayContent}  ,
+			#{sendDate}     ,
+			#{fellowShipId}
+		)                   
+	</insert>	
+	
+	<select id="searchPrays"  parameterType="Map" resultType="Map">
+		SELECT 
+			PRAY_ID          ,
+			RECEIVER_NAME    ,
+			SENDER_NAME      ,
+			PRAY_CONTENT     ,
+			PRAY_DATE        ,
+			FS_ID
+		FROM 
+		 pray_wall_info
+		WHERE FS_ID = #{fsId}
+		<if test="name != null and name !=''">
+		AND SENDER_NAME LIKE CONCAT(#{name},'%')
+		</if>
+		 	<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 		</if>	
+	</select>
+	
+	<select id="getFellowShipMsg"  parameterType="Map" resultType="Map">
+		SELECT 
+			a.FS_MSG_ID      ,
+			a.FS_ID          ,
+			a.SEND_MSG_US_ID ,
+			a.MSG_CONTENT    ,
+			a.SEND_DATE		 ,
+			b.IS_MASTER		 ,
+			c.US_NAME	,
+			c.HEAD_IMG 
+		FROM 
+		 	fellowship_msg_info a
+		LEFT JOIN fellowship_user_relation b
+		 	ON b.FS_ID = a.FS_ID 
+		 	AND b.US_ID = #{usId}
+	 	LEFT JOIN user_info c
+			ON c.US_ID = a.SEND_MSG_US_ID
+		WHERE a.FS_ID = #{fsId}
+		 	ORDER BY a.SEND_DATE desc
+	</select>
+   <insert id="addFellowShipMsg"  parameterType="Map">
+		insert into fellowship_msg_info
+		(
+			FS_MSG_ID        ,
+			FS_ID            ,
+			SEND_MSG_US_ID   ,
+			MSG_CONTENT      ,
+			SEND_DATE
+		)               
+		values          
+		(      
+			UUID()			,
+			#{fsId} 		,
+			#{usId}   		,
+			#{msgContent}   ,
+			NOW()
+		)                   
+	</insert>
+   <delete id="deleteFellowShipMsg"  parameterType="Map">
+		delete from fellowship_msg_info
+			where   
+		FS_MSG_ID = #{fsMsgId}   
+	</delete>
+	
+   <insert id="addFellowMembersBatch"  parameterType="Map">
+		insert into fellowship_user_relation
+		(
+		FS_US_RELATION_ID      ,
+		FS_ID                  ,
+		US_ID                  ,
+		JOIN_DATE              ,
+		IS_MASTER
+		)               
+		values          
+		(      
+			UUID()			,
+			#{FS_ID} 		,
+			#{US_ID}   		,
+			NOW()			,
+			'N'
+		)                   
+	</insert>
+	<delete id="deletePrayById">
+		delete from pray_wall_info
+		where PRAY_ID = #{prayId}
+	</delete>
+	
+   <insert id="addConcern"  parameterType="Map">
+		insert into concern_info
+		(
+		CONCERNED_US_ID ,
+		US_ID           ,
+		CONCERN_TIME    ,
+		IS_CONCERN
+
+		)               
+		values          
+		(     
+			#{concernedUsId}, 
+			#{usId} 		,
+			NOW()			,
+			'Y'
+		)                   
+	</insert>
+	<!--  <update id="addConcern"  parameterType="Map">
+		update concern_info set
+		IS_CONCERN = 'N'
+		where US_ID = #{usId} and CONCERNED_US_ID = #{concernedUsId}
+	</update> -->
+	<delete id="delConcern">
+		delete from concern_info where US_ID = #{usId} and CONCERNED_US_ID = #{concernedUsId}
+	</delete>
+	
+	<insert id="upLoadFSHeadImg" parameterType="Map">
+		insert into sys_file_info
+		(
+			FILE_ID,
+			MODU_CD,
+			MODU_NO,
+			FILE_NM,
+			FILE_REL_PATH,
+			FILE_ABS_PATH,
+			FILE_EXTENSION,
+			FILE_CONTENT_TYPE,
+			EXPIRE_TS,
+			UPLOAD_TS,
+			FILE_SIZE,
+			DL_CNT,
+			USED_STAT
+		)
+		values
+		(
+			#{FILE_ID},
+			#{MODU_CD},
+			#{MODU_NO},
+			#{FILE_NM},
+			#{FILE_REL_PATH},
+			#{FILE_ABS_PATH},
+			#{FILE_EXTENSION},
+			#{FILE_CONTENT_TYPE},
+			#{EXPIRE_TS},
+			#{UPLOAD_TS},
+			#{FILE_SIZE},
+			#{DL_CNT},
+			#{USED_STAT}
+		)
+	</insert>
+	
+
+	<insert id="addFellowShip" parameterType="Map">
+		insert into fellowship_info
+		(
+			FS_ID           ,
+			FS_NAME         ,
+			FS_HEAD_IMG     ,
+			BUILD_DATE      ,
+			TYPE            ,
+			ADDRESS         ,
+			FS_BUILD_US_ID  ,
+			FS_PS           ,
+			FS_MSG_NO
+		)
+		values
+		(
+		UUID(),
+		#{fSName},
+		#{fSHeadImg},
+		NOW(),
+		#{fSType},
+		#{fSAddress},
+		#{fSBuildUsId},
+		#{fSPs},
+		0
+		)
+	</insert>
+	<select id="searchFS" parameterType="Map" resultType="Map">
+		select
+			FS_ID           ,
+			FS_NAME         ,
+			FS_HEAD_IMG     ,
+			BUILD_DATE      ,
+			TYPE            ,
+			ADDRESS         ,
+			FS_BUILD_US_ID  ,
+			FS_PS           ,
+			FS_MSG_NO
+		from
+		fellowship_info
+		where
+		  FS_NAME like '%${keyword}%'
+	</select>
+	<insert id="upLoadFSAlbumImg" parameterType="Map">
+		insert into sys_file_info
+		(
+			FILE_ID,
+			MODU_CD,
+			MODU_NO,
+			FILE_NM,
+			FILE_REL_PATH,
+			FILE_ABS_PATH,
+			FILE_EXTENSION,
+			FILE_CONTENT_TYPE,
+			EXPIRE_TS,
+			UPLOAD_TS,
+			FILE_SIZE,
+			DL_CNT,
+			USED_STAT,
+			FS_ID
+		)
+		values
+		(
+			#{FILE_ID},
+			#{MODU_CD},
+			#{MODU_NO},
+			#{FILE_NM},
+			#{FILE_REL_PATH},
+			#{FILE_ABS_PATH},
+			#{FILE_EXTENSION},
+			#{FILE_CONTENT_TYPE},
+			#{EXPIRE_TS},
+			#{UPLOAD_TS},
+			#{FILE_SIZE},
+			#{DL_CNT},
+			#{USED_STAT},
+			#{FS_ID}
+		)
+	</insert>
+	
+	<select id="getFSAlbumImgs"  parameterType="Map" resultType="Map">
+		SELECT 
+			FILE_ID,
+			MODU_CD,
+			FILE_NM,
+			FILE_EXTENSION,
+			UPLOAD_TS
+		FROM 
+			sys_file_info
+		WHERE FS_ID = #{fsId}
+		order by UPLOAD_TS desc
+	</select>
+	<select id="searchAllQt"  parameterType="Map" resultType="Map">
+		SELECT 
+			QUESITION_ID				,
+			US_ID	AS REQUEST_US_ID    ,
+			FS_ID	                    ,
+			REQUEST_DATE                ,
+			QUESITION_STATE             ,
+			QUESITION_NAME              ,
+			QUESITION_CONTENT           ,
+			QUESITION_SOLUTED_DATE      ,
+			VIEWS                       ,
+			QUESITION_REPLY_NO
+		FROM 
+			fellowship_request
+		WHERE FS_ID = #{fsId}
+		<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>
+	</select>
+	
+	<select id="searchNoSolutedQt"  parameterType="Map" resultType="Map">
+		SELECT 
+			QUESITION_ID				,
+			US_ID	AS REQUEST_US_ID    ,
+			FS_ID	                    ,
+			REQUEST_DATE                ,
+			QUESITION_STATE             ,
+			QUESITION_NAME              ,
+			QUESITION_CONTENT           ,
+			QUESITION_SOLUTED_DATE      ,
+			VIEWS                       ,
+			QUESITION_REPLY_NO
+		FROM 
+			fellowship_request
+		WHERE FS_ID = #{fsId} AND QUESITION_STATE = 'N'
+		<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>
+	</select>
+	
+	<select id="searchSolutedQt"  parameterType="Map" resultType="Map">
+		SELECT 
+			QUESITION_ID				,
+			US_ID	AS REQUEST_US_ID    ,
+			FS_ID	                    ,
+			REQUEST_DATE                ,
+			QUESITION_STATE             ,
+			QUESITION_NAME              ,
+			QUESITION_CONTENT           ,
+			QUESITION_SOLUTED_DATE      ,
+			VIEWS                       ,
+			QUESITION_REPLY_NO
+		FROM 
+			fellowship_request
+		WHERE FS_ID = #{fsId} AND QUESITION_STATE = 'Y'
+		<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>
+	</select>
+	
+	<select id="getQuesitionDetail"  parameterType="Map" resultType="Map">
+		SELECT 
+			a.QUESITION_ID              ,
+			a.US_ID	AS REQUEST_US_ID  ,
+			a.FS_ID                     ,
+			a.REQUEST_DATE              ,
+			a.QUESITION_STATE           ,
+			a.QUESITION_NAME            ,
+			a.QUESITION_CONTENT         ,
+			a.QUESITION_SOLUTED_DATE    ,
+			a.VIEWS                     ,
+			a.QUESITION_REPLY_NO		,
+			b.US_NAME   ,
+			b.SEX       ,
+			b.PS        ,
+			b.AREA      ,
+			b.REG_DATE	,
+			b.HEAD_IMG
+
+		FROM 
+			fellowship_request a
+		LEFT JOIN user_info b
+		ON b.US_ID = a.US_ID	
+		WHERE QUESITION_ID = #{quesitionId} 
+	</select>
+	
+	<select id="getAnswers"  parameterType="Map" resultType="Map">
+		SELECT 
+			a.REQUEST_REPLY_ID    ,
+			a.QUESITION_ID        ,
+			a.REPLY_US_ID         ,
+			<!-- a.REPLYED_US_ID       , -->
+			a.REPLY_CONTENT       ,
+			a.REPLY_REPLY_CONTENT ,
+			a.IS_OK               ,
+			a.REPLY_DATE          ,
+
+			b.US_NAME  AS REPLY_US_NAME ,
+			b.SEX       ,
+			b.PS        ,
+			b.AREA      ,
+			b.REG_DATE	,
+			b.HEAD_IMG	,
+			c.US_ID AS REPLYED_US_ID,
+			d.US_NAME AS REPLY_REPLY_US_NAME
+
+		FROM 
+			request_reply a
+		LEFT JOIN user_info b
+		ON b.US_ID = a.REPLY_US_ID
+		LEFT JOIN fellowship_request c
+		ON c.QUESITION_ID = a.QUESITION_ID 
+		LEFT JOIN user_info d
+		ON d.US_ID = c.US_ID	
+		WHERE a.QUESITION_ID = #{quesitionId} 
+		order by a.REPLY_DATE desc
+	</select>
+	
+  	<insert id="addAnswer"  parameterType="Map">
+		insert into request_reply
+		(
+			REQUEST_REPLY_ID    ,
+			QUESITION_ID        ,
+			REPLY_US_ID         ,
+			REPLY_CONTENT       ,
+			REPLY_DATE
+		)               
+		values          
+		(      
+			UUID()			,
+			#{quesitionId} 		,
+			#{usId}   		,
+			#{replyContent}   ,
+			NOW()
+		)                   
+	</insert>
+	
+  	<update id="addReplyReply"  parameterType="Map">
+		update  request_reply 
+		set	REPLY_REPLY_CONTENT = #{rreplyContent}  where REQUEST_REPLY_ID=#{requestReplyId}   
+	</update>
+	
+	
+  	<update id="isSoluted"  parameterType="Map">
+		update  request_reply 
+		set	IS_OK = 'Y'  where REQUEST_REPLY_ID=#{requestReplyId}   
+	</update>
+	<update id="isSoluted1"  parameterType="Map">
+		update  fellowship_request 
+		set	QUESITION_STATE = 'Y'  where QUESITION_ID=#{quesitionId}   
+	</update>
+	
+	<delete id="deleteFellow">
+		delete from fellowship_info
+		where FS_ID = #{fsId} and FS_BUILD_US_ID = #{usId}
+	</delete>
+	
+	<delete id="delFellowPic">
+		delete from sys_file_info
+		where FILE_ID = #{fileId} and FS_ID = #{fsId}
+	</delete>
+	<insert id="addFSQ" parameterType="Map">
+		insert into fellowship_request
+		(
+			QUESITION_ID             ,
+			US_ID                    ,
+			FS_ID                    ,
+			REQUEST_DATE             ,
+			QUESITION_STATE          ,
+			QUESITION_NAME           ,
+			QUESITION_CONTENT        
+		)               
+		values          
+		(      
+			UUID()	,
+			#{usId} ,
+			#{fsId} ,
+			NOW()   ,
+			'N'     ,
+			#{fsQTitle},
+			#{fsQContent}
+		)              
+		
+	</insert>
+	
+  	<update id="modifyFsInfo"  parameterType="Map">
+		update  
+			fellowship_info 
+		set
+			ADDRESS = #{address},
+			FS_PS = #{fsPs}
+		 where FS_ID=#{fsId}   
+	</update>
+</mapper>

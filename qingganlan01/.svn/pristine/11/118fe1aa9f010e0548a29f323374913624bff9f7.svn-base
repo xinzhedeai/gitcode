@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>青橄榄-我的回收站</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="author" content="zjb" />
+	<script type="text/javascript" src="/lib/js/includeHead.js?v=20151020001"></script>
+	<script type="text/javascript" src="../js/myRecovery.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	
+</head>
+<body>
+	<div class="header"></div>
+	<div class="container index-container ">
+		<div class="row common-row">
+			<div class="person-c-headImage">
+				<!-- <img src="/lib/img/images/default_blog_img.jpg"  class="thumbnail" alt="" > -->
+				<!-- <span class="personCenterNickName"></span> -->
+			</div>
+<!-- 			<div class="common-function">
+				<ul>
+					<li><a><i class="fa fa-lg fa-comment"></i>日志</a></li>
+					<li><a><i class="fa fa-lg fa-eye"></i>相册</a></li>
+					<li><a><i class="fa fa-lg fa-eye"></i>留言板</a></li>
+					<li><a><i class="fa fa-lg fa-eye"></i>我的收藏</a></li>
+					<li><a><i class="fa fa-lg fa-eye"></i>更多...</a></li>
+				</ul>
+			</div>
+ -->		</div>
+		<div class="row ">
+			<div class="col-sm-3 index-col-sm-3" id="">
+				
+				<div class="person-c-ul">
+					<ul>
+						<li><a><i class="fa fa-lg fa-comment myBlog"></i></a></li>
+					<!-- 	<li><a><i class="fa fa-lg fa-eye"></i>@&nbsp;&nbsp;与我相关</a></li> -->
+						<li><a><i class="fa fa-lg fa-eye myConcern"></i></a></li>
+						<li><a><i class="fa fa-lg fa-star myCollect"></i></a></li>
+						<li><a><i class="fa fa-lg  fa-book myLog"></i></a></li>
+						<li><a><i class="fa fa-lg fa-edit myMsgBoard"></i></a></li>
+						<li><a><i class="fa fa-lg fa-trash-o myBlogTrash"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-sm-9 index-col-sm-9" >
+				<div class="index-sharetitle">
+					<label for="">回收站里的动态！</label>
+				</div>
+				<div class="index-sharecontent myRecovery">
+				</div>
+			</div>
+			<div class="col-sm-2 index-col-sm-2 myFriAndFellow">
+				<div class="tabbable" id="tabs-15344"><!-- tab切换版面开始 -->
+					<ul class="nav nav-tabs">
+						<li class="active">
+							<a data-toggle="tab" class="myFriendTab" href="#panel1" id="rdf">我的好友</a>
+						</li>
+						<li>
+							<a data-toggle="tab" class="myFellowTab" href="#panel2" id="jhr">我的青年团契</a>
+						</li>
+				
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active l-tab-pane-index" id="panel1">
+							<div class="myFriendsList">
+								<div class="myFriendsNo"></div>
+								<ul class="myFriendsUl">
+								</ul>
+							</div>
+						</div>
+						<div class="tab-pane l-tab-pane-indexA" id="panel2">
+							<div class="myFellowsList">
+								<div class="myFellowsNo">我参加的团契 (10)</div>
+								<ul class="myFellowsUl">
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div><!-- tab切换版面结束-->
+			</div>
+		</div>	
+	</div>
+	<div class="footer"></div>
+</body>
+</html>

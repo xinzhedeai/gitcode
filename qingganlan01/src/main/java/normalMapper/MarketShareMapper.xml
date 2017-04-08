@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="normalMapper.MarketShareMapper" >
+  <resultMap id="BaseResultMap" type="normalPo.MarketShare" >
+    <id column="MARKET_ID" property="marketId" jdbcType="VARCHAR" />
+    <result column="MARKET_NAME" property="marketName" jdbcType="VARCHAR" />
+    <result column="MARKET_ADDRESS" property="marketAddress" jdbcType="VARCHAR" />
+    <result column="MARKET_DESC" property="marketDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MARKET_ID, MARKET_NAME, MARKET_ADDRESS, MARKET_DESC
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="normalPo.MarketShareExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from market_share
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from market_share
+    where MARKET_ID = #{marketId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from market_share
+    where MARKET_ID = #{marketId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="normalPo.MarketShareExample" >
+    delete from market_share
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="normalPo.MarketShare" >
+    insert into market_share (MARKET_ID, MARKET_NAME, MARKET_ADDRESS, 
+      MARKET_DESC)
+    values (#{marketId,jdbcType=VARCHAR}, #{marketName,jdbcType=VARCHAR}, #{marketAddress,jdbcType=VARCHAR}, 
+      #{marketDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="normalPo.MarketShare" >
+    insert into market_share
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="marketId != null" >
+        MARKET_ID,
+      </if>
+      <if test="marketName != null" >
+        MARKET_NAME,
+      </if>
+      <if test="marketAddress != null" >
+        MARKET_ADDRESS,
+      </if>
+      <if test="marketDesc != null" >
+        MARKET_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="marketId != null" >
+        #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="marketName != null" >
+        #{marketName,jdbcType=VARCHAR},
+      </if>
+      <if test="marketAddress != null" >
+        #{marketAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="marketDesc != null" >
+        #{marketDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="normalPo.MarketShareExample" resultType="java.lang.Integer" >
+    select count(*) from market_share
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update market_share
+    <set >
+      <if test="record.marketId != null" >
+        MARKET_ID = #{record.marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketName != null" >
+        MARKET_NAME = #{record.marketName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketAddress != null" >
+        MARKET_ADDRESS = #{record.marketAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketDesc != null" >
+        MARKET_DESC = #{record.marketDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update market_share
+    set MARKET_ID = #{record.marketId,jdbcType=VARCHAR},
+      MARKET_NAME = #{record.marketName,jdbcType=VARCHAR},
+      MARKET_ADDRESS = #{record.marketAddress,jdbcType=VARCHAR},
+      MARKET_DESC = #{record.marketDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="normalPo.MarketShare" >
+    update market_share
+    <set >
+      <if test="marketName != null" >
+        MARKET_NAME = #{marketName,jdbcType=VARCHAR},
+      </if>
+      <if test="marketAddress != null" >
+        MARKET_ADDRESS = #{marketAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="marketDesc != null" >
+        MARKET_DESC = #{marketDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MARKET_ID = #{marketId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="normalPo.MarketShare" >
+    update market_share
+    set MARKET_NAME = #{marketName,jdbcType=VARCHAR},
+      MARKET_ADDRESS = #{marketAddress,jdbcType=VARCHAR},
+      MARKET_DESC = #{marketDesc,jdbcType=VARCHAR}
+    where MARKET_ID = #{marketId,jdbcType=VARCHAR}
+  </update>
+</mapper>

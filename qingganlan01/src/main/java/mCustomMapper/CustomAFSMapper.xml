@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mCustomMapper.CustomAFSMapper">
+	<select id="getAllFSs"  parameterType="Map" resultType="Map">
+		select
+			*
+		from
+			fellowship_info
+		WHERE 1 = 1
+   		<if test="fellowShipId != null and fellowShipId != ''">
+		 	and FS_ID = #{fellowShipId}
+	 	</if>
+	 	<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>
+	</select>
+	 <select id="getFSName" parameterType="Map" resultType="Map">
+		SELECT 
+			 DISTINCT FS_ID,
+			FS_NAME				 
+		FROM
+			fellowship_info 
+		WHERE 1 = 1
+		<if test="fellowShipId != null and fellowShipId != ''">
+			AND FS_ID LIKE '%${fellowShipId}%'
+		</if>
+    </select>
+    
+    <select id="getAllPrays"  parameterType="Map" resultType="Map">
+		select
+			*
+		from
+			pray_wall_info
+		WHERE 1 = 1
+   		<if test="fellowShipId != null and fellowShipId != ''">
+		 	and FS_ID = #{fellowShipId}
+	 	</if>
+	 	<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>
+	</select>
+	
+    <select id="getFSQs"  parameterType="Map" resultType="Map">
+		select
+			*
+		from
+			fellowship_request
+		WHERE 1 = 1
+   		<if test="fellowShipId != null and fellowShipId != ''">
+		 	and FS_ID = #{fellowShipId}
+	 	</if>
+	 	<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>
+	</select>
+	<select id="getChurchs"  parameterType="Map" resultType="Map">
+		select
+			a.*,
+			b.US_NAME
+		from
+			church_info a
+		left join user_info b on a.US_ID = b.US_ID
+		WHERE 1 = 1
+   		<if test="churchType != null and churchType != ''">
+		 	and TYPE = #{churchType}
+	 	</if>
+	 	<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>
+	</select>
+	
+	<select id="getAllFSMember" parameterType="Map" resultType="Map">
+		SELECT 
+			a.FS_NAME            ,
+			b.US_ID               ,
+			b.US_NAME             ,
+		<!-- 	b.AGE                 , -->
+	<!-- 		(NOW() - b.BIRTH_DATE) as AGE;年龄获得问题带解决 -->
+			b.SEX                 ,
+			b.TEL                 ,
+			b.EMAIL               ,
+			b.QQ                  ,
+			b.WEICHAT             ,
+			b.PS                  ,
+			b.HOBBY               ,
+			b.AREA                ,
+			b.GRADUATE_SCHOOL     ,
+			b.PROFESSION          ,
+			b.CHIRCH_TYPE         ,
+			b.STATE               ,
+			b.START_TRUTH,
+			b.REG_DATE            ,
+			b.IS_BAPTISM          ,
+			b.IS_TRUTH            ,
+			
+			c.JOIN_DATE          ,
+			c.IS_MASTER          
+		 <include refid="fellowShipMember"></include>
+    </select>
+   	<select id="getAllFSMemberExcel" parameterType="Map" resultType="java.util.LinkedHashMap">
+		SELECT 
+			
+			IFNULL(b.US_NAME , '') AS US_NAME,
+			IFNULL(a.FS_NAME, '') AS FS_NAME,
+			IFNULL(b.TEL, '') AS   TEL    ,
+			IFNULL(b.SEX, '') AS   SEX ,
+			IFNULL(b.QQ, '') AS      QQ ,
+			IFNULL(b.WEICHAT, '') AS   WEICHAT    ,
+			IFNULL(b.PROFESSION, '') AS   PROFESSION
+		 <include refid="fellowShipMember"></include>
+    </select>
+    <sql id="fellowShipMember">
+    	FROM
+			fellowship_info a
+		left join fellowship_user_relation c on a.FS_ID = c.FS_ID
+		left join user_info b on b.US_ID = c.US_ID
+		<where>
+			<if test="fellowShipId != null and fellowShipId != ''">
+				a.FS_ID = #{fellowShipId}
+			</if>
+		</where>
+    </sql>
+</mapper>

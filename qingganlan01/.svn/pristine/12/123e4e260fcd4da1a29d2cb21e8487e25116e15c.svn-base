@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="customMapper.CustomFriendMapper">
+	<select id="getMyFris"  parameterType="Map" resultMap="MyFrisResultMap">
+	SELECT 
+		a.US_FRIEND_ID,
+		a.DATE	AS addFriendDate,
+		
+	<!-- 	b.US_ID                     ,
+		b.US_NAME                   ,
+		b.AGE                       ,
+		b.SEX                       ,
+		b.BIRTH_DATE                ,
+		b.PS                        ,
+		b.HOBBY                     ,
+		b.AREA                      ,
+		b.GRADUATE_SCHOOL           ,
+		b.PROFESSION                ,
+		b.CHIRCH_TYPE               ,
+		b.STATE                     ,
+		b.REG_DATE                  ,
+		b.LAST_LOGIN_TIME           ,
+		b.HEAD_IMG                  ,
+		b.BLOG_NO                   ,
+		b.COLLECT_BLOG_NO           ,
+		b.CONCERN_NO                ,
+		b.FANS_NO                   ,
+		b.MY_FRIEND_NO              ,
+		b.COMMENT_NO                ,
+		b.COMMENT_ME_COMMENT_NO -->
+		b.*
+	FROM 
+	my_friends_info a
+	LEFT JOIN user_info b
+	ON b.US_ID = a.FRIEND_ID
+	WHERE a.US_ID = #{usId}
+	</select>
+	 <resultMap id="MyFrisResultMap" type="Map" >
+	    <id column="US_ID" property="usId" jdbcType="VARCHAR" />
+	    <result column="US_NAME" property="usName" jdbcType="VARCHAR" />
+	    <result column="AGE" property="age" jdbcType="INTEGER" />
+	    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+	    <result column="BIRTH_DATE" property="birthDate" jdbcType="TIMESTAMP" />
+	    <result column="PS" property="ps" jdbcType="VARCHAR" />
+	    <result column="HOBBY" property="hobby" jdbcType="VARCHAR" />
+	    <result column="AREA" property="area" jdbcType="VARCHAR" />
+	    <result column="GRADUATE_SCHOOL" property="graduateSchool" jdbcType="VARCHAR" />
+	    <result column="PROFESSION" property="profession" jdbcType="VARCHAR" />
+	    <result column="CHIRCH_TYPE" property="chirchType" jdbcType="VARCHAR" />
+	    <result column="STATE" property="state" jdbcType="VARCHAR" />
+	    <result column="START_TRUTH" property="startTruth" jdbcType="TIMESTAMP" />
+	    <result column="REG_DATE" property="regDate" jdbcType="TIMESTAMP" />
+	    <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP" />
+	    <result column="HEAD_IMG" property="headImg" jdbcType="VARCHAR" />
+	    <result column="BLOG_NO" property="blogNo" jdbcType="INTEGER" />
+	    <result column="COLLECT_BLOG_NO" property="collectBlogNo" jdbcType="INTEGER" />
+	    <result column="CONCERN_NO" property="concernNo" jdbcType="INTEGER" />
+	    <result column="FANS_NO" property="fansNo" jdbcType="INTEGER" />
+	    <result column="MY_FRIEND_NO" property="myFriendNo" jdbcType="INTEGER" />
+	    <result column="COMMENT_NO" property="commentNo" jdbcType="INTEGER" />
+	    <result column="COMMENT_ME_COMMENT_NO" property="commentMeCommentNo" jdbcType="INTEGER" />
+	    <result column="US_FRIEND_ID" property="usFriendId" jdbcType="VARCHAR" />
+	    <result column="addFriendDate" property="addFriendDate" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

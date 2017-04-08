@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="author" content="jianghaipeng" />
+<script type="text/javascript" src="../js/editdetail.js?v=20151127001"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+	<div class="row az-user-row">
+		<div class="col-md-12 az-user-all">
+			<div class="az-m9-title">
+				<h5>微法信息管理</h5>
+			</div>
+			<h4 class="az-m9-h3">微法解释详情</h4>
+			<div class="az-search az-editlow">
+				<form name="searchForm" >
+					<table class="table  table-bordered al-searchcondition" id="editdetail_table">
+						<tbody>
+							<tr>
+								<td>
+									 <div class="al-value">
+										<center><span>法律解释名称:</span></center>
+									</div>
+									<div class="az-showstyle">
+									 	<strong id="UPID" ></strong>
+									</div>
+								</td>
+							 	<td>
+						        	<div class="al-value">
+										<center><span class="aj-span">键值ID: </span></center>
+									</div>
+		  							<div class="az-showstyle">
+									 	<strong id="editdetailKeyID" ></strong>
+									</div>
+								</td>
+							</tr>
+						    <tr>
+						       <td>
+						        	<div class="al-value">
+										<center><span class="aj-span">微法ID:</span></center>
+									</div>
+		  							<div class="az-showstyle">
+									 	<strong id="editdetailNodeId" ></strong>
+									</div>
+								</td>
+						    	 <td>
+						        	<div class="al-value">
+										<center><span class="aj-span">微法解释ID: </span></center>
+									</div>
+		  							<div class="az-showstyle">
+									 	<strong id="editdetailIDr" ></strong>
+									</div>
+								</td>
+					     	</tr>
+						</tbody>
+					</table>
+				</form>
+				<h5>修改法律解释标题</h5>
+				<script id="detaileditor" type="text/plain" style="width:650px;height:200px;"></script>
+				<div class="az-updatelow">
+					<ul class="az-ul-common">
+						<li><button type="button" class="btn btn-default btn-md " id="editdetailTitle-btn">保存</button></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

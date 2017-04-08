@@ -1,0 +1,157 @@
+@CHARSET "UTF-8";
+.right{float:left; width:1600px;}
+.aj-bground{background-color:#005491; width:1000px; height:800px;}
+.aj-title{margin:40px auto; text-align:center; font-size:36px; color:#fff;}
+.aj-body{width:800px; height:600px; text-align:center; margin:auto; border-radius: 10px; background:url('/lib/img/images/a-background.jpg') no-repeat;}
+.aj-logo{margin-top:20px;}
+.aj-input{width:500px; height:60px; text-align:center; margin:50px auto;}
+.aj-input input{height:60px;}
+.aj-input span{margin-right: 6px; top: 0px;}
+/*change the bootstrap*/
+.glyphicon{margin-right: 6px;}
+.glyphicon-envelope, .glyphicon-lock{color:blue; font-size:24px;}
+
+.aj-top{width:1600px; height:60px; float:right; background-color:#3992d0;}
+.aj-row{width:1600px; height:60px; margin:auto 0px;}
+.aj-left{clear:both; width:300px; height:auto; overflow:visible !important; background-color:#3992d0; float:left;}
+.aj-left div{margin:0px; padding:0px;}
+.aj-tip{padding-top:20px; text-align:center; font-size:24px; color:#fff; height:60px;}
+.aj-col{width:20%; height:60px; float:right;}
+.aj-welcome{padding:18px 0px; width:200px; height:60px; font-size:16px; float:left;}
+.aj-welcome a{color:#fff;}
+.aj-lout{padding:18px 0px; width:100px; height:60px; font-size:16px; color:#fff; float:left;}
+.aj-lout a{color:#fff;}
+.aj-bdy{width:1400px; float:left; border:solid 1px #ccc;}
+.aj-foot{width:1400px; float:left; background-color:#eee;}
+.aj-ft{height:31px; text-align:center; margin-top:7px;}
+.aj-main{width:1900px;}
+.aj-span{padding:9px;}
+.aj-value{background-color:#F8F8F8; width: 110px; height: 35px; float: left; padding-top: 7px; margin:3px 5px 0px 0px;}
+.aj-value span{font-size: 15px;}
+.aj-table-search tr>td>span{float: left;width: 100px;height: 35px;background-color: #EDEDED; margin: 3px;}
+.aj-elsedisp{display:none;}
+.aj-tableInput{width: 401px;height: 36px;margin-top: 3px;border: 1px solid #ddd; margin-left: 3px;}
+.aj-alert{display:none;}
+
+body{margin:0;padding:0;}
+dl,dt,dd{display:block;margin:0;}
+a{text-decoration:none;}
+
+/*left*/
+.leftsidebar_box{width:300px; height:100% !important;background-color:#3992d0;}
+.leftsidebar_box dt{padding-left:70px;padding-right:10px;background-repeat:no-repeat;background-position:10px center;color:#f5f5f5;font-size:18px;position:relative;line-height:65px;cursor:pointer;}
+.leftsidebar_box dd{background-color:#317eb4;padding:0px 0px 8px 100px;}
+.leftsidebar_box dd a{color:#f5f5f5;line-height:20px; font-size:16px;}
+.leftsidebar_box dt i{position:absolute;right:70px;top:20px; color:#fff; font-size:18px;}
+.leftsidebar_box dl dd:last-child{padding-bottom:10px;}
+
+/* .aj-boy{border:solid 1px #ccc;} */
+/*tab  */
+body { font-family:Lucida Sans, Lucida Sans Unicode, Arial, Sans-Serif; font-size:13px; margin:0px auto;}
+#tabs { margin:0; padding:0; list-style:none; overflow:hidden; }
+#tabs li { float:left; display:block; padding:5px; background-color:#bbb; margin-right:5px;}
+#tabs li a { color:#fff; text-decoration:none; }
+#tabs li.current { background-color:#e1e1e1;}
+#tabs li.current a { color:#000; text-decoration:none; }
+#tabs li a.remove { color:#f00; margin-left:10px;}
+#content { background-color:#e1e1e1;}
+#content p { margin: 0; padding:20px 20px 100px 20px;}
+
+#wrapper {width:100%; float:left; margin:0 20px 0 0;}
+/* .datagrid-row{height: 35px;} */
+.datagrid-htable tr{height: 35px;}
+.datagrid-btable tr{height: 35px;}
+
+/* tab end */
+
+
+
+/*--- lvhejing ---*/
+.al-zhxx{font-size:18px; color: #4994EB; float:left; width: 1328px;}
+.al-searchconditionA tr td{width:50%;}
+.al-searchconditionA tr td select{width: 399px; height: 35px; border: 1px #DDD solid;}
+.al-searchcondition{width:100%;}
+.al-searchcondition tr td input{width:330px; height: 35px; margin-left: 5px;}
+.al-searchcondition tr td select{width: 399px; height: 35px; border: 1px #DDD solid;}
+.al-searchcondition tr>td>span{float: left;width: 100px;height: 35px;background-color: #EDEDED;}
+.al-value{background-color:#F8F8F8; width: 115px; height: 35px; float: left; padding-top: 7px; margin-right: 5px;}
+.al-value span{font-size: 15px;}
+.al-cxjg{margin-bottom: 18px;}
+.al-cxjg label{margin: 10px 0px;}
+.al-cxjg button{float:right; margin: 0px 0px 0px 5px;}
+.al-ul-common{list-style-type: none;}
+.al-user-page{padding: 15px 0px;}
+.al-user-page >ul>li{float: right;margin-right: 16px;}
+.al-tableInput{width: 57%;height: 36px; margin-top: 9px;}
+.al-table-search tr>td>span{float: left;width: 100px; height: 35px; background-color: #EDEDED; margin: 9px;margin-right: 15px; padding-top: 8px;}
+.al-table-searchA tr>td>span{float: left; margin-top: 9px;}
+.al-spanstyle{float: left;width: 100px; height: 35px; background-color: #EDEDED; margin: 9px;margin-right: 15px; padding-top: 8px; text-align: center;}
+.al-glyid{margin-top: 15px;}
+.al-table-search tr>td {text-align:center;}
+.al-editcontentsave{margin:20px 0px 0px 515px;}
+.al-editcontentsave ul li{list-style-type: none;}
+.al-editcontentsave >ul>li>button{width: 100px;}
+.al-showstyle{margin-top: 8px; float: left;}
+.al-listtree span{margin-right: 6px;}
+.al-tableInputA {width: 349px; height: 35px;}
+/*--- end ---*/
+
+
+
+/*user页面start---zjb*/
+.az-m9-title{text-align: right;margin-top: 10px;}
+.az-user-all button{/* background-color:#EDEDED; */}
+.az-m9-h3 {color:#4994EB ;}
+.az-search-top{margin: 5px 0;}
+.az-search-top>button{float: right;margin-bottom: 9px;}
+.az-welcome{margin: 25px auto;}
+.az-tableInput{width: 50%;height: 36px;}
+.az-table-searchA tr>td>label{margin-top:9px;}
+.az-table-searchA tr>td>span{float: left;width: 100px;height: 35px;background-color: #EDEDED; padding:9px; margin-left: 5px;  margin-right: 5px;}
+.az-table-search tr>td>label{margin-top:9px;}
+.az-table-search tr>td>span{float: left;width: 100px;height: 35px;background-color: #EDEDED; padding:9px; margin-left: 5px; margin-right: 10px;}
+.az-user-tableList >thead >tr:first-child{background-color:#EDEDED;} 
+.az-user-tableList >thead >tr>th{text-align:center;}
+.az-table-search tr>td {text-align:center; width:50%;}
+.az-ul-common{list-style-type: none;}
+.az-user-page >ul>li{float: right;margin-right: 16px;}
+.az-user-all label{margin-top:10px;}
+.az-search-func >ul>li{float: right;margin: 6px 1px 6px 6px;}
+.az-search-func >ul{float:right;}
+.az-user-row{padding-left:30px;padding-right:30px;padding-bottom:18px;background-color: #EEE;margin-left: 0;margin-right:0;}
+.az-m9-title>h5{font-size:18px;color:#4994EB ;}
+
+#az-user-mDetail tr td >strong{position: relative;top: 8px;}
+#az-user-mDetail tr td .az-tableInput{width: 100%;}
+
+.az-microlowTable-search tr>td>span{float: left;width: 100px; height: 35px; background-color: #EDEDED; margin: 9px;margin-right: 5px; padding-top: 8px;}
+.az-microlowTable-search tr>td {text-align:center; width:50%;}
+.az-microlowTable-search tr>td>select{margin-top:9px; width: 50%; height: 36px;}
+.az-showstyle {height: 35px;float: left; background-color: #F8F8F8;width: 440px; padding: 0px 10px;}
+#az-microId{margin-top: 8px;float: left;}
+
+/* 管理员信息页面布局 */
+#manadetailSex{width:328px;}
+#manadetailUserId,#manadetailAuth{margin-top: 8px;float: left;}
+.manaDetailUserId{width:110px;}
+.manadetailEmail{width:115px;}
+/* 修改密码布局 */
+#az-modify-password tr td input{width:243px;}
+#manaDetailModifyPwd{width:110px;}
+/*修改标题按钮布局  */
+#editdetailTitle-btn{float:left;margin-left: 39%;width: 116px;}
+#editdetail_table strong{margin-top:11px;float:left;}
+#welcome span{color:white;}
+/* 重置按钮布局 */
+.reset{margin-left:7px;}
+/* 用户列表搜索布局调整 */
+.az-scondition tr td select {width: 136px;float: left;margin-right: 7px;}
+/*法律基本信息  */
+.microAuthor{margin:5px;}
+.al-searchconditionB tr td input{width: 264px;}
+.al-searchconditionB tr > td > span{margin-top: 9px;}
+/* 认证页面模态框间距调整 */
+#az-auth-mDetail strong{ float:left; margin-top: 7px;}
+/* 12-31--帖子页面类型下拉框布局 */
+.az-blogTypeVal{ border: 1px solid #ddd; float: left; height: 35px; margin: 3px; width: 400px;}
+/*---end---*/

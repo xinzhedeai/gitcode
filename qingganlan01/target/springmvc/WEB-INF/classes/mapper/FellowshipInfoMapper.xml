@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.FellowshipInfoMapper">
+  <resultMap id="BaseResultMap" type="po.FellowshipInfo">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="FELLOWSHIP_ID" jdbcType="VARCHAR" property="fellowshipId" />
+    <result column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="BUILD_TIME" jdbcType="TIMESTAMP" property="buildTime" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="IS_MASTER" jdbcType="VARCHAR" property="isMaster" />
+  </resultMap>
+</mapper>

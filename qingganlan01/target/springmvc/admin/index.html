@@ -1,0 +1,25 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>
+
+	/* 1.从Cookie中查询是否有last-request-page
+		-> 如果有则进行2
+		-> 没有跳转/index/
+	2. 检查是否有access-token的Cookie
+		-> 如果有则直接跳转到last-request-page
+		-> 如果没有则跳转到/login.html
+ 	*/
+ 	function getCookie(name) { 
+ 	    var arr,reg=new RegExp('(^| )'+name+'=([^;]*)(;|$)');
+ 	 
+ 	    if(arr=document.cookie.match(reg))
+ 	        return unescape(arr[2]); 
+ 	    else 
+ 	        return null; 
+ 	} 
+		
+	if (getCookie('admin_userId') != null) 
+		location.href = "/admin/main/index.html";
+	else 
+		location.href = '/admin/login.html';
+		
+</script>

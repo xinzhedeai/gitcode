@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>青橄榄-主内小伙伴儿谈谈</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="author" content="zjb" />
+	<script type="text/javascript" src="/lib/js/includeHead.js?v=20151020001"></script>
+	<script type="text/javascript" src="/js/search.js"></script>
+	<script type="text/javascript" src="/lib/js/jquery.cityselect.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+	<div class="header"></div>
+	<div class="container index-container ">
+		<div class="row common-row">
+			<div class="col-md-12">
+				<div class="nextStep">
+					<div class="search">
+					<div class="ripple search-ripple1"></div>
+					<div class="ripple search-ripple2"></div>
+					<div class="ripple search-ripple3"></div>
+					<div class="ripple search-ripple4"></div>
+					<div class="search-ripple5"></div>
+					</div>
+					<div class="stranger">
+						<div class="searchFunc">
+							<ul>
+								<li>
+									<button class="btn btn-success showChurchBtn" data-toggle="modal" data-target="#mymodal-data" type="button">添加教会</button>
+								</li>
+							</ul>
+						</div>
+						<div class="searchUsers">
+							<h4>搜索到的用户</h4>
+							<ul class="strangerImg searchUSUl">
+								<!-- <li class="person">
+									<img src="/lib/img/yimaneili.jpg" alt="">
+									<span>耶和华是我的牧者！</span>
+								</li>
+									<li class="person">
+									<img src="/lib/img/yimaneili.jpg" alt="">
+									<span>耶和华是我的牧者！</span>
+								</li>
+									<li class="person">
+									<img src="/lib/img/yimaneili.jpg" alt="">
+									<span>耶和华是我的牧者！</span>
+								</li> -->
+							</ul>
+						</div>	
+						<div class="searchFellowShips">
+							<h4>搜索到的团契</h4>
+							<ul class="strangerImg searchFSUl">
+						
+							</ul>
+						</div>	
+						<div class="searchChurchs">
+							<h4>搜索到的教会</h4>
+							<ul class="strangerImg searchChurchUl">
+								<!-- <li class="person">
+									<img src="/lib/img/yimaneili.jpg" alt="">
+									<span>耶和华是我的牧者！</span>
+								</li>
+									<li class="person">
+									<img src="/lib/img/yimaneili.jpg" alt="">
+									<span>耶和华是我的牧者！</span>
+								</li> -->
+							</ul>
+						</div>	
+					</div>
+				</div>	
+			</div>
+		</div>	
+	</div>
+	<!-- 名片弹框 -->
+	<div class="cardDiv">
+		<a class="cardImg" href="main/persone.html" target="blank"><img class="thumbnail" src=""></a>
+		<div class="cardMessage">
+			<h5><a href="main/persone.html" target="blank" class="cardDivName"></a></h5>
+			<p><span class="cardDivSex">女</span><span>法人</span><span class="cardDivArea">北京</span></p>
+			<p class="cardDivPs">给时间一点时间，让过去的过去，开始的开始</p>
+		</div>
+		<div class="cardBottom">
+			<!-- <button type="button" class="btn"><i class="fa fa-plus"></i>加关注</button> -->
+		</div>
+	</div>
+		<!-- 团契弹框 -->
+	<div class="cardDiv fSCardDiv">
+		<a class="cardImg" href="main/persone.html" target="blank"><img class="thumbnail" src=""></a>
+		<div class="cardMessage">
+			<h5><a href="main/persone.html" target="blank" class="cardDivName"></a></h5>
+			<p><span class="cardDivFSType">女</span><span>法人</span><span class="cardDivArea">北京</span></p>
+			<p class="cardDivPs">给时间一点时间，让过去的过去，开始的开始</p>
+		</div>
+		<div class="cardBottom">
+			<button type="button" class="btn"><i class="fa fa-plus"></i>加关注</button>
+		</div>
+	</div>
+		<!-- 教会弹框 -->
+	<div class="cardDiv churchCardDiv">
+		<a class="cardImg" href="main/persone.html" target="blank"><img class="thumbnail" src=""></a>
+		<div class="cardMessage">
+			<h5><a href="main/persone.html" target="blank" class="cardDivName"></a></h5>
+			<p><span class="cardDivChurchType">家庭教会</span><span>法人</span><span class="cardDivArea">北京</span></p>
+			<p class="cardDivPs">给时间一点时间，让过去的过去，开始的开始</p>
+		</div>
+	</div>
+	<div class="modal fade" id="mymodal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width:1000px; margin-top:250px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">添加教会信息</h4>
+				</div>
+				<div class="modal-body">
+					<div class="addChurchDiv" id="addChurchDiv">
+		 				<form name="churchForm" id="addChurchForm">
+							<table class="table table-bordered">
+								<colgroup>
+									<col width="100" />
+									<col width="180" />
+									<col width="80" />
+									<col width="300" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<td><span>教会名称: </span></td><td colspan="3"><input type="text" name="churchName" class="form-control" placeholder="请输入教会名称"  id=""></td>
+										 <td><span>负责人名称</span></td>
+										 <td colspan="3" >
+										 	<input type="text" name="churchMasterName" class="form-control" placeholder="请输入负责人名称" id="">
+										 </td>
+									</tr>
+									<tr>
+										 <td><span>详细地址: </span></td>
+										 <td colspan="3"><input type="text" name="churchAddress" class="form-control" placeholder="请输入详细地址" id=""></td>
+										 <td><span>教会类型: </span></td><td colspan="3">
+											<select class="form-control" id="type" name="churchType">
+												 <option id="family" value="0">家庭教会</option>
+												 <option id="threeFree" value="1">三自教会</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td><span>教会所在地: </span></td>
+										<td colspan="3" id="city_2" class="churchArea">
+											<select class="prov form-control" id="prov"></select> 
+											<select class="city form-control" id="city" disabled="disabled" ></select>
+											<select class="dist form-control" id="dist" disabled="disabled"></select>
+										 </td>
+										<td><span>负责人联系方式: </span></td>
+										<td colspan="3">
+											 <input type="text" name="churchMasterTel" class="form-control" placeholder="请输入负责人联系方式" id="">
+										 </td>
+										
+									</tr>
+									<tr>
+										<td><span>聚会时间: </span></td>
+										<td colspan="3">
+										 	<input size="16" type="text" class="form-control startDate" name="churchAdorationTime"  placeholder="请输入教会聚会时间">
+										 </td>	
+										 <td><span>负责人邮箱帐号: </span></td>
+										<td colspan="3">
+											 <input type="text" name="churchMasterEmail" class="form-control" placeholder="请输入负责人邮箱帐号" id="">
+										</td>
+									</tr>
+									<tr>
+										<td><span>教会简介: </span></td><td colspan="3"><textarea type="text" class="form-control"  name="churchPs" rows="7" id="" placeholder="请输入教会简介"></textarea>
+									</tr>										
+								</tbody>
+							</table>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					 <button type="button" class="btn btn-default" data-dismiss="modal" id="closebtn">关闭</button>
+					 <button type="button" class="btn btn-primary" id="addChurch">保存</button>
+				 </div>
+			</div>
+		</div>
+	</div>
+	<div class="footer"></div>
+	<!--[if lte IE 9]>
+	<script type="text/javascript" src="respond.js"></script>
+
+	<![endif]-->
+</body>
+</html>

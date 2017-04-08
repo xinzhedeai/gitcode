@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="normalMapper.FellowshipInfoMapper" >
+  <resultMap id="BaseResultMap" type="normalPo.FellowshipInfo" >
+    <id column="FS_ID" property="fsId" jdbcType="VARCHAR" />
+    <result column="FS_NAME" property="fsName" jdbcType="VARCHAR" />
+    <result column="FS_HEAD_IMG" property="fsHeadImg" jdbcType="VARCHAR" />
+    <result column="BUILD_DATE" property="buildDate" jdbcType="TIMESTAMP" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="FS_BUILD_US_ID" property="fsBuildUsId" jdbcType="VARCHAR" />
+    <result column="FS_PS" property="fsPs" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FS_ID, FS_NAME, FS_HEAD_IMG, BUILD_DATE, TYPE, ADDRESS, FS_BUILD_US_ID, FS_PS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="normalPo.FellowshipInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fellowship_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fellowship_info
+    where FS_ID = #{fsId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fellowship_info
+    where FS_ID = #{fsId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="normalPo.FellowshipInfoExample" >
+    delete from fellowship_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="normalPo.FellowshipInfo" >
+    insert into fellowship_info (FS_ID, FS_NAME, FS_HEAD_IMG, 
+      BUILD_DATE, TYPE, ADDRESS, 
+      FS_BUILD_US_ID, FS_PS)
+    values (#{fsId,jdbcType=VARCHAR}, #{fsName,jdbcType=VARCHAR}, #{fsHeadImg,jdbcType=VARCHAR}, 
+      #{buildDate,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{fsBuildUsId,jdbcType=VARCHAR}, #{fsPs,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="normalPo.FellowshipInfo" >
+    insert into fellowship_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fsId != null" >
+        FS_ID,
+      </if>
+      <if test="fsName != null" >
+        FS_NAME,
+      </if>
+      <if test="fsHeadImg != null" >
+        FS_HEAD_IMG,
+      </if>
+      <if test="buildDate != null" >
+        BUILD_DATE,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="fsBuildUsId != null" >
+        FS_BUILD_US_ID,
+      </if>
+      <if test="fsPs != null" >
+        FS_PS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fsId != null" >
+        #{fsId,jdbcType=VARCHAR},
+      </if>
+      <if test="fsName != null" >
+        #{fsName,jdbcType=VARCHAR},
+      </if>
+      <if test="fsHeadImg != null" >
+        #{fsHeadImg,jdbcType=VARCHAR},
+      </if>
+      <if test="buildDate != null" >
+        #{buildDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fsBuildUsId != null" >
+        #{fsBuildUsId,jdbcType=VARCHAR},
+      </if>
+      <if test="fsPs != null" >
+        #{fsPs,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="normalPo.FellowshipInfoExample" resultType="java.lang.Integer" >
+    select count(*) from fellowship_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fellowship_info
+    <set >
+      <if test="record.fsId != null" >
+        FS_ID = #{record.fsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fsName != null" >
+        FS_NAME = #{record.fsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fsHeadImg != null" >
+        FS_HEAD_IMG = #{record.fsHeadImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildDate != null" >
+        BUILD_DATE = #{record.buildDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fsBuildUsId != null" >
+        FS_BUILD_US_ID = #{record.fsBuildUsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fsPs != null" >
+        FS_PS = #{record.fsPs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fellowship_info
+    set FS_ID = #{record.fsId,jdbcType=VARCHAR},
+      FS_NAME = #{record.fsName,jdbcType=VARCHAR},
+      FS_HEAD_IMG = #{record.fsHeadImg,jdbcType=VARCHAR},
+      BUILD_DATE = #{record.buildDate,jdbcType=TIMESTAMP},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      FS_BUILD_US_ID = #{record.fsBuildUsId,jdbcType=VARCHAR},
+      FS_PS = #{record.fsPs,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="normalPo.FellowshipInfo" >
+    update fellowship_info
+    <set >
+      <if test="fsName != null" >
+        FS_NAME = #{fsName,jdbcType=VARCHAR},
+      </if>
+      <if test="fsHeadImg != null" >
+        FS_HEAD_IMG = #{fsHeadImg,jdbcType=VARCHAR},
+      </if>
+      <if test="buildDate != null" >
+        BUILD_DATE = #{buildDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fsBuildUsId != null" >
+        FS_BUILD_US_ID = #{fsBuildUsId,jdbcType=VARCHAR},
+      </if>
+      <if test="fsPs != null" >
+        FS_PS = #{fsPs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FS_ID = #{fsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="normalPo.FellowshipInfo" >
+    update fellowship_info
+    set FS_NAME = #{fsName,jdbcType=VARCHAR},
+      FS_HEAD_IMG = #{fsHeadImg,jdbcType=VARCHAR},
+      BUILD_DATE = #{buildDate,jdbcType=TIMESTAMP},
+      TYPE = #{type,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      FS_BUILD_US_ID = #{fsBuildUsId,jdbcType=VARCHAR},
+      FS_PS = #{fsPs,jdbcType=VARCHAR}
+    where FS_ID = #{fsId,jdbcType=VARCHAR}
+  </update>
+</mapper>

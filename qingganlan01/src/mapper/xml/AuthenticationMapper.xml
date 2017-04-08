@@ -1,0 +1,1088 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.AuthenticationMapper">
+  <resultMap id="BaseResultMap" type="po.Authentication">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="US_NAME" jdbcType="VARCHAR" property="usName" />
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="PROFESSION" jdbcType="VARCHAR" property="profession" />
+    <result column="PICTURE" jdbcType="VARCHAR" property="picture" />
+    <result column="APPLY_TIME" jdbcType="TIMESTAMP" property="applyTime" />
+    <result column="AUTH_STATE" jdbcType="VARCHAR" property="authState" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, US_ID, US_NAME, CARD_ID, SEX, PROFESSION, PICTURE, APPLY_TIME, AUTH_STATE
+  </sql>
+  <select id="selectByExample" parameterType="po.AuthenticationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from authentication
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from authentication
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from authentication
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="po.AuthenticationExample">
+    delete from authentication
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.Authentication">
+    insert into authentication (ID, US_ID, US_NAME, 
+      CARD_ID, SEX, PROFESSION, 
+      PICTURE, APPLY_TIME, AUTH_STATE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{usId,jdbcType=VARCHAR}, #{usName,jdbcType=VARCHAR}, 
+      #{cardId,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, 
+      #{picture,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, #{authState,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="po.Authentication">
+    insert into authentication
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="usId != null">
+        US_ID,
+      </if>
+      <if test="usName != null">
+        US_NAME,
+      </if>
+      <if test="cardId != null">
+        CARD_ID,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="profession != null">
+        PROFESSION,
+      </if>
+      <if test="picture != null">
+        PICTURE,
+      </if>
+      <if test="applyTime != null">
+        APPLY_TIME,
+      </if>
+      <if test="authState != null">
+        AUTH_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null">
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="usName != null">
+        #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authState != null">
+        #{authState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.AuthenticationExample" resultType="java.lang.Integer">
+    select count(*) from authentication
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update authentication
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usId != null">
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usName != null">
+        US_NAME = #{record.usName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardId != null">
+        CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profession != null">
+        PROFESSION = #{record.profession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null">
+        PICTURE = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyTime != null">
+        APPLY_TIME = #{record.applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.authState != null">
+        AUTH_STATE = #{record.authState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update authentication
+    set ID = #{record.id,jdbcType=VARCHAR},
+      US_ID = #{record.usId,jdbcType=VARCHAR},
+      US_NAME = #{record.usName,jdbcType=VARCHAR},
+      CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      PROFESSION = #{record.profession,jdbcType=VARCHAR},
+      PICTURE = #{record.picture,jdbcType=VARCHAR},
+      APPLY_TIME = #{record.applyTime,jdbcType=TIMESTAMP},
+      AUTH_STATE = #{record.authState,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="po.Authentication">
+    update authentication
+    <set>
+      <if test="usName != null">
+        US_NAME = #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        CARD_ID = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        PROFESSION = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        PICTURE = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        APPLY_TIME = #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authState != null">
+        AUTH_STATE = #{authState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="po.Authentication">
+    update authentication
+    set US_NAME = #{usName,jdbcType=VARCHAR},
+      CARD_ID = #{cardId,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      PROFESSION = #{profession,jdbcType=VARCHAR},
+      PICTURE = #{picture,jdbcType=VARCHAR},
+      APPLY_TIME = #{applyTime,jdbcType=TIMESTAMP},
+      AUTH_STATE = #{authState,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="po.Authentication">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="US_NAME" jdbcType="VARCHAR" property="usName" />
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="PROFESSION" jdbcType="VARCHAR" property="profession" />
+    <result column="PICTURE" jdbcType="VARCHAR" property="picture" />
+    <result column="APPLY_TIME" jdbcType="TIMESTAMP" property="applyTime" />
+    <result column="AUTH_STATE" jdbcType="VARCHAR" property="authState" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, US_ID, US_NAME, CARD_ID, SEX, PROFESSION, PICTURE, APPLY_TIME, AUTH_STATE
+  </sql>
+  <select id="selectByExample" parameterType="po.AuthenticationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from authentication
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from authentication
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from authentication
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="po.AuthenticationExample">
+    delete from authentication
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.Authentication">
+    insert into authentication (ID, US_ID, US_NAME, 
+      CARD_ID, SEX, PROFESSION, 
+      PICTURE, APPLY_TIME, AUTH_STATE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{usId,jdbcType=VARCHAR}, #{usName,jdbcType=VARCHAR}, 
+      #{cardId,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, 
+      #{picture,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, #{authState,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="po.Authentication">
+    insert into authentication
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="usId != null">
+        US_ID,
+      </if>
+      <if test="usName != null">
+        US_NAME,
+      </if>
+      <if test="cardId != null">
+        CARD_ID,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="profession != null">
+        PROFESSION,
+      </if>
+      <if test="picture != null">
+        PICTURE,
+      </if>
+      <if test="applyTime != null">
+        APPLY_TIME,
+      </if>
+      <if test="authState != null">
+        AUTH_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null">
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="usName != null">
+        #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authState != null">
+        #{authState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.AuthenticationExample" resultType="java.lang.Integer">
+    select count(*) from authentication
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update authentication
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usId != null">
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usName != null">
+        US_NAME = #{record.usName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardId != null">
+        CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profession != null">
+        PROFESSION = #{record.profession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null">
+        PICTURE = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyTime != null">
+        APPLY_TIME = #{record.applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.authState != null">
+        AUTH_STATE = #{record.authState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update authentication
+    set ID = #{record.id,jdbcType=VARCHAR},
+      US_ID = #{record.usId,jdbcType=VARCHAR},
+      US_NAME = #{record.usName,jdbcType=VARCHAR},
+      CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      PROFESSION = #{record.profession,jdbcType=VARCHAR},
+      PICTURE = #{record.picture,jdbcType=VARCHAR},
+      APPLY_TIME = #{record.applyTime,jdbcType=TIMESTAMP},
+      AUTH_STATE = #{record.authState,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="po.Authentication">
+    update authentication
+    <set>
+      <if test="usName != null">
+        US_NAME = #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        CARD_ID = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        PROFESSION = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        PICTURE = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        APPLY_TIME = #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authState != null">
+        AUTH_STATE = #{authState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="po.Authentication">
+    update authentication
+    set US_NAME = #{usName,jdbcType=VARCHAR},
+      CARD_ID = #{cardId,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      PROFESSION = #{profession,jdbcType=VARCHAR},
+      PICTURE = #{picture,jdbcType=VARCHAR},
+      APPLY_TIME = #{applyTime,jdbcType=TIMESTAMP},
+      AUTH_STATE = #{authState,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="model.Authentication">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="US_NAME" jdbcType="VARCHAR" property="usName" />
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="PROFESSION" jdbcType="VARCHAR" property="profession" />
+    <result column="PICTURE" jdbcType="VARCHAR" property="picture" />
+    <result column="APPLY_TIME" jdbcType="TIMESTAMP" property="applyTime" />
+    <result column="AUTH_STATE" jdbcType="VARCHAR" property="authState" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, US_ID, US_NAME, CARD_ID, SEX, PROFESSION, PICTURE, APPLY_TIME, AUTH_STATE
+  </sql>
+  <select id="selectByExample" parameterType="model.AuthenticationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from authentication
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from authentication
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from authentication
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="model.AuthenticationExample">
+    delete from authentication
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="model.Authentication">
+    insert into authentication (ID, US_ID, US_NAME, 
+      CARD_ID, SEX, PROFESSION, 
+      PICTURE, APPLY_TIME, AUTH_STATE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{usId,jdbcType=VARCHAR}, #{usName,jdbcType=VARCHAR}, 
+      #{cardId,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, 
+      #{picture,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, #{authState,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.Authentication">
+    insert into authentication
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="usId != null">
+        US_ID,
+      </if>
+      <if test="usName != null">
+        US_NAME,
+      </if>
+      <if test="cardId != null">
+        CARD_ID,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="profession != null">
+        PROFESSION,
+      </if>
+      <if test="picture != null">
+        PICTURE,
+      </if>
+      <if test="applyTime != null">
+        APPLY_TIME,
+      </if>
+      <if test="authState != null">
+        AUTH_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null">
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="usName != null">
+        #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authState != null">
+        #{authState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="model.AuthenticationExample" resultType="java.lang.Integer">
+    select count(*) from authentication
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update authentication
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usId != null">
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usName != null">
+        US_NAME = #{record.usName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardId != null">
+        CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profession != null">
+        PROFESSION = #{record.profession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null">
+        PICTURE = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyTime != null">
+        APPLY_TIME = #{record.applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.authState != null">
+        AUTH_STATE = #{record.authState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update authentication
+    set ID = #{record.id,jdbcType=VARCHAR},
+      US_ID = #{record.usId,jdbcType=VARCHAR},
+      US_NAME = #{record.usName,jdbcType=VARCHAR},
+      CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      PROFESSION = #{record.profession,jdbcType=VARCHAR},
+      PICTURE = #{record.picture,jdbcType=VARCHAR},
+      APPLY_TIME = #{record.applyTime,jdbcType=TIMESTAMP},
+      AUTH_STATE = #{record.authState,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="model.Authentication">
+    update authentication
+    <set>
+      <if test="usName != null">
+        US_NAME = #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        CARD_ID = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        PROFESSION = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        PICTURE = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        APPLY_TIME = #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authState != null">
+        AUTH_STATE = #{authState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.Authentication">
+    update authentication
+    set US_NAME = #{usName,jdbcType=VARCHAR},
+      CARD_ID = #{cardId,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      PROFESSION = #{profession,jdbcType=VARCHAR},
+      PICTURE = #{picture,jdbcType=VARCHAR},
+      APPLY_TIME = #{applyTime,jdbcType=TIMESTAMP},
+      AUTH_STATE = #{authState,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="model.Authentication">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="US_NAME" jdbcType="VARCHAR" property="usName" />
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="PROFESSION" jdbcType="VARCHAR" property="profession" />
+    <result column="PICTURE" jdbcType="VARCHAR" property="picture" />
+    <result column="APPLY_TIME" jdbcType="TIMESTAMP" property="applyTime" />
+    <result column="AUTH_STATE" jdbcType="VARCHAR" property="authState" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, US_ID, US_NAME, CARD_ID, SEX, PROFESSION, PICTURE, APPLY_TIME, AUTH_STATE
+  </sql>
+  <select id="selectByExample" parameterType="model.AuthenticationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from authentication
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from authentication
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from authentication
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="model.AuthenticationExample">
+    delete from authentication
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="model.Authentication">
+    insert into authentication (ID, US_ID, US_NAME, 
+      CARD_ID, SEX, PROFESSION, 
+      PICTURE, APPLY_TIME, AUTH_STATE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{usId,jdbcType=VARCHAR}, #{usName,jdbcType=VARCHAR}, 
+      #{cardId,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, 
+      #{picture,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, #{authState,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.Authentication">
+    insert into authentication
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="usId != null">
+        US_ID,
+      </if>
+      <if test="usName != null">
+        US_NAME,
+      </if>
+      <if test="cardId != null">
+        CARD_ID,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="profession != null">
+        PROFESSION,
+      </if>
+      <if test="picture != null">
+        PICTURE,
+      </if>
+      <if test="applyTime != null">
+        APPLY_TIME,
+      </if>
+      <if test="authState != null">
+        AUTH_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null">
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="usName != null">
+        #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authState != null">
+        #{authState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="model.AuthenticationExample" resultType="java.lang.Integer">
+    select count(*) from authentication
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update authentication
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usId != null">
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usName != null">
+        US_NAME = #{record.usName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardId != null">
+        CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profession != null">
+        PROFESSION = #{record.profession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null">
+        PICTURE = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyTime != null">
+        APPLY_TIME = #{record.applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.authState != null">
+        AUTH_STATE = #{record.authState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update authentication
+    set ID = #{record.id,jdbcType=VARCHAR},
+      US_ID = #{record.usId,jdbcType=VARCHAR},
+      US_NAME = #{record.usName,jdbcType=VARCHAR},
+      CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      PROFESSION = #{record.profession,jdbcType=VARCHAR},
+      PICTURE = #{record.picture,jdbcType=VARCHAR},
+      APPLY_TIME = #{record.applyTime,jdbcType=TIMESTAMP},
+      AUTH_STATE = #{record.authState,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="model.Authentication">
+    update authentication
+    <set>
+      <if test="usName != null">
+        US_NAME = #{usName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        CARD_ID = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        PROFESSION = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        PICTURE = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        APPLY_TIME = #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authState != null">
+        AUTH_STATE = #{authState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.Authentication">
+    update authentication
+    set US_NAME = #{usName,jdbcType=VARCHAR},
+      CARD_ID = #{cardId,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      PROFESSION = #{profession,jdbcType=VARCHAR},
+      PICTURE = #{picture,jdbcType=VARCHAR},
+      APPLY_TIME = #{applyTime,jdbcType=TIMESTAMP},
+      AUTH_STATE = #{authState,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+      and US_ID = #{usId,jdbcType=VARCHAR}
+  </update>
+</mapper>

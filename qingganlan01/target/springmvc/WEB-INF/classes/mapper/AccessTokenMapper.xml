@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.AccessTokenMapper">
+  <resultMap id="BaseResultMap" type="po.AccessToken">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="access_token" jdbcType="VARCHAR" property="accessToken" />
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="EXPIRE_TS" jdbcType="TIMESTAMP" property="expireTs" />
+    <result column="LT_REQ_TS" jdbcType="TIMESTAMP" property="ltReqTs" />
+    <result column="REG_DC" jdbcType="VARCHAR" property="regDc" />
+  </resultMap>
+</mapper>

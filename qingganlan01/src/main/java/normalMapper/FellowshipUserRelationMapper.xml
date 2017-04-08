@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="normalMapper.FellowshipUserRelationMapper" >
+  <resultMap id="BaseResultMap" type="normalPo.FellowshipUserRelation" >
+    <id column="FS_US_RELATION_ID" property="fsUsRelationId" jdbcType="VARCHAR" />
+    <result column="FS_ID" property="fsId" jdbcType="VARCHAR" />
+    <result column="US_ID" property="usId" jdbcType="VARCHAR" />
+    <result column="JOIN_DATE" property="joinDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FS_US_RELATION_ID, FS_ID, US_ID, JOIN_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="normalPo.FellowshipUserRelationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fellowship_user_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fellowship_user_relation
+    where FS_US_RELATION_ID = #{fsUsRelationId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fellowship_user_relation
+    where FS_US_RELATION_ID = #{fsUsRelationId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="normalPo.FellowshipUserRelationExample" >
+    delete from fellowship_user_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="normalPo.FellowshipUserRelation" >
+    insert into fellowship_user_relation (FS_US_RELATION_ID, FS_ID, US_ID, 
+      JOIN_DATE)
+    values (#{fsUsRelationId,jdbcType=VARCHAR}, #{fsId,jdbcType=VARCHAR}, #{usId,jdbcType=VARCHAR}, 
+      #{joinDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="normalPo.FellowshipUserRelation" >
+    insert into fellowship_user_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fsUsRelationId != null" >
+        FS_US_RELATION_ID,
+      </if>
+      <if test="fsId != null" >
+        FS_ID,
+      </if>
+      <if test="usId != null" >
+        US_ID,
+      </if>
+      <if test="joinDate != null" >
+        JOIN_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fsUsRelationId != null" >
+        #{fsUsRelationId,jdbcType=VARCHAR},
+      </if>
+      <if test="fsId != null" >
+        #{fsId,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null" >
+        #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="joinDate != null" >
+        #{joinDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="normalPo.FellowshipUserRelationExample" resultType="java.lang.Integer" >
+    select count(*) from fellowship_user_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fellowship_user_relation
+    <set >
+      <if test="record.fsUsRelationId != null" >
+        FS_US_RELATION_ID = #{record.fsUsRelationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fsId != null" >
+        FS_ID = #{record.fsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usId != null" >
+        US_ID = #{record.usId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.joinDate != null" >
+        JOIN_DATE = #{record.joinDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fellowship_user_relation
+    set FS_US_RELATION_ID = #{record.fsUsRelationId,jdbcType=VARCHAR},
+      FS_ID = #{record.fsId,jdbcType=VARCHAR},
+      US_ID = #{record.usId,jdbcType=VARCHAR},
+      JOIN_DATE = #{record.joinDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="normalPo.FellowshipUserRelation" >
+    update fellowship_user_relation
+    <set >
+      <if test="fsId != null" >
+        FS_ID = #{fsId,jdbcType=VARCHAR},
+      </if>
+      <if test="usId != null" >
+        US_ID = #{usId,jdbcType=VARCHAR},
+      </if>
+      <if test="joinDate != null" >
+        JOIN_DATE = #{joinDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where FS_US_RELATION_ID = #{fsUsRelationId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="normalPo.FellowshipUserRelation" >
+    update fellowship_user_relation
+    set FS_ID = #{fsId,jdbcType=VARCHAR},
+      US_ID = #{usId,jdbcType=VARCHAR},
+      JOIN_DATE = #{joinDate,jdbcType=TIMESTAMP}
+    where FS_US_RELATION_ID = #{fsUsRelationId,jdbcType=VARCHAR}
+  </update>
+</mapper>

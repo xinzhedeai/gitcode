@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.WebFamilyMapper">
+  <resultMap id="BaseResultMap" type="po.WebFamily">
+    <result column="WEB_FAMILY_ID" jdbcType="VARCHAR" property="webFamilyId" />
+    <result column="WEB_FAMILY_NAME" jdbcType="VARCHAR" property="webFamilyName" />
+    <result column="WEB_FAMILY_ADDRESS" jdbcType="VARCHAR" property="webFamilyAddress" />
+    <result column="VIDEO_DESC" jdbcType="VARCHAR" property="videoDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    WEB_FAMILY_ID, WEB_FAMILY_NAME, WEB_FAMILY_ADDRESS, VIDEO_DESC
+  </sql>
+  <select id="selectByExample" parameterType="po.WebFamilyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from web_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="po.WebFamilyExample">
+    delete from web_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.WebFamily">
+    insert into web_family (WEB_FAMILY_ID, WEB_FAMILY_NAME, WEB_FAMILY_ADDRESS, 
+      VIDEO_DESC)
+    values (#{webFamilyId,jdbcType=VARCHAR}, #{webFamilyName,jdbcType=VARCHAR}, #{webFamilyAddress,jdbcType=VARCHAR}, 
+      #{videoDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="po.WebFamily">
+    insert into web_family
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="webFamilyId != null">
+        WEB_FAMILY_ID,
+      </if>
+      <if test="webFamilyName != null">
+        WEB_FAMILY_NAME,
+      </if>
+      <if test="webFamilyAddress != null">
+        WEB_FAMILY_ADDRESS,
+      </if>
+      <if test="videoDesc != null">
+        VIDEO_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="webFamilyId != null">
+        #{webFamilyId,jdbcType=VARCHAR},
+      </if>
+      <if test="webFamilyName != null">
+        #{webFamilyName,jdbcType=VARCHAR},
+      </if>
+      <if test="webFamilyAddress != null">
+        #{webFamilyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        #{videoDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.WebFamilyExample" resultType="java.lang.Integer">
+    select count(*) from web_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update web_family
+    <set>
+      <if test="record.webFamilyId != null">
+        WEB_FAMILY_ID = #{record.webFamilyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webFamilyName != null">
+        WEB_FAMILY_NAME = #{record.webFamilyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webFamilyAddress != null">
+        WEB_FAMILY_ADDRESS = #{record.webFamilyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoDesc != null">
+        VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update web_family
+    set WEB_FAMILY_ID = #{record.webFamilyId,jdbcType=VARCHAR},
+      WEB_FAMILY_NAME = #{record.webFamilyName,jdbcType=VARCHAR},
+      WEB_FAMILY_ADDRESS = #{record.webFamilyAddress,jdbcType=VARCHAR},
+      VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="po.WebFamily">
+    <result column="WEB_FAMILY_ID" jdbcType="VARCHAR" property="webFamilyId" />
+    <result column="WEB_FAMILY_NAME" jdbcType="VARCHAR" property="webFamilyName" />
+    <result column="WEB_FAMILY_ADDRESS" jdbcType="VARCHAR" property="webFamilyAddress" />
+    <result column="VIDEO_DESC" jdbcType="VARCHAR" property="videoDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    WEB_FAMILY_ID, WEB_FAMILY_NAME, WEB_FAMILY_ADDRESS, VIDEO_DESC
+  </sql>
+  <select id="selectByExample" parameterType="po.WebFamilyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from web_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="po.WebFamilyExample">
+    delete from web_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.WebFamily">
+    insert into web_family (WEB_FAMILY_ID, WEB_FAMILY_NAME, WEB_FAMILY_ADDRESS, 
+      VIDEO_DESC)
+    values (#{webFamilyId,jdbcType=VARCHAR}, #{webFamilyName,jdbcType=VARCHAR}, #{webFamilyAddress,jdbcType=VARCHAR}, 
+      #{videoDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="po.WebFamily">
+    insert into web_family
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="webFamilyId != null">
+        WEB_FAMILY_ID,
+      </if>
+      <if test="webFamilyName != null">
+        WEB_FAMILY_NAME,
+      </if>
+      <if test="webFamilyAddress != null">
+        WEB_FAMILY_ADDRESS,
+      </if>
+      <if test="videoDesc != null">
+        VIDEO_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="webFamilyId != null">
+        #{webFamilyId,jdbcType=VARCHAR},
+      </if>
+      <if test="webFamilyName != null">
+        #{webFamilyName,jdbcType=VARCHAR},
+      </if>
+      <if test="webFamilyAddress != null">
+        #{webFamilyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        #{videoDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.WebFamilyExample" resultType="java.lang.Integer">
+    select count(*) from web_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update web_family
+    <set>
+      <if test="record.webFamilyId != null">
+        WEB_FAMILY_ID = #{record.webFamilyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webFamilyName != null">
+        WEB_FAMILY_NAME = #{record.webFamilyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webFamilyAddress != null">
+        WEB_FAMILY_ADDRESS = #{record.webFamilyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoDesc != null">
+        VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update web_family
+    set WEB_FAMILY_ID = #{record.webFamilyId,jdbcType=VARCHAR},
+      WEB_FAMILY_NAME = #{record.webFamilyName,jdbcType=VARCHAR},
+      WEB_FAMILY_ADDRESS = #{record.webFamilyAddress,jdbcType=VARCHAR},
+      VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="model.WebFamily">
+    <result column="WEB_FAMILY_ID" jdbcType="VARCHAR" property="webFamilyId" />
+    <result column="WEB_FAMILY_NAME" jdbcType="VARCHAR" property="webFamilyName" />
+    <result column="WEB_FAMILY_ADDRESS" jdbcType="VARCHAR" property="webFamilyAddress" />
+    <result column="VIDEO_DESC" jdbcType="VARCHAR" property="videoDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    WEB_FAMILY_ID, WEB_FAMILY_NAME, WEB_FAMILY_ADDRESS, VIDEO_DESC
+  </sql>
+  <select id="selectByExample" parameterType="model.WebFamilyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from web_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="model.WebFamilyExample">
+    delete from web_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="model.WebFamily">
+    insert into web_family (WEB_FAMILY_ID, WEB_FAMILY_NAME, WEB_FAMILY_ADDRESS, 
+      VIDEO_DESC)
+    values (#{webFamilyId,jdbcType=VARCHAR}, #{webFamilyName,jdbcType=VARCHAR}, #{webFamilyAddress,jdbcType=VARCHAR}, 
+      #{videoDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="model.WebFamily">
+    insert into web_family
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="webFamilyId != null">
+        WEB_FAMILY_ID,
+      </if>
+      <if test="webFamilyName != null">
+        WEB_FAMILY_NAME,
+      </if>
+      <if test="webFamilyAddress != null">
+        WEB_FAMILY_ADDRESS,
+      </if>
+      <if test="videoDesc != null">
+        VIDEO_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="webFamilyId != null">
+        #{webFamilyId,jdbcType=VARCHAR},
+      </if>
+      <if test="webFamilyName != null">
+        #{webFamilyName,jdbcType=VARCHAR},
+      </if>
+      <if test="webFamilyAddress != null">
+        #{webFamilyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        #{videoDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="model.WebFamilyExample" resultType="java.lang.Integer">
+    select count(*) from web_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update web_family
+    <set>
+      <if test="record.webFamilyId != null">
+        WEB_FAMILY_ID = #{record.webFamilyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webFamilyName != null">
+        WEB_FAMILY_NAME = #{record.webFamilyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webFamilyAddress != null">
+        WEB_FAMILY_ADDRESS = #{record.webFamilyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoDesc != null">
+        VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update web_family
+    set WEB_FAMILY_ID = #{record.webFamilyId,jdbcType=VARCHAR},
+      WEB_FAMILY_NAME = #{record.webFamilyName,jdbcType=VARCHAR},
+      WEB_FAMILY_ADDRESS = #{record.webFamilyAddress,jdbcType=VARCHAR},
+      VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="model.WebFamily">
+    <result column="WEB_FAMILY_ID" jdbcType="VARCHAR" property="webFamilyId" />
+    <result column="WEB_FAMILY_NAME" jdbcType="VARCHAR" property="webFamilyName" />
+    <result column="WEB_FAMILY_ADDRESS" jdbcType="VARCHAR" property="webFamilyAddress" />
+    <result column="VIDEO_DESC" jdbcType="VARCHAR" property="videoDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    WEB_FAMILY_ID, WEB_FAMILY_NAME, WEB_FAMILY_ADDRESS, VIDEO_DESC
+  </sql>
+  <select id="selectByExample" parameterType="model.WebFamilyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from web_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="model.WebFamilyExample">
+    delete from web_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="model.WebFamily">
+    insert into web_family (WEB_FAMILY_ID, WEB_FAMILY_NAME, WEB_FAMILY_ADDRESS, 
+      VIDEO_DESC)
+    values (#{webFamilyId,jdbcType=VARCHAR}, #{webFamilyName,jdbcType=VARCHAR}, #{webFamilyAddress,jdbcType=VARCHAR}, 
+      #{videoDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="model.WebFamily">
+    insert into web_family
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="webFamilyId != null">
+        WEB_FAMILY_ID,
+      </if>
+      <if test="webFamilyName != null">
+        WEB_FAMILY_NAME,
+      </if>
+      <if test="webFamilyAddress != null">
+        WEB_FAMILY_ADDRESS,
+      </if>
+      <if test="videoDesc != null">
+        VIDEO_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="webFamilyId != null">
+        #{webFamilyId,jdbcType=VARCHAR},
+      </if>
+      <if test="webFamilyName != null">
+        #{webFamilyName,jdbcType=VARCHAR},
+      </if>
+      <if test="webFamilyAddress != null">
+        #{webFamilyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        #{videoDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="model.WebFamilyExample" resultType="java.lang.Integer">
+    select count(*) from web_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update web_family
+    <set>
+      <if test="record.webFamilyId != null">
+        WEB_FAMILY_ID = #{record.webFamilyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webFamilyName != null">
+        WEB_FAMILY_NAME = #{record.webFamilyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webFamilyAddress != null">
+        WEB_FAMILY_ADDRESS = #{record.webFamilyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoDesc != null">
+        VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update web_family
+    set WEB_FAMILY_ID = #{record.webFamilyId,jdbcType=VARCHAR},
+      WEB_FAMILY_NAME = #{record.webFamilyName,jdbcType=VARCHAR},
+      WEB_FAMILY_ADDRESS = #{record.webFamilyAddress,jdbcType=VARCHAR},
+      VIDEO_DESC = #{record.videoDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="customMapper.CustomLogMapper">
+	<select id="searchMyLogsWitness"  parameterType="Map" resultType="Map">
+		SELECT 
+			LOG_ID           ,
+			LOG_TITLE        ,
+			US_ID            ,   
+			LOG_CONTENT      ,
+			SEND_DATE        ,
+			IS_DELETE
+			
+		FROM 
+		log 
+		WHERE US_ID = #{usId}
+			AND LOG_TYPE= '0'
+		 	<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>	
+	</select>
+	<select id="searchMyLogsQT"  parameterType="Map" resultType="Map">
+		SELECT 
+			LOG_ID           ,
+			LOG_TITLE        ,
+			US_ID            ,   
+			LOG_CONTENT      ,
+			SEND_DATE        ,
+			IS_DELETE
+			
+		FROM 
+		log 
+		WHERE US_ID = #{usId}
+			AND LOG_TYPE= '1'
+		 	<if test="order != null and sort != null">
+		 	ORDER BY ${sort} ${order}
+	 	</if>	
+	</select>
+	 <insert id="addLogWitness"  parameterType="Map">
+		insert into log
+		(
+			LOG_ID          ,
+			LOG_TITLE       ,
+			US_ID           ,
+			LOG_CONTENT     ,
+			SEND_DATE       ,
+			IS_DELETE		,
+			LOG_TYPE		
+		
+		)               
+		values          
+		(      
+			UUID()			, 
+			#{logTitle}     ,       
+			#{usId}         ,
+			#{logContent}   ,
+			NOW()           ,
+			'N'             ,
+			'0'
+		)
+	</insert>	
+	 <insert id="addLogQT"  parameterType="Map">
+		insert into log
+		(
+			LOG_ID          ,
+			LOG_TITLE       ,
+			US_ID           ,
+			LOG_CONTENT     ,
+			SEND_DATE       ,
+			IS_DELETE		,
+			LOG_TYPE		
+		
+		)               
+		values          
+		(      
+			UUID()			, 
+			#{logTitle}     ,       
+			#{usId}         ,
+			#{logContent}   ,
+			NOW()           ,
+			'N'             ,
+			'1'
+		)
+	</insert>	
+	
+	<delete id="delLogById" parameterType="Map">
+		DELETE  FROM log
+		WHERE 
+			LOG_ID = #{logId} 
+	</delete>
+	<select id="getLogDetail"  parameterType="Map" resultType="Map">
+		SELECT 
+			LOG_ID           ,
+			LOG_TITLE        ,
+			US_ID            ,   
+			LOG_CONTENT      ,
+			SEND_DATE        
+		FROM 
+			log 
+		WHERE LOG_ID = #{logId}
+	</select>
+	
+	<update id="editLog"  parameterType="Map">
+		update log set
+			LOG_TITLE = #{logTitle},
+			LOG_CONTENT = #{logContent}     ,
+			LOG_UPDATE_DATE  = NOW()     
+		WHERE LOG_ID = #{logId}
+	</update>
+	<select id="searchOrderExcel"   resultType="java.util.LinkedHashMap">
+		SELECT 
+		<!-- 订单信息 -->
+		a.ORDER_ID        ,
+		c.IE_FLAG         ,
+		c.TRADE_MODE      ,
+		c.EB_CODE         ,
+		c.EB_NAME         ,
+		c.TOTAL_PAYMENT   ,
+		<!-- 之前发现导出的数据少了一列，就是币制，原来这里重名了，返回去的时候只按一列返回。 -->
+		c.CURR_CODE      AS ORDER_CURR_CODE ,
+		c.BUYER_NAME      ,
+		c.BUYER_CERT_TYPE ,
+		c.BUYER_CERT_ID   ,
+		c.BUYER_COUNTRY   ,
+		c.BUYER_TEL       ,
+		c.DELIVERY_ADDR   ,
+		c.EB_PLAT_ID      ,
+		c.NOTE         AS ORDER_NOTE    ,
+		
+		<!-- 商品信息 -->
+		a.G_NO            ,
+		a.CODE_TS         ,
+		a.G_NAME          ,
+		a.G_DESC          ,
+		a.G_MODEL         ,
+		a.G_NUM           ,
+		a.G_UNIT          ,
+		a.PRICE           ,
+		a.CURR_CODE     AS GOOD_CURR_CODE ,
+		a.NOTE          AS GOOD_NOTE   ,
+		<!-- 运单信息 -->
+		a.WAYBILL_ID      ,
+		d.LOGI_ENTE_CODE
+		FROM 
+			good_info a 
+		left join apply_info b on b.ORDER_ID=a.ORDER_ID and b.WAYBILL_ID=a.WAYBILL_ID and b.` COMPANY_ID`=a.` COMPANY_ID`
+		left join order_info c on c.COL=b.COL
+		left join waybill_info d on d.COL=b.COL
+	
+	</select>
+	<select id="searchWaybillExcel"  resultType="java.util.LinkedHashMap">
+		SELECT 
+		<!-- 运单信息 -->
+		a.WAYBILL_ID      ,
+		c.TRAF_MODE       ,
+		c.DECL_PORT       ,
+		c.IE_PORT         ,
+		c.TRAF_NAME       ,
+		c.VOYAGE_NO       ,
+		c.BILL_NO         ,
+		c.PACK_ID         ,
+		c.LOGI_ENTE_CODE  ,
+		c.LOGI_ENTE_NAME  ,
+		c.TOTAL_FREIGHT   ,
+		c.CURR_CODE       AS WAYBILL_CURR_CODE   ,
+		c.GROSS_WEIGHT    ,
+		c.PACK_NUM        ,
+		c.CONSIGNEE_NAME  ,
+		c.CONSIGNEE_ADDR  ,
+		c.CONSIGNEE_TEL   ,
+		c.CONSIGNEE_COUN  ,
+		c.CONSIGNER_NAME  ,
+		c.CONSIGNER_ADDR  ,
+		c.CONSIGNER_COUN  ,
+		c.NOTE     AS WAYBILL_NOTE      ,
+
+		
+		<!-- 商品信息 -->
+		a.G_NO            ,
+		a.G_NAME          ,
+		a.CODE_TS         ,
+		a.G_DESC          ,
+		a.G_MODEL         ,
+		a.G_NUM           ,
+		a.G_UNIT          ,
+		a.PRICE           ,
+		a.CURR_CODE      AS GOOD_CURR_CODE ,
+		a.FREIGHT		  ,
+		a.F_CURR_CODE	  ,
+		a.ORDER_ID        ,
+		d.EB_PLAT_ID      ,
+		a.NOTE          AS GOOD_NOTE  ,
+		<!-- 订单信息 -->
+		a.ORDER_ID     AS ORDRE_ID1    ,
+		d.EB_PLAT_ID  AS EB_PLAT_ID1 
+		FROM 
+			good_info a 
+		left join apply_info b on b.ORDER_ID=a.ORDER_ID and b.WAYBILL_ID=a.WAYBILL_ID and b.` COMPANY_ID`=a.` COMPANY_ID`
+		left join waybill_info c on c.COL=b.COL
+		left join order_info d on d.COL=b.COL
+	
+	</select>
+	<select id="searchDeclformExcel" resultType="java.util.LinkedHashMap">
+		SELECT 
+		<!-- 清单信息 -->
+		a.WAYBILL_ID       ,
+		c.IE_FLAG          ,
+		c.TRADE_MODE       ,
+		c.RETURN_FLAG      ,
+		c.REL_SEQ_NO       ,
+		c.REL_WAYBILL_ID   ,
+		c.REL_LOGI_ENTECODE,
+		c.PACK_ID          ,
+		c.DECL_PORT        ,
+		c.IE_PORT          ,
+		c.IE_DATE          ,
+		c.MANUAL_NO        ,
+		c.OWNER_CERT_TYPE  ,
+		c.OWNER_CERT_ID    ,
+		c.OWNER_NAME       ,
+		c.OWNER_ADDR       ,
+		c.OWNER_TEL        ,
+		c.TRADE_CODE       ,
+		c.TRADE_NAME       ,
+		c.AGENT_CODE       ,
+		c.AGENT_NAME       ,
+		c.TRAF_MODE        ,
+		c.TRAF_NAME        ,
+		c.VOYAGE_NO        ,
+		c.BILL_NO          ,
+		c.TRADE_COUNT      ,
+		c.TRANS_TOTAL_PRICE,
+		c.GROSS_WEIGHT     ,
+		c.PACK_NUM         ,
+		c.CURR_CODE      AS DECLFORM_CURR_CODE   ,
+		c.EB_CODE          ,
+		c.EB_NAME          ,
+		
+		c.EB_PLAT_ID       ,
+		c.EB_PLAT_NAME     ,
+		c.LOGI_ENTE_CODE   ,
+		c.LOGI_ENTE_NAME   ,
+		c.NOTE       AS DECLFORM_NOTE       ,
+
+
+		
+		<!-- 商品信息 -->
+		a.G_NO            ,
+		a.CODE_TS         ,
+		a.G_NAME          ,
+		a.G_MODEL         ,
+		a.G_DESC          ,
+		a.G_NUM           ,
+		a.G_UNIT          ,
+		a.PRICE           ,
+		a.TOTAL_PRICE	  ,
+		a.CURR_CODE    AS GOOD_CURR_CODE    ,
+		a.QTY_1           , 
+		a.UNIT_1          , 
+		a.TRADE_MARK      , 
+		a.ORIGIN_COUNTRY  , 
+		a.USE_TO          , 
+		a.DUTY_MODE       , 
+		a.TAX_PAYMENT     , 
+		a.TAX_RATE        , 
+		a.NOTE         AS GOOD_NOTE    , 
+
+		<!-- 集装箱信息 -->
+		d.CONTAINER_ID  ,
+		d.CONTAINER_MD  ,
+		d.NOTE	AS CONTAINER_NOTE 
+		FROM 
+			good_info a 
+		left join apply_info b on b.ORDER_ID=a.ORDER_ID and b.WAYBILL_ID=a.WAYBILL_ID and b.` COMPANY_ID`=a.` COMPANY_ID`
+		left join declform_info c on c.COL=b.COL
+		left join container_info d on d.COL=b.COL
+	
+	</select>
+  </mapper>

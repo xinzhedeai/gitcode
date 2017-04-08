@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="po.UserInfo">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="US_NAME" jdbcType="VARCHAR" property="usName" />
+    <result column="AGE" jdbcType="INTEGER" property="age" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="BIRTH_DATE" jdbcType="TIMESTAMP" property="birthDate" />
+    <result column="US_PS" jdbcType="VARCHAR" property="usPs" />
+    <result column="TEL" jdbcType="VARCHAR" property="tel" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="QQ" jdbcType="VARCHAR" property="qq" />
+    <result column="WEICHAT" jdbcType="VARCHAR" property="weichat" />
+    <result column="PS" jdbcType="VARCHAR" property="ps" />
+    <result column="HOBBY" jdbcType="VARCHAR" property="hobby" />
+    <result column="AREA" jdbcType="VARCHAR" property="area" />
+    <result column="GRADUATE_SCHOOL" jdbcType="VARCHAR" property="graduateSchool" />
+    <result column="PROFESSION" jdbcType="VARCHAR" property="profession" />
+    <result column="CHIRCH_TYPE" jdbcType="VARCHAR" property="chirchType" />
+    <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="START_TRUTH" jdbcType="TIMESTAMP" property="startTruth" />
+    <result column="REG_DATE" jdbcType="TIMESTAMP" property="regDate" />
+    <result column="LAST_LOGIN_TIME" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="HEAD_IMG" jdbcType="VARCHAR" property="headImg" />
+    <result column="LEVEL" jdbcType="VARCHAR" property="level" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="TK_ID" jdbcType="VARCHAR" property="tkId" />
+    <result column="AUTHENTICATION" jdbcType="VARCHAR" property="authentication" />
+    <result column="IS_BAPTISM" jdbcType="VARCHAR" property="isBaptism" />
+    <result column="IS_TRUTH" jdbcType="VARCHAR" property="isTruth" />
+    <result column="BLOG_NO" jdbcType="INTEGER" property="blogNo" />
+    <result column="COLLECT_BLOG_NO" jdbcType="INTEGER" property="collectBlogNo" />
+    <result column="CONCERN_NO" jdbcType="INTEGER" property="concernNo" />
+    <result column="FANS_NO" jdbcType="INTEGER" property="fansNo" />
+    <result column="MY_FRIEND_NO" jdbcType="INTEGER" property="myFriendNo" />
+    <result column="COMMENT_NO" jdbcType="INTEGER" property="commentNo" />
+    <result column="COMMENT_ME_COMMENT_NO" jdbcType="INTEGER" property="commentMeCommentNo" />
+  </resultMap>
+</mapper>

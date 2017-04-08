@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BlogMapper">
+  <resultMap id="BaseResultMap" type="po.Blog">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="BLOG_ID" jdbcType="VARCHAR" property="blogId" />
+    <result column="US_ID" jdbcType="VARCHAR" property="usId" />
+    <result column="SEND_TIME" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="BLOG_IMG" jdbcType="VARCHAR" property="blogImg" />
+    <result column="UPVOTE_NO" jdbcType="VARCHAR" property="upvoteNo" />
+    <result column="COMMENT_NO" jdbcType="INTEGER" property="commentNo" />
+    <result column="COLLECT_NO" jdbcType="INTEGER" property="collectNo" />
+    <result column="FORWARDING_NO" jdbcType="INTEGER" property="forwardingNo" />
+    <result column="IS_DELETE" jdbcType="VARCHAR" property="isDelete" />
+    <result column="IS_FORWARD" jdbcType="VARCHAR" property="isForward" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="FORWARD_VALIABLE" jdbcType="VARCHAR" property="forwardValiable" />
+    <result column="BLOG_STATE" jdbcType="VARCHAR" property="blogState" />
+  </resultMap>
+</mapper>
