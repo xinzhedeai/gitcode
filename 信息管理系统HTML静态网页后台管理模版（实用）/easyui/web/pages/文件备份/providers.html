@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>供应商列表</title>
+
+		<link href="css/base.css" rel="stylesheet">
+		<link rel="stylesheet" href="../custom/uimaker/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../custom/uimaker/icon.css">
+		<link rel="stylesheet" href="css/providers.css">
+	</head>
+
+	<body>
+		<div class="container">
+			<table id="dg" style="width:100%;height:554px" title="全体供应商列表" data-options="
+                rownumbers:true,
+                singleSelect:false,
+                autoRowHeight:false,
+                pagination:true,
+                fitColumns:true,
+                striped:true,
+                checkOnSelect:false,
+                selectOnCheck:false,
+                collapsible:true,
+                toolbar:'#tb',
+                pageSize:10
+            	">
+				<thead>
+					<tr>
+						<th field="code" width="110">供应商编码</th>
+						<th field="name" width="226">供应商名称</th>
+						<th field="level" width="112">等级</th>
+						<th field="provide" width="170">主供品类</th>
+						<th field="full" width="130">资料是否完善</th>
+						<th field="issubmit" width="136">调查表格是否提交</th>
+						<th field="status" width="120">审核状态</th>
+						<th field="note" width="105">备注</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="tb" style="padding:0 30px;">
+				供应商编码: <input class="easyui-textbox" type="text" name="code" style="width:166px;height:35px;line-height:35px;"></input>
+				供应商名称: <input class="easyui-textbox" type="text" name="name" style="width:166px;height:35px;line-height:35px;"></input>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-search" data-options="selected:true">查询</a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-reload">重置</a>
+			</div>
+		</div>
+
+		<div id="menu" class="easyui-menu" style="width: 120px; display: none;">
+			<div onclick="addFun();" data-options="iconCls:'pencil_add'">增加</div>
+			<div onclick="deleteFun();" data-options="iconCls:'pencil_delete'">删除</div>
+			<div onclick="editFun();" data-options="iconCls:'pencil'">编辑</div>
+		</div>
+		<div id="addModal" title="用户登录" style="width: 330px; height: 220px; overflow: hidden; display: none;">
+			<div title="用户输入模式" style="overflow: hidden; padding: 10px;">
+				<form method="post">
+					<table class="table table-hover table-condensed">
+						<tr>
+							<th>供应商编码</th>
+							<td><input name="code" type="text" placeholder="请输入登录名" class="easyui-validatebox" data-options="required:true" value="孙宇"></td>
+						</tr>
+						<tr>
+							<th>供应商名称</th>
+							<td><input name="name" type="password" placeholder="请输入密码" class="easyui-validatebox" data-options="required:true" value="123456"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../custom/jquery.min.js"></script>
+		<script type="text/javascript" src="../custom/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="../custom/easyui-lang-zh_CN.js"></script>
+		<script src="providers.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/extJquery.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>
